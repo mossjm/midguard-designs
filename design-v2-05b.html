@@ -1,0 +1,2776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midguard Academy — Train Hard. Train Smart. Train Here.</title>
+    <link rel="icon" type="image/png" href="assets/images/logos/logo-04.png">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ========== RESET & BASE ========== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body {
+            font-family: 'Barlow', sans-serif;
+            background: #0A0A0A;
+            color: #d0d0d0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; display: block; }
+        ul { list-style: none; }
+
+        /* ========== CSS VARIABLES ========== */
+        :root {
+            --red: #C41E2A;
+            --red-dark: #9B1720;
+            --black: #0A0A0A;
+            --charcoal: #111111;
+            --dark-gray: #1A1A1A;
+            --white: #FFFFFF;
+            --off-white: #F5F5F5;
+            --text-muted: #999;
+        }
+
+        /* ========== UTILITY ========== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ========== NAVIGATION ========== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: var(--black);
+            border-bottom: 3px solid var(--red);
+            transition: all 0.3s ease;
+        }
+        .nav-inner {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+        .nav-logo img {
+            height: 50px;
+            width: auto;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .nav-links a {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--off-white);
+            padding: 8px 16px;
+            transition: color 0.3s;
+            position: relative;
+        }
+        .nav-links a:not(.nav-cta):hover {
+            color: var(--red);
+        }
+        .nav-cta {
+            background: var(--red);
+            color: var(--white) !important;
+            padding: 10px 24px !important;
+            font-weight: 600 !important;
+            clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+            transition: background 0.3s !important;
+        }
+        .nav-cta:hover {
+            background: var(--red-dark) !important;
+        }
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+        }
+        .nav-hamburger span {
+            width: 28px;
+            height: 3px;
+            background: var(--white);
+            transition: all 0.3s;
+        }
+
+        /* ========== RED TICKER BANNER ========== */
+        .ticker-banner {
+            background: var(--red);
+            padding: 8px 0;
+            overflow: hidden;
+            margin-top: 70px;
+        }
+        .ticker-content {
+            display: flex;
+            animation: tickerScroll 20s linear infinite;
+            white-space: nowrap;
+        }
+        .ticker-content span {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--white);
+            padding: 0 40px;
+        }
+        @keyframes tickerScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ========== HERO — FULL-BLEED IMAGE ========== */
+        .hero {
+            position: relative;
+            min-height: calc(100vh - 105px);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(to right, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.7) 45%, rgba(10,10,10,0.15) 100%),
+                linear-gradient(to top, rgba(10,10,10,0.6) 0%, transparent 40%);
+            z-index: 1;
+        }
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px 60px;
+            position: relative;
+            z-index: 2;
+            max-width: 650px;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .hero-badge-line {
+            width: 40px;
+            height: 3px;
+            background: var(--red);
+        }
+        .hero-badge-text {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--red);
+        }
+        .hero h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            line-height: 1.05;
+            color: var(--white);
+            margin-bottom: 24px;
+        }
+        .hero h1 em {
+            font-style: normal;
+            color: var(--red);
+            display: block;
+        }
+        .hero-tagline {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            margin-bottom: 40px;
+            max-width: 400px;
+        }
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .hero-stat {
+            text-align: left;
+        }
+        .hero-stat-number {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--red);
+            line-height: 1;
+        }
+        .hero-stat-label {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+        .hero-cta-group {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+        .btn-primary {
+            display: inline-block;
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 16px 40px;
+            background: var(--red);
+            color: var(--white);
+            clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+            transition: background 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-primary:hover {
+            background: var(--red-dark);
+        }
+        .btn-outline {
+            display: inline-block;
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 14px 36px;
+            border: 2px solid var(--red);
+            color: var(--white);
+            background: transparent;
+            clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .btn-outline:hover {
+            background: var(--red);
+        }
+
+        /* ========== SECTION COMMON ========== */
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .section-header-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .section-header-tag .line {
+            width: 30px;
+            height: 2px;
+            background: var(--red);
+        }
+        .section-header-tag span {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--red);
+        }
+        .section-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--white);
+            letter-spacing: 2px;
+        }
+        .section-subtitle {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            margin-top: 8px;
+        }
+
+        /* ========== ANGLED SECTION DIVIDERS ========== */
+        .angle-top {
+            position: relative;
+        }
+        .angle-top::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: inherit;
+            clip-path: polygon(0 50%, 100% 0, 100% 100%, 0 100%);
+            z-index: 1;
+        }
+
+        /* ========== PROGRAMS — MATCH CARDS ========== */
+        .programs {
+            padding: 100px 0;
+            background: var(--charcoal);
+            position: relative;
+        }
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+        .match-card {
+            background: var(--dark-gray);
+            border: 1px solid #222;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .match-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--red);
+        }
+        .match-card-header {
+            background: var(--red);
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            clip-path: polygon(0 0, 100% 0, calc(100% - 20px) 100%, 0 100%);
+        }
+        .match-card-header h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--white);
+        }
+        .match-card-header .live-badge {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--white);
+            background: rgba(0,0,0,0.3);
+            padding: 4px 12px;
+        }
+        .match-card-body {
+            padding: 24px;
+        }
+        .match-card-schedule {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--red);
+        }
+        .match-card-schedule svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--red);
+        }
+        .match-card-desc {
+            font-size: 0.95rem;
+            color: #aaa;
+            line-height: 1.6;
+        }
+        .match-card-number {
+            position: absolute;
+            bottom: 16px;
+            right: 20px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            color: rgba(196, 30, 42, 0.08);
+            line-height: 1;
+        }
+
+        /* ========== INSTRUCTORS — ATHLETE PROFILES ========== */
+        .instructors {
+            padding: 120px 0;
+            background: var(--black);
+            position: relative;
+        }
+        .instructors::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: var(--charcoal);
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+        }
+        .instructor-profiles {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-top: 20px;
+        }
+        .athlete-card {
+            background: var(--dark-gray);
+            border: 1px solid #222;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            min-height: 380px;
+            transition: border-color 0.3s;
+        }
+        .athlete-card:hover {
+            border-color: var(--red);
+        }
+        .athlete-photo {
+            position: relative;
+            overflow: hidden;
+        }
+        .athlete-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .athlete-photo::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40%;
+            background: linear-gradient(transparent, rgba(26,26,26,0.8));
+        }
+        .athlete-info {
+            padding: 30px 28px;
+            display: flex;
+            flex-direction: column;
+        }
+        .athlete-name {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--white);
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+        .athlete-title {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--red);
+            margin-bottom: 20px;
+        }
+        .athlete-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #333;
+        }
+        .athlete-stat {
+            text-align: center;
+            padding: 10px 0;
+            background: rgba(196, 30, 42, 0.06);
+            border: 1px solid rgba(196, 30, 42, 0.15);
+        }
+        .athlete-stat-val {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--red);
+            line-height: 1;
+        }
+        .athlete-stat-lbl {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+        .athlete-bio {
+            font-size: 0.85rem;
+            color: #aaa;
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        /* ========== WHY TRAIN ========== */
+        .why-train {
+            padding: 100px 0;
+            background: var(--charcoal);
+            position: relative;
+        }
+        .why-train::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: var(--black);
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 0%);
+        }
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+        .why-card {
+            background: var(--dark-gray);
+            border-top: 4px solid var(--red);
+            padding: 40px 28px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        .why-card:hover {
+            transform: translateY(-6px);
+        }
+        .why-card-number {
+            font-family: 'Oswald', sans-serif;
+            font-size: 5rem;
+            font-weight: 700;
+            color: rgba(196, 30, 42, 0.08);
+            position: absolute;
+            top: -10px;
+            right: 16px;
+            line-height: 1;
+        }
+        .why-card h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--white);
+            margin-bottom: 16px;
+            position: relative;
+        }
+        .why-card p {
+            font-size: 0.9rem;
+            color: #aaa;
+            line-height: 1.7;
+            position: relative;
+        }
+
+        /* ========== SCHEDULE — BROADCAST STYLE ========== */
+        .schedule {
+            padding: 100px 0;
+            background: var(--black);
+            position: relative;
+        }
+        .schedule::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: var(--charcoal);
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+        }
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--dark-gray);
+            overflow: hidden;
+        }
+        .schedule-table thead {
+            background: var(--red);
+        }
+        .schedule-table th {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--white);
+            padding: 16px 20px;
+            text-align: left;
+        }
+        .schedule-table td {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: #ccc;
+            padding: 16px 20px;
+            border-bottom: 1px solid #222;
+            vertical-align: top;
+        }
+        .schedule-table tbody tr {
+            transition: background 0.2s;
+        }
+        .schedule-table tbody tr:hover {
+            background: rgba(196, 30, 42, 0.05);
+        }
+        .schedule-table .day-cell {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--white);
+            min-width: 100px;
+        }
+        .schedule-table .time-badge {
+            display: inline-block;
+            background: rgba(196, 30, 42, 0.15);
+            color: var(--red);
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 3px 10px;
+            letter-spacing: 1px;
+            margin-right: 8px;
+        }
+        .schedule-table .closed-cell {
+            color: #555;
+            font-style: italic;
+        }
+
+        /* ========== TESTIMONIAL ========== */
+        .testimonial {
+            padding: 80px 0;
+            background: var(--red);
+            position: relative;
+            clip-path: polygon(0 30px, 100% 0, 100% calc(100% - 30px), 0 100%);
+        }
+        .testimonial-inner {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 20px 24px;
+        }
+        .testimonial-quote {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+            font-weight: 300;
+            color: var(--white);
+            line-height: 1.6;
+            margin-bottom: 24px;
+            font-style: italic;
+        }
+        .testimonial-author {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* ========== FINAL CTA ========== */
+        .final-cta {
+            padding: 120px 0;
+            background: var(--dark-gray);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .final-cta::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--red);
+        }
+        .final-cta h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--white);
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+        .final-cta p {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            margin-bottom: 40px;
+        }
+        .final-cta-bg-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(6rem, 15vw, 14rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            color: rgba(196, 30, 42, 0.04);
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            background: var(--black);
+            border-top: 3px solid var(--red);
+            padding: 50px 0 30px;
+        }
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: start;
+            gap: 40px;
+        }
+        .footer-logo img {
+            height: 45px;
+            width: auto;
+        }
+        .footer-links {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .footer-links a {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            transition: color 0.3s;
+        }
+        .footer-links a:hover {
+            color: var(--red);
+        }
+        .footer-hours {
+            text-align: right;
+        }
+        .footer-hours p {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 30px auto 0;
+            padding: 20px 24px 0;
+            border-top: 1px solid #222;
+            text-align: center;
+        }
+        .footer-bottom p {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.8rem;
+            color: #555;
+            letter-spacing: 1px;
+        }
+
+        /* ========== GRAND OPENING / LAUNCH EVENT ========== */
+        .grand-opening {
+            padding: 100px 0;
+            background: var(--black);
+            position: relative;
+            overflow: hidden;
+        }
+        .grand-opening::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, rgba(196, 30, 42, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .grand-opening-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        .countdown-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin: 40px 0;
+        }
+        .countdown-unit {
+            background: var(--dark-gray);
+            border: 1px solid rgba(196, 30, 42, 0.3);
+            padding: 24px 20px;
+            min-width: 100px;
+            text-align: center;
+            position: relative;
+        }
+        .countdown-unit::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--red);
+        }
+        .countdown-number {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--red);
+            line-height: 1;
+        }
+        .countdown-label {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+        .grand-opening-details {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 32px;
+            flex-wrap: wrap;
+        }
+        .grand-opening-detail {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1rem;
+            color: #ccc;
+            letter-spacing: 1px;
+        }
+        .grand-opening-detail svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--red);
+            flex-shrink: 0;
+        }
+
+        /* ========== PRICING / MEMBERSHIP ========== */
+        .pricing {
+            padding: 100px 0;
+            background: var(--charcoal);
+            position: relative;
+        }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            align-items: start;
+        }
+        .price-card {
+            background: var(--dark-gray);
+            border: 1px solid #222;
+            overflow: hidden;
+            transition: transform 0.3s, border-color 0.3s;
+            position: relative;
+        }
+        .price-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--red);
+        }
+        .price-card.featured {
+            border-color: var(--red);
+            transform: scale(1.04);
+        }
+        .price-card.featured:hover {
+            transform: scale(1.04) translateY(-6px);
+        }
+        .price-card-badge {
+            position: absolute;
+            top: 16px;
+            right: -32px;
+            background: var(--red);
+            color: var(--white);
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 6px 40px;
+            transform: rotate(45deg);
+            z-index: 2;
+        }
+        .price-card-header {
+            background: rgba(196, 30, 42, 0.06);
+            padding: 32px 28px 24px;
+            text-align: center;
+            border-bottom: 1px solid #222;
+        }
+        .price-card.featured .price-card-header {
+            background: var(--red);
+        }
+        .price-card-name {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+        .price-card-price {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--red);
+            line-height: 1;
+        }
+        .price-card.featured .price-card-price {
+            color: var(--white);
+        }
+        .price-card-price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+        .price-card.featured .price-card-price span {
+            color: rgba(255,255,255,0.7);
+        }
+        .price-card-period {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+        .price-card.featured .price-card-period {
+            color: rgba(255,255,255,0.7);
+        }
+        .price-card-body {
+            padding: 28px;
+        }
+        .price-card-features {
+            margin-bottom: 28px;
+        }
+        .price-card-features li {
+            font-family: 'Barlow', sans-serif;
+            font-size: 0.9rem;
+            color: #aaa;
+            padding: 10px 0;
+            border-bottom: 1px solid #1a1a1a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .price-card-features li::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--red);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            flex-shrink: 0;
+        }
+        .price-card-cta {
+            display: block;
+            text-align: center;
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 14px 24px;
+            background: var(--red);
+            color: var(--white);
+            clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+            transition: background 0.3s;
+        }
+        .price-card-cta:hover {
+            background: var(--red-dark);
+        }
+
+        /* ========== REFERRAL PROGRAM ========== */
+        .referral {
+            padding: 100px 0;
+            background: var(--black);
+            position: relative;
+            overflow: hidden;
+        }
+        .referral-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .referral-content h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--white);
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+        .referral-content > p {
+            font-size: 1rem;
+            color: #aaa;
+            line-height: 1.7;
+            margin-bottom: 32px;
+        }
+        .referral-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .referral-step {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+        .referral-step-num {
+            width: 48px;
+            height: 48px;
+            background: var(--red);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--white);
+            flex-shrink: 0;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        }
+        .referral-step-text h4 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--white);
+            margin-bottom: 4px;
+        }
+        .referral-step-text p {
+            font-size: 0.85rem;
+            color: #888;
+        }
+        .referral-rewards {
+            background: var(--dark-gray);
+            border: 1px solid #222;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        .referral-rewards::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--red);
+        }
+        .referral-rewards h4 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--white);
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        .reward-tier {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 0;
+            border-bottom: 1px solid #222;
+        }
+        .reward-tier:last-child {
+            border-bottom: none;
+        }
+        .reward-tier-label {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.95rem;
+            color: #ccc;
+            letter-spacing: 1px;
+        }
+        .reward-tier-value {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--red);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ========== FREE TRIAL CTA ========== */
+        .free-trial-section {
+            padding: 80px 0;
+            background: var(--red);
+            position: relative;
+            clip-path: polygon(0 20px, 100% 0, 100% calc(100% - 20px), 0 100%);
+        }
+        .free-trial-inner {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px 24px;
+        }
+        .free-trial-inner h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--white);
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+        .free-trial-inner p {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.85);
+            letter-spacing: 1px;
+            margin-bottom: 32px;
+        }
+        .btn-white {
+            display: inline-block;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 16px 44px;
+            background: var(--white);
+            color: var(--red);
+            clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+            transition: background 0.3s, color 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-white:hover {
+            background: var(--black);
+            color: var(--white);
+        }
+        .free-trial-badges {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+        .free-trial-badge {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.7);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .free-trial-badge svg {
+            width: 16px;
+            height: 16px;
+            fill: rgba(255,255,255,0.7);
+        }
+
+        /* ========== STUDENT SPOTLIGHT / TESTIMONIALS ========== */
+        .spotlight {
+            padding: 100px 0;
+            background: var(--charcoal);
+            position: relative;
+        }
+        .spotlight-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .spotlight-card {
+            background: var(--dark-gray);
+            border: 1px solid #222;
+            padding: 32px 28px;
+            position: relative;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+        .spotlight-card:hover {
+            border-color: var(--red);
+            transform: translateY(-4px);
+        }
+        .spotlight-card::before {
+            content: '\201C';
+            font-family: 'Oswald', sans-serif;
+            font-size: 5rem;
+            color: rgba(196, 30, 42, 0.15);
+            position: absolute;
+            top: 8px;
+            left: 20px;
+            line-height: 1;
+        }
+        .spotlight-stars {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
+        }
+        .spotlight-stars svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--red);
+        }
+        .spotlight-quote {
+            font-family: 'Barlow', sans-serif;
+            font-size: 0.95rem;
+            color: #bbb;
+            line-height: 1.7;
+            margin-bottom: 24px;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        .spotlight-author {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .spotlight-avatar {
+            width: 48px;
+            height: 48px;
+            background: var(--red);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--white);
+            flex-shrink: 0;
+        }
+        .spotlight-author-info h4 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--white);
+        }
+        .spotlight-author-info p {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+
+        /* ========== FAQ ========== */
+        .faq {
+            padding: 100px 0;
+            background: var(--black);
+            position: relative;
+        }
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .faq-item {
+            border-bottom: 1px solid #222;
+        }
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 24px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            gap: 16px;
+        }
+        .faq-question h4 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--white);
+            text-align: left;
+        }
+        .faq-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--dark-gray);
+            border: 1px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: background 0.3s, border-color 0.3s;
+        }
+        .faq-icon svg {
+            width: 14px;
+            height: 14px;
+            fill: var(--red);
+            transition: transform 0.3s;
+        }
+        .faq-item.active .faq-icon {
+            background: var(--red);
+            border-color: var(--red);
+        }
+        .faq-item.active .faq-icon svg {
+            fill: var(--white);
+            transform: rotate(45deg);
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+        .faq-answer p {
+            font-size: 0.95rem;
+            color: #aaa;
+            line-height: 1.7;
+            padding-bottom: 24px;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+        }
+
+        /* ========== CLASS SCHEDULE GRID ========== */
+        .class-schedule {
+            padding: 100px 0;
+            background: var(--charcoal);
+            position: relative;
+        }
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 2px;
+            background: #222;
+            border: 1px solid #222;
+        }
+        .schedule-grid-header {
+            background: var(--red);
+            padding: 16px 12px;
+            text-align: center;
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--white);
+        }
+        .schedule-grid-cell {
+            background: var(--dark-gray);
+            padding: 16px 12px;
+            text-align: center;
+            min-height: 90px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 8px;
+            transition: background 0.2s;
+        }
+        .schedule-grid-cell:hover {
+            background: rgba(196, 30, 42, 0.08);
+        }
+        .schedule-grid-cell.empty {
+            color: #444;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.85rem;
+            font-style: italic;
+        }
+        .schedule-grid-class {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--white);
+        }
+        .schedule-grid-time {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.7rem;
+            color: var(--red);
+            letter-spacing: 1px;
+        }
+        .schedule-grid-slot {
+            background: rgba(196, 30, 42, 0.06);
+            border: 1px solid rgba(196, 30, 42, 0.12);
+            padding: 8px 6px;
+        }
+
+        /* ========== BLOG / NEWS ========== */
+        .blog {
+            padding: 100px 0;
+            background: var(--black);
+            position: relative;
+        }
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .blog-card {
+            background: var(--dark-gray);
+            border: 1px solid #222;
+            overflow: hidden;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .blog-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--red);
+        }
+        .blog-card-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--charcoal), var(--dark-gray));
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .blog-card-image svg {
+            width: 48px;
+            height: 48px;
+            fill: rgba(196, 30, 42, 0.3);
+        }
+        .blog-card-category {
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            background: var(--red);
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--white);
+            padding: 4px 12px;
+        }
+        .blog-card-body {
+            padding: 24px;
+        }
+        .blog-card-date {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--red);
+            margin-bottom: 8px;
+        }
+        .blog-card-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--white);
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        .blog-card-excerpt {
+            font-size: 0.85rem;
+            color: #888;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+        .blog-card-link {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--red);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.3s;
+        }
+        .blog-card-link:hover {
+            gap: 14px;
+        }
+        .blog-card-link svg {
+            width: 14px;
+            height: 14px;
+            fill: var(--red);
+        }
+
+        /* ========== NEWSLETTER ========== */
+        .newsletter {
+            padding: 80px 0;
+            background: var(--dark-gray);
+            position: relative;
+            overflow: hidden;
+        }
+        .newsletter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--red);
+        }
+        .newsletter-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        .newsletter-content h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+        .newsletter-content p {
+            font-size: 0.9rem;
+            color: #888;
+        }
+        .newsletter-form {
+            display: flex;
+            gap: 0;
+        }
+        .newsletter-input {
+            flex: 1;
+            padding: 16px 20px;
+            background: var(--black);
+            border: 1px solid #333;
+            border-right: none;
+            color: var(--white);
+            font-family: 'Barlow', sans-serif;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .newsletter-input::placeholder {
+            color: #555;
+        }
+        .newsletter-input:focus {
+            border-color: var(--red);
+        }
+        .newsletter-btn {
+            padding: 16px 32px;
+            background: var(--red);
+            border: none;
+            color: var(--white);
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: background 0.3s;
+            white-space: nowrap;
+        }
+        .newsletter-btn:hover {
+            background: var(--red-dark);
+        }
+
+        /* ========== SOCIAL MEDIA ========== */
+        .social-connect {
+            padding: 80px 0;
+            background: var(--charcoal);
+            text-align: center;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        .social-link {
+            width: 60px;
+            height: 60px;
+            background: var(--dark-gray);
+            border: 1px solid #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        .social-link:hover {
+            background: var(--red);
+            border-color: var(--red);
+            transform: translateY(-4px);
+        }
+        .social-link svg {
+            width: 24px;
+            height: 24px;
+            fill: #ccc;
+            transition: fill 0.3s;
+        }
+        .social-link:hover svg {
+            fill: var(--white);
+        }
+        .social-handle {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            margin-top: 24px;
+            letter-spacing: 2px;
+        }
+        .social-handle a {
+            color: var(--red);
+            transition: color 0.3s;
+        }
+        .social-handle a:hover {
+            color: var(--white);
+        }
+
+        /* ========== GROWTH SECTIONS RESPONSIVE ========== */
+        @media (max-width: 900px) {
+            .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+            .price-card.featured { transform: none; }
+            .price-card.featured:hover { transform: translateY(-6px); }
+            .referral-inner { grid-template-columns: 1fr; }
+            .spotlight-grid { grid-template-columns: 1fr; }
+            .blog-grid { grid-template-columns: 1fr; }
+            .schedule-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .countdown-wrapper { gap: 12px; }
+            .countdown-unit { min-width: 70px; padding: 16px 12px; }
+            .countdown-number { font-size: 2rem; }
+            .grand-opening-details { gap: 16px; flex-direction: column; align-items: center; }
+            .newsletter-inner { grid-template-columns: 1fr; text-align: center; }
+            .newsletter-form { flex-direction: column; }
+            .newsletter-input { border-right: 1px solid #333; }
+            .schedule-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 480px) {
+            .countdown-wrapper { flex-wrap: wrap; justify-content: center; }
+            .countdown-unit { min-width: 60px; }
+            .countdown-number { font-size: 1.6rem; }
+            .free-trial-badges { flex-direction: column; align-items: center; gap: 12px; }
+            .schedule-grid { grid-template-columns: 1fr; }
+            .social-link { width: 50px; height: 50px; }
+        }
+
+        /* ========== SCROLL ANIMATIONS ========== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* ========== MOBILE RESPONSIVE ========== */
+        @media (max-width: 1024px) {
+            .athlete-card {
+                grid-template-columns: 180px 1fr;
+            }
+        }
+        @media (max-width: 900px) {
+            .hero {
+                min-height: 80vh;
+            }
+            .hero-content {
+                padding: 80px 40px 60px;
+            }
+            .instructor-profiles {
+                grid-template-columns: 1fr;
+            }
+            .athlete-card {
+                grid-template-columns: 200px 1fr;
+            }
+            .programs-grid {
+                grid-template-columns: 1fr;
+            }
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: var(--black);
+                flex-direction: column;
+                padding: 20px;
+                border-bottom: 3px solid var(--red);
+                gap: 0;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .nav-links a {
+                padding: 14px 20px;
+                width: 100%;
+                text-align: center;
+            }
+            .nav-cta {
+                clip-path: none;
+                margin-top: 8px;
+            }
+            .nav-hamburger {
+                display: flex;
+            }
+            .hero-content {
+                padding: 60px 24px 50px;
+            }
+            .hero-stats {
+                gap: 24px;
+            }
+            .hero-cta-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .athlete-card {
+                grid-template-columns: 1fr;
+            }
+            .athlete-photo {
+                height: 250px;
+            }
+            .schedule-table {
+                font-size: 0.85rem;
+            }
+            .schedule-table th, .schedule-table td {
+                padding: 12px 14px;
+            }
+            .footer-inner {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 24px;
+            }
+            .footer-logo {
+                display: flex;
+                justify-content: center;
+            }
+            .footer-hours {
+                text-align: center;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero-stat-number {
+                font-size: 2rem;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== NAVIGATION ========== -->
+    <nav class="nav" id="navbar">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">
+                <img src="assets/images/logos/logo-04.png" alt="Midguard Academy">
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="#programs">Programs</a>
+                <a href="#instructors">Instructors</a>
+                <a href="#schedule">Schedule</a>
+                <a href="#why-train">Why Train</a>
+                <a href="#free-trial" class="nav-cta">Free Trial</a>
+            </div>
+            <div class="nav-hamburger" id="hamburger" onclick="document.getElementById('navLinks').classList.toggle('active')">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ========== TICKER BANNER ========== -->
+    <div class="ticker-banner">
+        <div class="ticker-content">
+            <span>Kickboxing &bull; Brazilian Jiu-Jitsu &bull; Kids Programs &bull; Free Trial Available</span>
+            <span>Expert Instruction &bull; Real Skills &bull; &bull; All Skill Levels Welcome</span>
+            <span>Kickboxing &bull; Brazilian Jiu-Jitsu &bull; Kids Programs &bull; Free Trial Available</span>
+            <span>Expert Instruction &bull; Real Skills &bull; &bull; All Skill Levels Welcome</span>
+        </div>
+    </div>
+
+    <!-- ========== HERO — FULL-BLEED IMAGE ========== -->
+    <section class="hero">
+        <div class="hero-bg">
+            <img src="assets/images/original/hero-nogi-bjj-v2.png" alt="Training at Midguard Academy">
+        </div>
+        <div class="container hero-content">
+            <div class="hero-badge">
+                <span class="hero-badge-line"></span>
+                <span class="hero-badge-text">Midguard Academy</span>
+            </div>
+            <h1>Train Hard.<br>Train Smart.<br><em>Train Here.</em></h1>
+            <p class="hero-tagline">Premier kickboxing &amp; Brazilian Jiu-Jitsu training for all ages and experience levels.</p>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-stat-number">20+</div>
+                    <div class="hero-stat-label">Years Experience</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-number">6</div>
+                    <div class="hero-stat-label">Programs</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-number">30+</div>
+                    <div class="hero-stat-label">Active Students</div>
+                </div>
+            </div>
+            <div class="hero-cta-group">
+                <a href="#free-trial" class="btn-primary">Start Free Trial</a>
+                <a href="#programs" class="btn-outline">View Programs</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PROGRAMS ========== -->
+    <section class="programs" id="programs">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-header-tag">
+                    <span class="line"></span>
+                    <span>Programs</span>
+                    <span class="line"></span>
+                </div>
+                <h2 class="section-title">Our Programs</h2>
+                <p class="section-subtitle">Choose your discipline. Begin your journey.</p>
+            </div>
+            <div class="programs-grid">
+                <!-- Card 1 -->
+                <div class="match-card reveal-left">
+                    <div class="match-card-header">
+                        <h3>Adult Kickboxing</h3>
+                        <span class="live-badge">Adults</span>
+                    </div>
+                    <div class="match-card-body">
+                        <div class="match-card-schedule">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z"/></svg>
+                            Mon / Wed / Fri &mdash; 6:00 - 7:00 PM
+                        </div>
+                        <p class="match-card-desc">Striking, footwork, combinations, and conditioning. Build power and precision on your feet.</p>
+                    </div>
+                    <span class="match-card-number">01</span>
+                </div>
+                <!-- Card 2 -->
+                <div class="match-card reveal-right">
+                    <div class="match-card-header">
+                        <h3>Adult Brazilian Jiu-Jitsu</h3>
+                        <span class="live-badge">Adults</span>
+                    </div>
+                    <div class="match-card-body">
+                        <div class="match-card-schedule">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z"/></svg>
+                            Tue / Thu 6:00 - 7:30 PM &bull; Sat 9:00 - 11:00 AM
+                        </div>
+                        <p class="match-card-desc">Ground fighting, submissions, and self-defense. Master the art of leverage and control.</p>
+                    </div>
+                    <span class="match-card-number">02</span>
+                </div>
+                <!-- Card 3 -->
+                <div class="match-card reveal-left">
+                    <div class="match-card-header">
+                        <h3>Kids Jiu-Jitsu</h3>
+                        <span class="live-badge">Kids</span>
+                    </div>
+                    <div class="match-card-body">
+                        <div class="match-card-schedule">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z"/></svg>
+                            Mon / Wed &mdash; 5:00 - 5:45 PM
+                        </div>
+                        <p class="match-card-desc">Fundamentals of BJJ in a safe, fun, structured environment. Develops balance, coordination, confidence.</p>
+                    </div>
+                    <span class="match-card-number">03</span>
+                </div>
+                <!-- Card 4 -->
+                <div class="match-card reveal-right">
+                    <div class="match-card-header">
+                        <h3>Ninja Kids</h3>
+                        <span class="live-badge">Kids</span>
+                    </div>
+                    <div class="match-card-body">
+                        <div class="match-card-schedule">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z"/></svg>
+                            Tue / Thu &mdash; 5:00 - 5:45 PM
+                        </div>
+                        <p class="match-card-desc">Fun, high-energy program building confidence, coordination, strength through playful movements and gymnastics-inspired skills.</p>
+                    </div>
+                    <span class="match-card-number">04</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== INSTRUCTORS ========== -->
+    <section class="instructors" id="instructors">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-header-tag">
+                    <span class="line"></span>
+                    <span>Athlete Profiles</span>
+                    <span class="line"></span>
+                </div>
+                <h2 class="section-title">Meet Your Coaches</h2>
+                <p class="section-subtitle">Experienced, passionate instruction</p>
+            </div>
+            <div class="instructor-profiles">
+                <!-- Josh -->
+                <div class="athlete-card reveal-left">
+                    <div class="athlete-photo">
+                        <img src="assets/images/original/josh-pinney.jpg" alt="Josh Pinney" style="object-position: 45% 15%;">
+                    </div>
+                    <div class="athlete-info">
+                        <h3 class="athlete-name">Josh Pinney</h3>
+                        <p class="athlete-title">Owner &amp; Head Kickboxing Instructor</p>
+                        <div class="athlete-stats">
+                            <div class="athlete-stat">
+                                <div class="athlete-stat-val">20+</div>
+                                <div class="athlete-stat-lbl">Yrs Training</div>
+                            </div>
+                            <div class="athlete-stat">
+                                <div class="athlete-stat-val">Black</div>
+                                <div class="athlete-stat-lbl">Belt Rank</div>
+                            </div>
+                            <div class="athlete-stat">
+                                <div class="athlete-stat-val">Purple</div>
+                                <div class="athlete-stat-lbl">BJJ Belt</div>
+                            </div>
+                            <div class="athlete-stat">
+                                <div class="athlete-stat-val">Army</div>
+                                <div class="athlete-stat-lbl">Veteran</div>
+                            </div>
+                        </div>
+                        <p class="athlete-bio">Training since 2002. Black Belt (I.K.C.A, 2007). BJJ Purple Belt. US Army veteran &mdash; trained with Dan Henderson, Gray Maynard, and Mark Munoz. Has coached multiple state and national champions.</p>
+                    </div>
+                </div>
+                <!-- Robert -->
+                <div class="athlete-card reveal-right">
+                    <div class="athlete-photo">
+                        <img src="assets/images/original/robert-tahtinen.jpg" alt="Robert Tahtinen">
+                    </div>
+                    <div class="athlete-info">
+                        <h3 class="athlete-name">Robert Tahtinen</h3>
+                        <p class="athlete-title">Head BJJ Instructor &bull; Nibiru BJJ</p>
+                        <div class="athlete-stats">
+                            <div class="athlete-stat">
+                                <div class="athlete-stat-val">15+</div>
+                                <div class="athlete-stat-lbl">Yrs Training</div>
+                            </div>
+                            <div class="athlete-stat">
+                                <div class="athlete-stat-val">Black</div>
+                                <div class="athlete-stat-lbl">BJJ Belt</div>
+                            </div>
+                            <div class="athlete-stat">
+                                <div class="athlete-stat-val">4</div>
+                                <div class="athlete-stat-lbl">Title Belts</div>
+                            </div>
+                            <div class="athlete-stat">
+                                <div class="athlete-stat-val">KOTC</div>
+                                <div class="athlete-stat-lbl">Champion</div>
+                            </div>
+                        </div>
+                        <p class="athlete-bio">Black Belt (TAC Team, 2021). Training since 2011 after 15 years of wrestling. Retired MMA fighter with four title belts and a King of the Cage victory. Won IBJJF and Arizona State tournaments.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== WHY TRAIN ========== -->
+    <section class="why-train" id="why-train">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-header-tag">
+                    <span class="line"></span>
+                    <span>The Advantage</span>
+                    <span class="line"></span>
+                </div>
+                <h2 class="section-title">Why Train With Us</h2>
+                <p class="section-subtitle">What sets us apart</p>
+            </div>
+            <div class="why-grid">
+                <div class="why-card reveal">
+                    <span class="why-card-number">01</span>
+                    <h3>Expert Instruction</h3>
+                    <p>Our instructors are highly trained and experienced in Sport Karate, Kickboxing, and Jiu Jitsu and are dedicated to helping you achieve your goals.</p>
+                </div>
+                <div class="why-card reveal" style="transition-delay: 0.15s;">
+                    <span class="why-card-number">02</span>
+                    <h3>Train with Experienced Instructors</h3>
+                    <p>Train under experienced instructors who are invested in your growth. Build real skills in an environment that fosters confidence, discipline, and community.</p>
+                </div>
+                <div class="why-card reveal" style="transition-delay: 0.3s;">
+                    <span class="why-card-number">03</span>
+                    <h3>Be Part of a Team</h3>
+                    <p>Beyond a team, we're a family. Together, we forge bonds that strengthen on and off the mat.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SCHEDULE ========== -->
+    <section class="schedule" id="schedule">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-header-tag">
+                    <span class="line"></span>
+                    <span>Broadcast Schedule</span>
+                    <span class="line"></span>
+                </div>
+                <h2 class="section-title">Weekly Schedule</h2>
+                <p class="section-subtitle">Find your time slot</p>
+            </div>
+            <div class="reveal" style="overflow-x:auto;">
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>Early Session</th>
+                            <th>Main Event</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="day-cell">Monday</td>
+                            <td><span class="time-badge">5:00-5:45</span> Kids Jiu-Jitsu</td>
+                            <td><span class="time-badge">6:00-7:00</span> Adult Kickboxing</td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">Tuesday</td>
+                            <td><span class="time-badge">5:00-5:45</span> Ninja Kids</td>
+                            <td><span class="time-badge">6:00-7:30</span> Adult BJJ</td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">Wednesday</td>
+                            <td><span class="time-badge">5:00-5:45</span> Kids Jiu-Jitsu</td>
+                            <td><span class="time-badge">6:00-7:00</span> Adult Kickboxing</td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">Thursday</td>
+                            <td><span class="time-badge">5:00-5:45</span> Ninja Kids</td>
+                            <td><span class="time-badge">6:00-7:30</span> Adult BJJ</td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">Friday</td>
+                            <td>&mdash;</td>
+                            <td><span class="time-badge">6:00-7:00</span> Adult Kickboxing</td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">Saturday</td>
+                            <td>&mdash;</td>
+                            <td><span class="time-badge">9:00-11:00</span> Adult BJJ</td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">Sunday</td>
+                            <td class="closed-cell" colspan="2">Closed</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== TESTIMONIAL ========== -->
+    <section class="testimonial">
+        <div class="testimonial-inner">
+            <p class="testimonial-quote">"Midguard Academy changed my life. The instructors genuinely care about every student's growth, and the community here is like a second family."</p>
+            <p class="testimonial-author">&mdash; Sarah M., Training for 2 Years</p>
+        </div>
+    </section>
+
+    <!-- ========== FINAL CTA ========== -->
+    <section class="final-cta" id="free-trial">
+        <div class="final-cta-bg-text">Fight Night</div>
+        <div class="container" style="position:relative;z-index:2;">
+            <div class="section-header-tag" style="justify-content:center;display:flex;margin-bottom:16px;">
+                <span class="line"></span>
+                <span style="font-family:'Barlow Condensed',sans-serif;font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:4px;color:var(--red);padding:0 12px;">Step Into The Ring</span>
+                <span class="line"></span>
+            </div>
+            <h2>Start Your Free Trial Today</h2>
+            <p>No commitment, no pressure &mdash; just step onto the mat.</p>
+            <a href="#" class="btn-primary" style="font-size:1.1rem;padding:18px 50px;">Claim Your Free Trial</a>
+        </div>
+    </section>
+
+    <!-- ========== 1. GRAND OPENING / LAUNCH EVENT ========== -->
+    <section class="grand-opening" id="grand-opening">
+        <div class="container">
+            <div class="grand-opening-content reveal">
+                <div class="section-header">
+                    <div class="section-header-tag">
+                        <span class="line"></span>
+                        <span>Grand Opening</span>
+                        <span class="line"></span>
+                    </div>
+                    <h2 class="section-title">Grand Opening Event</h2>
+                    <p class="section-subtitle">Be there when the doors open &mdash; free classes, giveaways, and live demos</p>
+                </div>
+                <div class="countdown-wrapper">
+                    <div class="countdown-unit">
+                        <div class="countdown-number" id="cd-days">00</div>
+                        <div class="countdown-label">Days</div>
+                    </div>
+                    <div class="countdown-unit">
+                        <div class="countdown-number" id="cd-hours">00</div>
+                        <div class="countdown-label">Hours</div>
+                    </div>
+                    <div class="countdown-unit">
+                        <div class="countdown-number" id="cd-mins">00</div>
+                        <div class="countdown-label">Minutes</div>
+                    </div>
+                    <div class="countdown-unit">
+                        <div class="countdown-number" id="cd-secs">00</div>
+                        <div class="countdown-label">Seconds</div>
+                    </div>
+                </div>
+                <a href="#" class="btn-primary">RSVP Now</a>
+                <div class="grand-opening-details">
+                    <div class="grand-opening-detail">
+                        <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
+                        <span>Saturday, March 15, 2026</span>
+                    </div>
+                    <div class="grand-opening-detail">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z"/></svg>
+                        <span>10:00 AM &mdash; 2:00 PM</span>
+                    </div>
+                    <div class="grand-opening-detail">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
+                        <span>Midguard Academy &mdash; Prescott Valley, AZ</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 2. PRICING / MEMBERSHIP ========== -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-header-tag">
+                    <span class="line"></span>
+                    <span>Membership</span>
+                    <span class="line"></span>
+                </div>
+                <h2 class="section-title">Membership Plans</h2>
+                <p class="section-subtitle">Invest in yourself &mdash; choose the plan that fits your goals</p>
+            </div>
+            <div class="pricing-grid">
+                <!-- Intro Offer -->
+                <div class="price-card reveal-left">
+                    <div class="price-card-header">
+                        <div class="price-card-name">Intro Offer</div>
+                        <div class="price-card-price"><span>$</span>49</div>
+                        <div class="price-card-period">First Month &mdash; New Members Only</div>
+                    </div>
+                    <div class="price-card-body">
+                        <ul class="price-card-features">
+                            <li>Unlimited classes for 30 days</li>
+                            <li>Access to all programs</li>
+                            <li>Free loaner gear</li>
+                            <li>No commitment required</li>
+                        </ul>
+                        <a href="#" class="price-card-cta">Get Started</a>
+                    </div>
+                </div>
+                <!-- Monthly -->
+                <div class="price-card featured reveal">
+                    <span class="price-card-badge">Popular</span>
+                    <div class="price-card-header">
+                        <div class="price-card-name">Monthly</div>
+                        <div class="price-card-price"><span>$</span>120<span>/mo</span></div>
+                        <div class="price-card-period">Unlimited Access &mdash; No Contracts</div>
+                    </div>
+                    <div class="price-card-body">
+                        <ul class="price-card-features">
+                            <li>Unlimited classes per week</li>
+                            <li>All adult &amp; kids programs</li>
+                            <li>Open mat sessions included</li>
+                            <li>Cancel anytime</li>
+                            <li>Priority event registration</li>
+                        </ul>
+                        <a href="#" class="price-card-cta">Join Now</a>
+                    </div>
+                </div>
+                <!-- Family Plan -->
+                <div class="price-card reveal-right">
+                    <div class="price-card-header">
+                        <div class="price-card-name">Family Plan</div>
+                        <div class="price-card-price"><span>$</span>199<span>/mo</span></div>
+                        <div class="price-card-period">Up to 4 Family Members</div>
+                    </div>
+                    <div class="price-card-body">
+                        <ul class="price-card-features">
+                            <li>Unlimited classes for entire family</li>
+                            <li>All adult &amp; kids programs</li>
+                            <li>Family discount on gear</li>
+                            <li>Priority scheduling</li>
+                            <li>$25/mo per additional member</li>
+                        </ul>
+                        <a href="#" class="price-card-cta">Enroll Family</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 3. REFERRAL PROGRAM ========== -->
+    <section class="referral" id="referral">
+        <div class="container">
+            <div class="referral-inner">
+                <div class="referral-content reveal-left">
+                    <div class="section-header-tag" style="margin-bottom:16px;">
+                        <span class="line"></span>
+                        <span>Referral Program</span>
+                    </div>
+                    <h3>Bring a Friend,<br>Earn Rewards</h3>
+                    <p>Our community grows through word of mouth. When you refer a friend who joins, you both win. The more you share, the more you earn.</p>
+                    <div class="referral-steps">
+                        <div class="referral-step">
+                            <div class="referral-step-num">1</div>
+                            <div class="referral-step-text">
+                                <h4>Share Your Code</h4>
+                                <p>Get your unique referral code from the front desk or your member portal.</p>
+                            </div>
+                        </div>
+                        <div class="referral-step">
+                            <div class="referral-step-num">2</div>
+                            <div class="referral-step-text">
+                                <h4>Friend Signs Up</h4>
+                                <p>Your friend uses your code when they register for a membership.</p>
+                            </div>
+                        </div>
+                        <div class="referral-step">
+                            <div class="referral-step-num">3</div>
+                            <div class="referral-step-text">
+                                <h4>You Both Earn</h4>
+                                <p>You get a reward, and your friend gets a bonus on their first month.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="referral-rewards reveal-right">
+                    <h4>Reward Tiers</h4>
+                    <div class="reward-tier">
+                        <span class="reward-tier-label">1 Referral</span>
+                        <span class="reward-tier-value">Free T-Shirt</span>
+                    </div>
+                    <div class="reward-tier">
+                        <span class="reward-tier-label">3 Referrals</span>
+                        <span class="reward-tier-value">1 Month Free</span>
+                    </div>
+                    <div class="reward-tier">
+                        <span class="reward-tier-label">5 Referrals</span>
+                        <span class="reward-tier-value">Free Private Lesson</span>
+                    </div>
+                    <div class="reward-tier">
+                        <span class="reward-tier-label">10 Referrals</span>
+                        <span class="reward-tier-value">3 Months Free</span>
+                    </div>
+                    <div class="reward-tier">
+                        <span class="reward-tier-label">Your Friend Gets</span>
+                        <span class="reward-tier-value">20% Off First Month</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 4. FREE TRIAL / FIRST CLASS FREE CTA ========== -->
+    <section class="free-trial-section">
+        <div class="free-trial-inner">
+            <h2>Your First Class Is Free</h2>
+            <p>No experience needed. No gear required. Just show up and discover what you're capable of.</p>
+            <a href="#" class="btn-white">Book Your Free Class</a>
+            <div class="free-trial-badges">
+                <div class="free-trial-badge">
+                    <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                    No Commitment
+                </div>
+                <div class="free-trial-badge">
+                    <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                    All Skill Levels
+                </div>
+                <div class="free-trial-badge">
+                    <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                    Gear Provided
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 5. STUDENT SPOTLIGHT / TESTIMONIALS ========== -->
+    <section class="spotlight" id="testimonials">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-header-tag">
+                    <span class="line"></span>
+                    <span>Student Spotlight</span>
+                    <span class="line"></span>
+                </div>
+                <h2 class="section-title">What Our Students Say</h2>
+                <p class="section-subtitle">Real stories from real members</p>
+            </div>
+            <div class="spotlight-grid">
+                <div class="spotlight-card reveal">
+                    <div class="spotlight-stars">
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    </div>
+                    <p class="spotlight-quote">I came in as a complete beginner and within 3 months I felt like a different person. The confidence I've gained extends far beyond the mat.</p>
+                    <div class="spotlight-author">
+                        <div class="spotlight-avatar">SM</div>
+                        <div class="spotlight-author-info">
+                            <h4>Sarah M.</h4>
+                            <p>Adult Kickboxing &bull; 2 Years</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="spotlight-card reveal" style="transition-delay: 0.15s;">
+                    <div class="spotlight-stars">
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    </div>
+                    <p class="spotlight-quote">My son started in the Kids BJJ program and I've watched him grow in discipline and focus. His teachers even noticed a difference at school. Incredible program.</p>
+                    <div class="spotlight-author">
+                        <div class="spotlight-avatar">DK</div>
+                        <div class="spotlight-author-info">
+                            <h4>David K.</h4>
+                            <p>Kids BJJ Parent &bull; 1 Year</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="spotlight-card reveal" style="transition-delay: 0.3s;">
+                    <div class="spotlight-stars">
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    </div>
+                    <p class="spotlight-quote">As a 45-year-old who never thought I'd do martial arts, I can't say enough about how welcoming and patient the coaches are. Best decision I ever made.</p>
+                    <div class="spotlight-author">
+                        <div class="spotlight-avatar">JR</div>
+                        <div class="spotlight-author-info">
+                            <h4>Jennifer R.</h4>
+                            <p>Adult BJJ &bull; 8 Months</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 6. FAQ ========== -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-header-tag">
+                    <span class="line"></span>
+                    <span>FAQ</span>
+                    <span class="line"></span>
+                </div>
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <p class="section-subtitle">Everything you need to know before your first class</p>
+            </div>
+            <div class="faq-list reveal">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <h4>Do I need any experience to start?</h4>
+                        <span class="faq-icon"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Absolutely not. Most of our students start with zero experience. Our programs are designed to take you from complete beginner to confident practitioner at your own pace. Our coaches will work with you one-on-one to make sure you're comfortable.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <h4>What should I wear to my first class?</h4>
+                        <span class="faq-icon"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>For your first class, comfortable athletic clothing is all you need &mdash; shorts or sweats and a t-shirt work great. For BJJ classes, we have loaner gis available. No shoes are needed on the mat.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <h4>What ages do you accept?</h4>
+                        <span class="faq-icon"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Our kids programs start at age 5. Ninja Kids and Kids Jiu-Jitsu are designed for ages 5-12. Adult programs are open to ages 13 and up. There is no upper age limit &mdash; we have students in their 50s and 60s training regularly.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <h4>I'm not in great shape. Can I still join?</h4>
+                        <span class="faq-icon"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes! You don't need to be fit to start &mdash; you start to get fit. Our classes are scalable, meaning every drill and exercise can be adjusted to your current fitness level. Many of our students came to us specifically to get in shape.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <h4>Is kickboxing / BJJ safe?</h4>
+                        <span class="faq-icon"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Safety is our top priority. All sparring is controlled, protective gear is required, and our instructors closely supervise every session. Beginners start with fundamentals and don't spar until they're ready. Our injury rate is very low.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <h4>Can I try a class before committing to a membership?</h4>
+                        <span class="faq-icon"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Absolutely! Your first class is completely free with no obligation. Come try any of our programs and see if it's the right fit for you. We want you to be 100% confident before you commit.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <h4>Do you offer private lessons?</h4>
+                        <span class="faq-icon"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes, private lessons are available with both our kickboxing and BJJ instructors. These are great for accelerating your learning or preparing for competition. Ask at the front desk for scheduling and pricing.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 7. CLASS SCHEDULE GRID ========== -->
+    <section class="class-schedule" id="class-times">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-header-tag">
+                    <span class="line"></span>
+                    <span>Class Times</span>
+                    <span class="line"></span>
+                </div>
+                <h2 class="section-title">Weekly Class Grid</h2>
+                <p class="section-subtitle">Find the perfect time for your training</p>
+            </div>
+            <div class="reveal" style="overflow-x:auto;">
+                <div class="schedule-grid">
+                    <div class="schedule-grid-header">Mon</div>
+                    <div class="schedule-grid-header">Tue</div>
+                    <div class="schedule-grid-header">Wed</div>
+                    <div class="schedule-grid-header">Thu</div>
+                    <div class="schedule-grid-header">Fri</div>
+                    <div class="schedule-grid-header">Sat</div>
+                    <!-- 5:00 PM Row -->
+                    <div class="schedule-grid-cell">
+                        <div class="schedule-grid-slot">
+                            <div class="schedule-grid-class">Kids BJJ</div>
+                            <div class="schedule-grid-time">5:00 - 5:45 PM</div>
+                        </div>
+                    </div>
+                    <div class="schedule-grid-cell">
+                        <div class="schedule-grid-slot">
+                            <div class="schedule-grid-class">Ninja Kids</div>
+                            <div class="schedule-grid-time">5:00 - 5:45 PM</div>
+                        </div>
+                    </div>
+                    <div class="schedule-grid-cell">
+                        <div class="schedule-grid-slot">
+                            <div class="schedule-grid-class">Kids BJJ</div>
+                            <div class="schedule-grid-time">5:00 - 5:45 PM</div>
+                        </div>
+                    </div>
+                    <div class="schedule-grid-cell">
+                        <div class="schedule-grid-slot">
+                            <div class="schedule-grid-class">Ninja Kids</div>
+                            <div class="schedule-grid-time">5:00 - 5:45 PM</div>
+                        </div>
+                    </div>
+                    <div class="schedule-grid-cell empty">&mdash;</div>
+                    <div class="schedule-grid-cell empty">&mdash;</div>
+                    <!-- 6:00 PM Row -->
+                    <div class="schedule-grid-cell">
+                        <div class="schedule-grid-slot">
+                            <div class="schedule-grid-class">Adult Kickboxing</div>
+                            <div class="schedule-grid-time">6:00 - 7:00 PM</div>
+                        </div>
+                    </div>
+                    <div class="schedule-grid-cell">
+                        <div class="schedule-grid-slot">
+                            <div class="schedule-grid-class">Adult BJJ</div>
+                            <div class="schedule-grid-time">6:00 - 7:30 PM</div>
+                        </div>
+                    </div>
+                    <div class="schedule-grid-cell">
+                        <div class="schedule-grid-slot">
+                            <div class="schedule-grid-class">Adult Kickboxing</div>
+                            <div class="schedule-grid-time">6:00 - 7:00 PM</div>
+                        </div>
+                    </div>
+                    <div class="schedule-grid-cell">
+                        <div class="schedule-grid-slot">
+                            <div class="schedule-grid-class">Adult BJJ</div>
+                            <div class="schedule-grid-time">6:00 - 7:30 PM</div>
+                        </div>
+                    </div>
+                    <div class="schedule-grid-cell">
+                        <div class="schedule-grid-slot">
+                            <div class="schedule-grid-class">Adult Kickboxing</div>
+                            <div class="schedule-grid-time">6:00 - 7:00 PM</div>
+                        </div>
+                    </div>
+                    <div class="schedule-grid-cell">
+                        <div class="schedule-grid-slot">
+                            <div class="schedule-grid-class">Adult BJJ</div>
+                            <div class="schedule-grid-time">9:00 - 11:00 AM</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 8. BLOG / NEWS ========== -->
+    <section class="blog" id="blog">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-header-tag">
+                    <span class="line"></span>
+                    <span>Latest News</span>
+                    <span class="line"></span>
+                </div>
+                <h2 class="section-title">From The Academy</h2>
+                <p class="section-subtitle">News, tips, and updates from Midguard</p>
+            </div>
+            <div class="blog-grid">
+                <div class="blog-card reveal-left">
+                    <div class="blog-card-image">
+                        <svg viewBox="0 0 24 24"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"/></svg>
+                        <span class="blog-card-category">Training Tips</span>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-date">February 10, 2026</div>
+                        <h3 class="blog-card-title">5 Kickboxing Combos Every Beginner Should Master</h3>
+                        <p class="blog-card-excerpt">Build a strong foundation with these five essential striking combinations that will level up your game.</p>
+                        <a href="#" class="blog-card-link">Read More <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg></a>
+                    </div>
+                </div>
+                <div class="blog-card reveal">
+                    <div class="blog-card-image">
+                        <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                        <span class="blog-card-category">Community</span>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-date">February 3, 2026</div>
+                        <h3 class="blog-card-title">Student of the Month: Meet Our Rising Stars</h3>
+                        <p class="blog-card-excerpt">Celebrating the dedication and progress of our standout students who put in the work every single week.</p>
+                        <a href="#" class="blog-card-link">Read More <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg></a>
+                    </div>
+                </div>
+                <div class="blog-card reveal-right">
+                    <div class="blog-card-image">
+                        <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                        <span class="blog-card-category">Self Defense</span>
+                    </div>
+                    <div class="blog-card-body">
+                        <div class="blog-card-date">January 27, 2026</div>
+                        <h3 class="blog-card-title">Why Every Adult Should Learn Basic Self-Defense</h3>
+                        <p class="blog-card-excerpt">Practical self-defense isn't about fighting &mdash; it's about awareness, confidence, and knowing how to protect yourself.</p>
+                        <a href="#" class="blog-card-link">Read More <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 9. NEWSLETTER SIGNUP ========== -->
+    <section class="newsletter" id="newsletter">
+        <div class="container">
+            <div class="newsletter-inner reveal">
+                <div class="newsletter-content">
+                    <h3>Stay in the Fight</h3>
+                    <p>Get training tips, schedule updates, and exclusive offers delivered to your inbox.</p>
+                </div>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); this.querySelector('.newsletter-btn').textContent='Subscribed!'; this.querySelector('.newsletter-input').value='';">
+                    <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+                    <button type="submit" class="newsletter-btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 10. SOCIAL MEDIA / FOLLOW US ========== -->
+    <section class="social-connect" id="social">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-header-tag">
+                    <span class="line"></span>
+                    <span>Follow Us</span>
+                    <span class="line"></span>
+                </div>
+                <h2 class="section-title">Join The Community</h2>
+                <p class="section-subtitle">Follow us on social media for daily content, highlights, and updates</p>
+            </div>
+            <div class="social-links reveal">
+                <a href="#" class="social-link" aria-label="Facebook">
+                    <svg viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>
+                </a>
+                <a href="#" class="social-link" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 01-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 017.8 2zm-.2 2A3.6 3.6 0 004 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 003.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6zm9.65 1.5a1.25 1.25 0 110 2.5 1.25 1.25 0 010-2.5zM12 7a5 5 0 110 10 5 5 0 010-10zm0 2a3 3 0 100 6 3 3 0 000-6z"/></svg>
+                </a>
+                <a href="#" class="social-link" aria-label="YouTube">
+                    <svg viewBox="0 0 24 24"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/></svg>
+                </a>
+                <a href="#" class="social-link" aria-label="TikTok">
+                    <svg viewBox="0 0 24 24"><path d="M16.6 5.82s.51.5 0 0A4.278 4.278 0 0115.54 3h-3.09v12.4a2.592 2.592 0 01-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 004.3 1.38V7.3s-1.88.09-3.24-1.48z"/></svg>
+                </a>
+                <a href="#" class="social-link" aria-label="X">
+                    <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+            </div>
+            <p class="social-handle reveal">Follow us <a href="#">@MidguardAcademy</a></p>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-logo">
+                <img src="assets/images/logos/logo-04.png" alt="Midguard Academy">
+            </div>
+            <div class="footer-links">
+                <a href="#programs">Programs</a>
+                <a href="#instructors">Instructors</a>
+                <a href="#schedule">Schedule</a>
+                <a href="#why-train">Why Train</a>
+                <a href="#free-trial">Free Trial</a>
+            </div>
+            <div class="footer-hours">
+                <p>Mon-Fri 5 - 7:30 PM</p>
+                <p>Sat 9 - 11 AM</p>
+                <p>Sun Closed</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Midguard Academy. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ========== SCROLL REVEAL JS ========== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+            reveals.forEach(function(el) { observer.observe(el); });
+
+            // Navbar scroll effect
+            let lastScroll = 0;
+            window.addEventListener('scroll', function() {
+                const nav = document.getElementById('navbar');
+                if (window.scrollY > 100) {
+                    nav.style.background = 'rgba(10,10,10,0.98)';
+                    nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.5)';
+                } else {
+                    nav.style.background = 'var(--black)';
+                    nav.style.boxShadow = 'none';
+                }
+                lastScroll = window.scrollY;
+            });
+
+            // Countdown Timer — Grand Opening March 15, 2026
+            var launchDate = new Date('2026-03-15T10:00:00').getTime();
+            function updateCountdown() {
+                var now = new Date().getTime();
+                var diff = launchDate - now;
+                if (diff <= 0) {
+                    document.getElementById('cd-days').textContent = '00';
+                    document.getElementById('cd-hours').textContent = '00';
+                    document.getElementById('cd-mins').textContent = '00';
+                    document.getElementById('cd-secs').textContent = '00';
+                    return;
+                }
+                var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                var secs = Math.floor((diff % (1000 * 60)) / 1000);
+                document.getElementById('cd-days').textContent = days < 10 ? '0' + days : days;
+                document.getElementById('cd-hours').textContent = hours < 10 ? '0' + hours : hours;
+                document.getElementById('cd-mins').textContent = mins < 10 ? '0' + mins : mins;
+                document.getElementById('cd-secs').textContent = secs < 10 ? '0' + secs : secs;
+            }
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+
+            // FAQ Accordion
+            document.querySelectorAll('.faq-question').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    var item = this.closest('.faq-item');
+                    var isActive = item.classList.contains('active');
+                    document.querySelectorAll('.faq-item.active').forEach(function(open) {
+                        open.classList.remove('active');
+                    });
+                    if (!isActive) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
