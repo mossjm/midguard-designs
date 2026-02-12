@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midguard Academy — Heritage &amp; Honor | BJJ &amp; Kickboxing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Source Serif 4', 'Georgia', serif;
+            background: #FAF8F5;
+            color: #2D2D2D;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+        img { max-width: 100%; display: block; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        :root {
+            --burgundy: #722F37;
+            --navy: #1B2838;
+            --cream: #FAF8F5;
+            --gold: #B8860B;
+            --charcoal: #2D2D2D;
+            --warm-white: #F5F0EB;
+            --text-dark: #333;
+            --text-light: #E8E0D6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* ===== TYPOGRAPHY UTILITIES ===== */
+        .label-sans {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+        .heading-serif {
+            font-family: 'Libre Baskerville', serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        .body-serif {
+            font-family: 'Source Serif 4', serif;
+            font-weight: 400;
+            line-height: 1.85;
+        }
+
+        /* ===== DECORATIVE RULE ===== */
+        .rule {
+            display: block;
+            width: 60px;
+            height: 1px;
+            background: var(--burgundy);
+            margin: 1.5rem auto;
+        }
+        .rule-gold {
+            background: var(--gold);
+        }
+        .rule-left {
+            margin-left: 0;
+        }
+
+        /* ===== NAVIGATION ===== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(250,248,245,0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            transition: all 0.3s;
+        }
+        .nav.nav-dark {
+            background: rgba(27,40,56,0.95);
+            border-bottom-color: rgba(255,255,255,0.06);
+        }
+        .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 68px;
+        }
+        .nav-logo img {
+            height: 36px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2.2rem;
+            align-items: center;
+        }
+        .nav-links a {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.68rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            color: var(--charcoal);
+            position: relative;
+            padding-bottom: 3px;
+            transition: color 0.3s;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--burgundy);
+            transition: width 0.3s;
+        }
+        .nav-links a:hover { color: var(--burgundy); }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-cta-link {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.68rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 10px 24px;
+            border: 1.5px solid var(--burgundy);
+            color: var(--burgundy);
+            transition: all 0.3s;
+        }
+        .nav-cta-link:hover {
+            background: var(--burgundy);
+            color: #fff;
+        }
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 4px;
+        }
+        .nav-hamburger span {
+            display: block;
+            width: 24px;
+            height: 1.5px;
+            background: var(--charcoal);
+            transition: all 0.3s;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: flex-end;
+            overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('assets/images/original/hero-bg.jpg') center/cover no-repeat;
+        }
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                0deg,
+                rgba(27,40,56,0.95) 0%,
+                rgba(27,40,56,0.7) 35%,
+                rgba(27,40,56,0.4) 60%,
+                rgba(27,40,56,0.6) 100%
+            );
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem 6rem;
+            width: 100%;
+        }
+        .hero-eyebrow {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.68rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+        .hero-rule {
+            width: 50px;
+            height: 1px;
+            background: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+        .hero-title {
+            font-family: 'Libre Baskerville', serif;
+            font-weight: 700;
+            font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+            line-height: 1.15;
+            color: #fff;
+            max-width: 700px;
+            margin-bottom: 1.5rem;
+        }
+        .hero-title em {
+            font-style: italic;
+            color: var(--gold);
+        }
+        .hero-sub {
+            font-family: 'Source Serif 4', serif;
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.7);
+            max-width: 520px;
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+        }
+        .hero-btn {
+            display: inline-block;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            padding: 15px 36px;
+            border: 1.5px solid var(--gold);
+            color: var(--gold);
+            transition: all 0.3s;
+        }
+        .hero-btn:hover {
+            background: var(--gold);
+            color: var(--navy);
+        }
+
+        /* ===== ACADEMY STORY ===== */
+        .story {
+            padding: 7rem 0;
+            background: var(--cream);
+        }
+        .story-inner {
+            max-width: 720px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .story-label {
+            color: var(--burgundy);
+            margin-bottom: 1rem;
+        }
+        .story h2 {
+            font-family: 'Libre Baskerville', serif;
+            font-weight: 700;
+            font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+            color: var(--navy);
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+        .story .body-text {
+            font-size: 1.05rem;
+            color: #555;
+            margin-top: 2rem;
+        }
+        .story .body-text + .body-text {
+            margin-top: 1.2rem;
+        }
+
+        /* ===== PROGRAMS ===== */
+        .programs {
+            padding: 6rem 0;
+            background: var(--navy);
+            color: var(--text-light);
+        }
+        .programs-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .programs-header .label-sans { color: var(--gold); margin-bottom: 1rem; display: block; }
+        .programs-header h2 {
+            font-family: 'Libre Baskerville', serif;
+            font-weight: 700;
+            font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+            color: #fff;
+        }
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+        .program-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 2.5rem 2rem;
+            transition: all 0.4s;
+        }
+        .program-card:hover {
+            background: rgba(255,255,255,0.07);
+            border-color: rgba(184,134,11,0.3);
+            transform: translateY(-3px);
+        }
+        .program-card .label-sans {
+            color: var(--gold);
+            margin-bottom: 0.7rem;
+            display: block;
+        }
+        .program-card h3 {
+            font-family: 'Libre Baskerville', serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #fff;
+            margin-bottom: 0.4rem;
+        }
+        .program-schedule {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
+        }
+        .program-card p {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.8;
+        }
+
+        /* ===== INSTRUCTORS ===== */
+        .instructors {
+            padding: 7rem 0;
+            background: var(--cream);
+        }
+        .instructors-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .instructors-header .label-sans { color: var(--burgundy); display: block; margin-bottom: 1rem; }
+        .instructors-header h2 {
+            font-family: 'Libre Baskerville', serif;
+            font-weight: 700;
+            font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+            color: var(--navy);
+        }
+
+        .instructor-feature {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+            margin-bottom: 5rem;
+            padding-bottom: 5rem;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+        }
+        .instructor-feature:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        .instructor-feature.reverse { direction: rtl; }
+        .instructor-feature.reverse > * { direction: ltr; }
+
+        .instructor-img-wrap {
+            position: relative;
+        }
+        .instructor-img-wrap img {
+            width: 100%;
+            aspect-ratio: 4/5;
+            object-fit: cover;
+            filter: grayscale(15%);
+        }
+        .instructor-img-wrap::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            right: -12px;
+            width: 60%;
+            height: 60%;
+            border: 2px solid var(--gold);
+            z-index: -1;
+        }
+
+        .instructor-text {
+            padding-top: 1rem;
+        }
+        .instructor-text .label-sans {
+            color: var(--burgundy);
+            display: block;
+            margin-bottom: 0.7rem;
+        }
+        .instructor-text h3 {
+            font-family: 'Libre Baskerville', serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--navy);
+            margin-bottom: 0.3rem;
+        }
+        .instructor-text .role {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+        .instructor-text .bio {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Pull quote */
+        .pull-quote {
+            position: relative;
+            padding: 1.5rem 0 1.5rem 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 3px solid var(--gold);
+        }
+        .pull-quote p {
+            font-family: 'Libre Baskerville', serif;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--navy);
+            line-height: 1.6;
+        }
+
+        .instructor-stats-row {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(0,0,0,0.08);
+        }
+        .i-stat {
+            text-align: center;
+        }
+        .i-stat-value {
+            font-family: 'Libre Baskerville', serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--burgundy);
+        }
+        .i-stat-label {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.62rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #888;
+            margin-top: 0.2rem;
+        }
+
+        /* ===== WHY TRAIN ===== */
+        .why-section {
+            padding: 6rem 0;
+            background: var(--charcoal);
+            color: var(--text-light);
+        }
+        .why-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .why-header .label-sans { color: var(--gold); display: block; margin-bottom: 1rem; }
+        .why-header h2 {
+            font-family: 'Libre Baskerville', serif;
+            font-weight: 700;
+            font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+            color: #fff;
+        }
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+        .why-card {
+            text-align: center;
+            padding: 0 1rem;
+        }
+        .why-card-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 1.5rem;
+            color: var(--gold);
+        }
+        .why-card-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+        .why-card h3 {
+            font-family: 'Libre Baskerville', serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #fff;
+            margin-bottom: 0.8rem;
+        }
+        .why-card p {
+            font-size: 0.92rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.8;
+        }
+        .why-pullquote {
+            max-width: 680px;
+            margin: 4rem auto 0;
+            text-align: center;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+        .why-pullquote .big-quote {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 3rem;
+            color: var(--gold);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+        .why-pullquote blockquote {
+            font-family: 'Libre Baskerville', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.85);
+            line-height: 1.7;
+        }
+
+        /* ===== SCHEDULE ===== */
+        .schedule-section {
+            padding: 6rem 0;
+            background: var(--cream);
+        }
+        .schedule-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .schedule-header .label-sans { color: var(--burgundy); display: block; margin-bottom: 1rem; }
+        .schedule-header h2 {
+            font-family: 'Libre Baskerville', serif;
+            font-weight: 700;
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            color: var(--navy);
+        }
+        .schedule-table-wrap {
+            overflow-x: auto;
+        }
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+        .schedule-table thead th {
+            font-family: 'Libre Baskerville', serif;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--navy);
+            padding: 1rem 1.2rem;
+            border-bottom: 2px solid var(--navy);
+            text-align: left;
+        }
+        .schedule-table tbody td {
+            padding: 1rem 1.2rem;
+            font-family: 'Source Serif 4', serif;
+            font-size: 0.9rem;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            color: #555;
+            vertical-align: top;
+        }
+        .schedule-table tbody td:first-child {
+            font-family: 'Libre Baskerville', serif;
+            font-weight: 700;
+            color: var(--navy);
+            font-size: 0.85rem;
+        }
+        .schedule-table tbody tr:hover {
+            background: rgba(114,47,55,0.03);
+        }
+        .sched-class {
+            font-weight: 600;
+            color: var(--burgundy);
+        }
+        .sched-note {
+            color: #999;
+            font-style: italic;
+        }
+
+        .schedule-hours {
+            text-align: center;
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0,0,0,0.06);
+        }
+        .schedule-hours p {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: #888;
+            letter-spacing: 1px;
+        }
+
+        /* ===== CTA ===== */
+        .cta-section {
+            padding: 7rem 0;
+            background: var(--burgundy);
+            text-align: center;
+            position: relative;
+        }
+        .cta-section::before,
+        .cta-section::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 1px;
+            background: var(--gold);
+        }
+        .cta-section::before { top: 3rem; }
+        .cta-section::after { bottom: 3rem; }
+
+        .cta-section .label-sans {
+            color: rgba(255,255,255,0.5);
+            display: block;
+            margin-bottom: 1rem;
+        }
+        .cta-section h2 {
+            font-family: 'Libre Baskerville', serif;
+            font-weight: 700;
+            font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+        .cta-section .cta-text {
+            font-size: 1.05rem;
+            color: rgba(255,255,255,0.65);
+            max-width: 500px;
+            margin: 0 auto 2.5rem;
+        }
+        .cta-btn {
+            display: inline-block;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            padding: 16px 42px;
+            border: 1.5px solid var(--gold);
+            color: var(--gold);
+            background: transparent;
+            transition: all 0.3s;
+        }
+        .cta-btn:hover {
+            background: var(--gold);
+            color: var(--burgundy);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            padding: 4rem 0 2rem;
+            background: var(--navy);
+            color: rgba(255,255,255,0.5);
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        .footer-brand img {
+            height: 36px;
+            margin-bottom: 1rem;
+        }
+        .footer-brand p {
+            font-size: 0.85rem;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.4);
+        }
+        .footer h4 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+        .footer ul li {
+            margin-bottom: 0.6rem;
+        }
+        .footer ul li a {
+            font-family: 'Source Serif 4', serif;
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.4);
+            transition: color 0.3s;
+        }
+        .footer ul li a:hover { color: var(--gold); }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+        .footer-bottom p {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.68rem;
+            color: rgba(255,255,255,0.3);
+            letter-spacing: 1px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .instructor-feature {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .instructor-feature.reverse { direction: ltr; }
+            .instructor-img-wrap {
+                max-width: 450px;
+            }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-hamburger { display: flex; }
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 68px;
+                left: 0;
+                right: 0;
+                background: rgba(250,248,245,0.98);
+                padding: 2rem;
+                gap: 1.5rem;
+                border-bottom: 1px solid rgba(0,0,0,0.06);
+            }
+            .programs-grid { grid-template-columns: 1fr; }
+            .why-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .hero-content { padding-bottom: 4rem; }
+        }
+        @media (max-width: 480px) {
+            .footer-grid { grid-template-columns: 1fr; }
+            .instructor-stats-row { flex-wrap: wrap; gap: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav" id="nav">
+    <div class="nav-inner">
+        <a href="#" class="nav-logo">
+            <img src="assets/images/logos/logo-01.png" alt="Midguard Academy">
+        </a>
+        <div class="nav-links" id="navLinks">
+            <a href="#story">Our Story</a>
+            <a href="#programs">Programs</a>
+            <a href="#instructors">Instructors</a>
+            <a href="#schedule">Schedule</a>
+            <a href="#cta" class="nav-cta-link">Free Trial</a>
+        </div>
+        <div class="nav-hamburger" id="navHamburger" onclick="document.getElementById('navLinks').classList.toggle('active')">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+        <p class="hero-eyebrow">Midguard BJJ &amp; Kickboxing</p>
+        <div class="hero-rule"></div>
+        <h1 class="hero-title">Where Discipline<br>Meets <em>Legacy</em></h1>
+        <p class="hero-sub">A tradition of excellence in martial arts. Training champions, building character, and forging bonds that last a lifetime.</p>
+        <a href="#cta" class="hero-btn">Begin Your Journey</a>
+    </div>
+</section>
+
+<!-- ACADEMY STORY -->
+<section class="story" id="story">
+    <div class="container">
+        <div class="story-inner">
+            <p class="label-sans story-label">The Academy</p>
+            <h2>More Than a Gym.<br>A Way of Life.</h2>
+            <span class="rule"></span>
+            <p class="body-text body-serif">Midguard Academy stands as a home for those who believe in the transformative power of martial arts. Under the guidance of champion instructors, students of every level discover not just technique, but character, resilience, and community.</p>
+            <p class="body-text body-serif">From the focused discipline of Brazilian Jiu-Jitsu to the explosive art of Kickboxing, every program is designed to challenge, inspire, and elevate. This is where champions are made and legacies begin.</p>
+        </div>
+    </div>
+</section>
+
+<!-- PROGRAMS -->
+<section class="programs" id="programs">
+    <div class="container">
+        <div class="programs-header">
+            <p class="label-sans">What We Teach</p>
+            <span class="rule rule-gold"></span>
+            <h2>Our Programs</h2>
+        </div>
+        <div class="programs-grid">
+            <div class="program-card">
+                <p class="label-sans">Adults</p>
+                <h3>Kickboxing</h3>
+                <p class="program-schedule">Mon / Wed / Fri &mdash; 6:00 &ndash; 7:00 PM</p>
+                <p>Striking, footwork, combinations, and conditioning. Build power, precision, and endurance in every round.</p>
+            </div>
+            <div class="program-card">
+                <p class="label-sans">Adults</p>
+                <h3>Brazilian Jiu-Jitsu</h3>
+                <p class="program-schedule">Tue / Thu 6:00 &ndash; 7:30 PM &bull; Sat 9:00 &ndash; 11:00 AM</p>
+                <p>Ground fighting, submissions, and self-defense. Develop the technique and composure of a true practitioner.</p>
+            </div>
+            <div class="program-card">
+                <p class="label-sans">Youth</p>
+                <h3>Kids Jiu-Jitsu</h3>
+                <p class="program-schedule">Mon / Wed &mdash; 5:00 &ndash; 5:45 PM</p>
+                <p>Fundamentals of BJJ in a safe, fun environment. Building confidence and discipline from the ground up.</p>
+            </div>
+            <div class="program-card">
+                <p class="label-sans">Youth</p>
+                <h3>Ninja Kids</h3>
+                <p class="program-schedule">Tue / Thu &mdash; 5:00 &ndash; 5:45 PM</p>
+                <p>A fun program building confidence, coordination, and strength. Where young warriors begin their journey.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- INSTRUCTORS -->
+<section class="instructors" id="instructors">
+    <div class="container">
+        <div class="instructors-header">
+            <p class="label-sans">Meet the Coaches</p>
+            <span class="rule"></span>
+            <h2>Guided by Experience</h2>
+        </div>
+
+        <!-- Josh Pinney -->
+        <div class="instructor-feature">
+            <div class="instructor-img-wrap">
+                <img src="assets/images/original/josh-pinney.jpg" alt="Josh Pinney">
+            </div>
+            <div class="instructor-text">
+                <p class="label-sans">Owner &amp; Head Instructor</p>
+                <h3>Josh Pinney</h3>
+                <p class="role">Kickboxing &amp; Sport Karate</p>
+                <p class="bio body-serif">Training since 2002, Josh brings over two decades of martial arts mastery to every class. A Black Belt holder (I.K.C.A, 2007) and BJJ Purple Belt, his journey spans from military service to training alongside legends.</p>
+                <div class="pull-quote">
+                    <p>A US Army veteran who trained with Dan Henderson, Gray Maynard, and Mark Munoz &mdash; and has coached multiple state and national champions.</p>
+                </div>
+                <div class="instructor-stats-row">
+                    <div class="i-stat">
+                        <div class="i-stat-value">20+</div>
+                        <div class="i-stat-label">Years Training</div>
+                    </div>
+                    <div class="i-stat">
+                        <div class="i-stat-value">Black Belt</div>
+                        <div class="i-stat-label">I.K.C.A (2007)</div>
+                    </div>
+                    <div class="i-stat">
+                        <div class="i-stat-value">US Army</div>
+                        <div class="i-stat-label">Veteran</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Robert Tahtinen -->
+        <div class="instructor-feature reverse">
+            <div class="instructor-img-wrap">
+                <img src="assets/images/original/robert-tahtinen.jpg" alt="Robert Tahtinen">
+            </div>
+            <div class="instructor-text">
+                <p class="label-sans">Head BJJ Instructor</p>
+                <h3>Robert Tahtinen</h3>
+                <p class="role">Nibiru BJJ &bull; Brazilian Jiu-Jitsu</p>
+                <p class="bio body-serif">Robert's path to the black belt (TAC Team, 2021) was forged through 15 years of wrestling before discovering BJJ in 2011. A retired MMA fighter with four title belts, his competition record speaks for itself.</p>
+                <div class="pull-quote">
+                    <p>A King of the Cage victor and IBJJF champion, Robert brings elite-level competition experience to every session on the mat.</p>
+                </div>
+                <div class="instructor-stats-row">
+                    <div class="i-stat">
+                        <div class="i-stat-value">4</div>
+                        <div class="i-stat-label">Title Belts</div>
+                    </div>
+                    <div class="i-stat">
+                        <div class="i-stat-value">Black Belt</div>
+                        <div class="i-stat-label">TAC Team (2021)</div>
+                    </div>
+                    <div class="i-stat">
+                        <div class="i-stat-value">IBJJF</div>
+                        <div class="i-stat-label">Champion</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WHY TRAIN -->
+<section class="why-section" id="why">
+    <div class="container">
+        <div class="why-header">
+            <p class="label-sans">The Midguard Difference</p>
+            <span class="rule rule-gold"></span>
+            <h2>Why Train With Us</h2>
+        </div>
+        <div class="why-grid">
+            <div class="why-card">
+                <div class="why-card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+                </div>
+                <h3>Expert Instruction</h3>
+                <p>Our instructors are highly trained and experienced in Sport Karate, Kickboxing, and Jiu-Jitsu and are dedicated to helping you achieve your goals.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M6 9H4.5a2.5 2.5 0 010-5C7 4 7 7 7 7"/><path d="M18 9h1.5a2.5 2.5 0 000-5C17 4 17 7 17 7"/><path d="M4 22h16"/><path d="M10 22V8a4 4 0 014 0v14"/><path d="M8 22v-5a6 6 0 0112 0v5"/></svg>
+                </div>
+                <h3>Train with Champions</h3>
+                <p>Train alongside state and national champions. Elevate your skills in an environment that fosters growth, determination, and greatness.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+                </div>
+                <h3>Be Part of a Team</h3>
+                <p>Beyond a team, we're a family. Together, we forge bonds that strengthen on and off the mat.</p>
+            </div>
+        </div>
+        <div class="why-pullquote">
+            <div class="big-quote">&ldquo;</div>
+            <blockquote>We forge bonds that strengthen on and off the mat. At Midguard, every student is family, every session is an investment in who you're becoming.</blockquote>
+        </div>
+    </div>
+</section>
+
+<!-- SCHEDULE -->
+<section class="schedule-section" id="schedule">
+    <div class="container">
+        <div class="schedule-header">
+            <p class="label-sans">Weekly Calendar</p>
+            <span class="rule"></span>
+            <h2>Training Schedule</h2>
+        </div>
+        <div class="schedule-table-wrap">
+            <table class="schedule-table">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>5:00 &ndash; 5:45 PM</th>
+                        <th>6:00 &ndash; 7:00 PM</th>
+                        <th>6:00 &ndash; 7:30 PM</th>
+                        <th>9:00 &ndash; 11:00 AM</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Monday</td>
+                        <td><span class="sched-class">Kids Jiu-Jitsu</span></td>
+                        <td><span class="sched-class">Adult Kickboxing</span></td>
+                        <td><span class="sched-note">&mdash;</span></td>
+                        <td><span class="sched-note">&mdash;</span></td>
+                    </tr>
+                    <tr>
+                        <td>Tuesday</td>
+                        <td><span class="sched-class">Ninja Kids</span></td>
+                        <td><span class="sched-note">&mdash;</span></td>
+                        <td><span class="sched-class">Adult BJJ</span></td>
+                        <td><span class="sched-note">&mdash;</span></td>
+                    </tr>
+                    <tr>
+                        <td>Wednesday</td>
+                        <td><span class="sched-class">Kids Jiu-Jitsu</span></td>
+                        <td><span class="sched-class">Adult Kickboxing</span></td>
+                        <td><span class="sched-note">&mdash;</span></td>
+                        <td><span class="sched-note">&mdash;</span></td>
+                    </tr>
+                    <tr>
+                        <td>Thursday</td>
+                        <td><span class="sched-class">Ninja Kids</span></td>
+                        <td><span class="sched-note">&mdash;</span></td>
+                        <td><span class="sched-class">Adult BJJ</span></td>
+                        <td><span class="sched-note">&mdash;</span></td>
+                    </tr>
+                    <tr>
+                        <td>Friday</td>
+                        <td><span class="sched-note">&mdash;</span></td>
+                        <td><span class="sched-class">Adult Kickboxing</span></td>
+                        <td><span class="sched-note">&mdash;</span></td>
+                        <td><span class="sched-note">&mdash;</span></td>
+                    </tr>
+                    <tr>
+                        <td>Saturday</td>
+                        <td><span class="sched-note">&mdash;</span></td>
+                        <td><span class="sched-note">&mdash;</span></td>
+                        <td><span class="sched-note">&mdash;</span></td>
+                        <td><span class="sched-class">Adult BJJ</span></td>
+                    </tr>
+                    <tr>
+                        <td>Sunday</td>
+                        <td colspan="4"><span class="sched-note">Closed</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="schedule-hours">
+            <p>Mon&ndash;Fri: 5:00 PM &ndash; 7:30 PM &nbsp;&bull;&nbsp; Sat: 9:00 AM &ndash; 11:00 AM &nbsp;&bull;&nbsp; Sun: Closed</p>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="cta">
+    <div class="container">
+        <p class="label-sans">Your Journey Starts Here</p>
+        <span class="rule rule-gold"></span>
+        <h2>Start Your Free Trial Today</h2>
+        <p class="cta-text body-serif">No commitment. No pressure. Step onto the mat, experience the Midguard difference, and discover what you're capable of.</p>
+        <a href="#" class="cta-btn">Claim Your Free Trial</a>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <img src="assets/images/logos/logo-04.png" alt="Midguard Academy">
+                <p>Midguard BJJ &amp; Kickboxing. A tradition of excellence in martial arts. Training champions, building character.</p>
+            </div>
+            <div>
+                <h4>Programs</h4>
+                <ul>
+                    <li><a href="#programs">Adult Kickboxing</a></li>
+                    <li><a href="#programs">Adult BJJ</a></li>
+                    <li><a href="#programs">Kids Jiu-Jitsu</a></li>
+                    <li><a href="#programs">Ninja Kids</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Academy</h4>
+                <ul>
+                    <li><a href="#instructors">Instructors</a></li>
+                    <li><a href="#schedule">Schedule</a></li>
+                    <li><a href="#why">Why Midguard</a></li>
+                    <li><a href="#cta">Free Trial</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Hours</h4>
+                <ul>
+                    <li><a href="#schedule">Mon&ndash;Fri: 5&ndash;7:30 PM</a></li>
+                    <li><a href="#schedule">Sat: 9&ndash;11 AM</a></li>
+                    <li><a href="#schedule">Sun: Closed</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Midguard Academy. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

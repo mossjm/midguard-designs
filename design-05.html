@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midguard BJJ and Kickboxing — Championship Training</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #0D0D0D;
+            --charcoal: #1A1A1A;
+            --charcoal-light: #222222;
+            --gold: #D4AF37;
+            --gold-light: #F4D03F;
+            --gold-muted: #C9A84C;
+            --white: #FFFFFF;
+            --gray: #999999;
+            --gray-dark: #444444;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--black);
+            color: var(--white);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ===== UTILITY ===== */
+        .gold-text {
+            background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gold-line {
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            margin: 0 auto;
+        }
+
+        .gold-line-left {
+            margin: 0;
+        }
+
+        .section-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 0.75rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.25rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.05rem;
+            color: var(--gray);
+            max-width: 600px;
+            font-weight: 300;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ===== NAV ===== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(13, 13, 13, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+            transition: background 0.3s;
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+        }
+
+        .nav-logo img {
+            height: 44px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--white);
+            text-decoration: none;
+            position: relative;
+            padding-bottom: 4px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            font-size: 0.75rem !important;
+            font-weight: 600 !important;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 10px 24px;
+            border: 1px solid var(--gold);
+            color: var(--gold) !important;
+            transition: all 0.3s !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--gold) !important;
+            color: var(--black) !important;
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--gold);
+            transition: 0.3s;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('assets/images/original/hero-bg.jpg') center/cover no-repeat;
+        }
+
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                180deg,
+                rgba(13,13,13,0.85) 0%,
+                rgba(13,13,13,0.6) 50%,
+                rgba(13,13,13,0.9) 100%
+            );
+        }
+
+        .hero-content {
+            position: relative;
+            text-align: center;
+            padding: 120px 24px 80px;
+            max-width: 900px;
+        }
+
+        .hero-frame {
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 60px 48px;
+            position: relative;
+        }
+
+        .hero-frame::before,
+        .hero-frame::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border-color: var(--gold);
+            border-style: solid;
+        }
+
+        .hero-frame::before {
+            top: -2px;
+            left: -2px;
+            border-width: 2px 0 0 2px;
+        }
+
+        .hero-frame::after {
+            bottom: -2px;
+            right: -2px;
+            border-width: 0 2px 2px 0;
+        }
+
+        .hero-badge {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 2rem;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            font-weight: 800;
+            line-height: 1.05;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 40%, var(--gold) 70%, var(--gold-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(0.9rem, 2vw, 1.15rem);
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.6);
+            font-weight: 300;
+            margin-bottom: 2rem;
+        }
+
+        .hero-divider {
+            width: 60px;
+            height: 1px;
+            background: var(--gold);
+            margin: 0 auto 2rem;
+        }
+
+        .hero-tagline {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            font-style: italic;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 2.5rem;
+            font-weight: 400;
+        }
+
+        .btn-gold {
+            display: inline-block;
+            padding: 16px 42px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: var(--black);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.35);
+        }
+
+        .btn-gold-outline {
+            display: inline-block;
+            padding: 16px 42px;
+            background: transparent;
+            color: var(--gold);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: 1px solid var(--gold);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-gold-outline:hover {
+            background: var(--gold);
+            color: var(--black);
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        /* ===== PROGRAMS ===== */
+        .programs {
+            background: var(--charcoal);
+            padding: 100px 0;
+        }
+
+        .programs-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .programs-header .section-subtitle {
+            margin: 0 auto;
+        }
+
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .program-card {
+            background: var(--black);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            padding: 40px 28px 36px;
+            position: relative;
+            transition: all 0.4s;
+            overflow: hidden;
+        }
+
+        .program-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .program-card:hover {
+            border-color: rgba(212, 175, 55, 0.5);
+            transform: translateY(-4px);
+        }
+
+        .program-card:hover::before {
+            opacity: 1;
+        }
+
+        .program-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, rgba(212,175,55,0.3), rgba(244,208,63,0.1));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 1.25rem;
+        }
+
+        .program-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .program-schedule {
+            font-size: 0.8rem;
+            color: var(--gold-muted);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+
+        .program-card p {
+            font-size: 0.9rem;
+            color: var(--gray);
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        /* ===== WHY TRAIN ===== */
+        .why-train {
+            background: var(--black);
+            padding: 100px 0;
+        }
+
+        .why-train-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .why-train-header .section-subtitle {
+            margin: 0 auto;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .why-item {
+            text-align: center;
+            padding: 40px 24px;
+            position: relative;
+        }
+
+        .why-item::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 20%;
+            height: 60%;
+            width: 1px;
+            background: linear-gradient(180deg, transparent, rgba(212,175,55,0.3), transparent);
+        }
+
+        .why-item:last-child::after {
+            display: none;
+        }
+
+        .why-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 1.5rem;
+            border: 1px solid var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: rotate(45deg);
+        }
+
+        .why-icon svg {
+            width: 28px;
+            height: 28px;
+            transform: rotate(-45deg);
+            fill: none;
+            stroke: var(--gold);
+            stroke-width: 1.5;
+        }
+
+        .why-item h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .why-item p {
+            font-size: 0.9rem;
+            color: var(--gray);
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        /* ===== INSTRUCTORS ===== */
+        .instructors {
+            background: var(--charcoal);
+            padding: 100px 0;
+        }
+
+        .instructors-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .instructors-header .section-subtitle {
+            margin: 0 auto;
+        }
+
+        .instructors-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 60px;
+        }
+
+        .instructor-card {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 36px;
+            align-items: start;
+        }
+
+        .instructor-photo-frame {
+            position: relative;
+            padding: 8px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .instructor-photo-frame::before,
+        .instructor-photo-frame::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-color: var(--gold);
+            border-style: solid;
+        }
+
+        .instructor-photo-frame::before {
+            top: -1px;
+            left: -1px;
+            border-width: 2px 0 0 2px;
+        }
+
+        .instructor-photo-frame::after {
+            bottom: -1px;
+            right: -1px;
+            border-width: 0 2px 2px 0;
+        }
+
+        .instructor-photo-frame img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            display: block;
+            filter: grayscale(20%);
+            transition: filter 0.4s;
+        }
+
+        .instructor-card:hover .instructor-photo-frame img {
+            filter: grayscale(0%);
+        }
+
+        .instructor-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .instructor-title {
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold-muted);
+            margin-bottom: 1.25rem;
+        }
+
+        .instructor-info p {
+            font-size: 0.9rem;
+            color: var(--gray);
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        /* ===== SCHEDULE ===== */
+        .schedule {
+            background: var(--black);
+            padding: 100px 0;
+        }
+
+        .schedule-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .schedule-header .section-subtitle {
+            margin: 0 auto;
+        }
+
+        .schedule-table-wrap {
+            overflow-x: auto;
+        }
+
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 700px;
+        }
+
+        .schedule-table thead th {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(212,175,55,0.05));
+            color: var(--gold);
+            padding: 16px 20px;
+            text-align: left;
+            border-bottom: 1px solid rgba(212,175,55,0.3);
+        }
+
+        .schedule-table tbody td {
+            padding: 16px 20px;
+            font-size: 0.9rem;
+            color: var(--gray);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-weight: 300;
+            transition: background 0.3s;
+        }
+
+        .schedule-table tbody tr:hover td {
+            background: rgba(212, 175, 55, 0.04);
+        }
+
+        .schedule-table .class-name {
+            color: var(--white);
+            font-weight: 500;
+        }
+
+        .schedule-hours {
+            text-align: center;
+            margin-top: 40px;
+            padding: 24px;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+        }
+
+        .schedule-hours p {
+            font-size: 0.9rem;
+            color: var(--gray);
+            font-weight: 300;
+        }
+
+        .schedule-hours strong {
+            color: var(--gold-muted);
+            font-weight: 600;
+        }
+
+        /* ===== CTA ===== */
+        .cta-section {
+            background: var(--charcoal);
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .cta-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .cta-inner {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-inner .section-title {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            margin-bottom: 1rem;
+        }
+
+        .cta-inner p {
+            font-size: 1.05rem;
+            color: var(--gray);
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--black);
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 60px 0 40px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand img {
+            height: 40px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand p {
+            font-size: 0.85rem;
+            color: var(--gray);
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        .footer h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1.25rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.6rem;
+        }
+
+        .footer-links a {
+            font-size: 0.85rem;
+            color: var(--gray);
+            text-decoration: none;
+            font-weight: 300;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .footer-contact p {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+            font-weight: 300;
+        }
+
+        .footer-bottom {
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .footer-bottom p {
+            font-size: 0.75rem;
+            color: var(--gray-dark);
+            font-weight: 300;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 16px;
+        }
+
+        .social-icons a {
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+        }
+
+        .social-icons a svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--gold);
+            transition: fill 0.3s;
+        }
+
+        .social-icons a:hover svg {
+            fill: var(--black);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .programs-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .instructors-grid {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            .instructor-card {
+                grid-template-columns: 200px 1fr;
+                gap: 28px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 72px;
+                left: 0;
+                right: 0;
+                background: rgba(13, 13, 13, 0.98);
+                flex-direction: column;
+                padding: 32px 24px;
+                gap: 1.5rem;
+                border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .hero-frame {
+                padding: 40px 24px;
+            }
+
+            .programs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .why-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .why-item::after {
+                display: none;
+            }
+
+            .instructor-card {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .instructor-photo-frame {
+                max-width: 280px;
+                margin: 0 auto;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-frame {
+                padding: 28px 16px;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">
+                <img src="assets/images/logos/logo-04.png" alt="Midguard Academy">
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#programs">Programs</a></li>
+                <li><a href="#why">Why Midguard</a></li>
+                <li><a href="#instructors">Instructors</a></li>
+                <li><a href="#schedule">Schedule</a></li>
+                <li><a href="#trial" class="nav-cta">Free Trial</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-frame">
+                <p class="hero-badge">Est. Prescott Valley, Arizona</p>
+                <h1 class="hero-title">MIDGUARD</h1>
+                <p class="hero-subtitle">BJJ &amp; Kickboxing</p>
+                <div class="hero-divider"></div>
+                <p class="hero-tagline">Train with Champions. Become One.</p>
+                <a href="#trial" class="btn-gold">Claim Your Free Trial</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROGRAMS -->
+    <section class="programs" id="programs">
+        <div class="container">
+            <div class="programs-header">
+                <p class="section-label">Our Programs</p>
+                <h2 class="section-title"><span class="gold-text">Championship</span> Training Programs</h2>
+                <div class="gold-line" style="margin-bottom: 1.5rem;"></div>
+                <p class="section-subtitle">World-class instruction across four disciplines, designed for every level of athlete.</p>
+            </div>
+            <div class="programs-grid">
+                <div class="program-card">
+                    <div class="program-number">01</div>
+                    <h3>Adult Kickboxing</h3>
+                    <p class="program-schedule">Mon / Wed / Fri &mdash; 6:00 - 7:00 PM</p>
+                    <p>Striking, footwork, combinations, and conditioning. Build power and precision with every session.</p>
+                </div>
+                <div class="program-card">
+                    <div class="program-number">02</div>
+                    <h3>Adult Brazilian Jiu-Jitsu</h3>
+                    <p class="program-schedule">Tue / Thu &mdash; 6:00 - 7:30 PM &bull; Sat &mdash; 9 - 11 AM</p>
+                    <p>Ground fighting, submissions, and self-defense. Master the art of technique and leverage.</p>
+                </div>
+                <div class="program-card">
+                    <div class="program-number">03</div>
+                    <h3>Kids Jiu-Jitsu</h3>
+                    <p class="program-schedule">Mon / Wed &mdash; 5:00 - 5:45 PM</p>
+                    <p>Fundamentals of BJJ in a safe, fun environment. Building confident, disciplined young athletes.</p>
+                </div>
+                <div class="program-card">
+                    <div class="program-number">04</div>
+                    <h3>Ninja Kids</h3>
+                    <p class="program-schedule">Tue / Thu &mdash; 5:00 - 5:45 PM</p>
+                    <p>A fun program building confidence, coordination, and strength for the next generation of warriors.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY TRAIN -->
+    <section class="why-train" id="why">
+        <div class="container">
+            <div class="why-train-header">
+                <p class="section-label">The Midguard Difference</p>
+                <h2 class="section-title">Why <span class="gold-text">Champions</span> Train Here</h2>
+                <div class="gold-line" style="margin-bottom: 1.5rem;"></div>
+                <p class="section-subtitle">Step onto the mat and discover what sets Midguard apart from every other gym.</p>
+            </div>
+            <div class="why-grid">
+                <div class="why-item">
+                    <div class="why-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <h3 class="gold-text">Expert Instruction</h3>
+                    <p>Our instructors are highly trained and experienced in Sport Karate, Kickboxing, and Jiu-Jitsu and are dedicated to helping you achieve your goals.</p>
+                </div>
+                <div class="why-item">
+                    <div class="why-icon">
+                        <svg viewBox="0 0 24 24"><path d="M6 2l.01 4H4v2h2.01L6 14H4v2h2v6h2v-6h2.01L10 14H8l.01-6H10V6H8V2H6zm10 0v4h-2v2h2v6h-2v2h2.01L16 22h2l.01-6H20v-2h-2.01L18 8h2V6h-2V2h-2z"/></svg>
+                    </div>
+                    <h3 class="gold-text">Train with Champions</h3>
+                    <p>Train alongside state and national champions. Elevate your skills in an environment that fosters growth, determination, and greatness.</p>
+                </div>
+                <div class="why-item">
+                    <div class="why-icon">
+                        <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                    </div>
+                    <h3 class="gold-text">Be Part of a Team</h3>
+                    <p>Beyond a team, we're a family. Together, we forge bonds that strengthen on and off the mat.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INSTRUCTORS -->
+    <section class="instructors" id="instructors">
+        <div class="container">
+            <div class="instructors-header">
+                <p class="section-label">Meet Your Coaches</p>
+                <h2 class="section-title">Led by <span class="gold-text">The Best</span></h2>
+                <div class="gold-line" style="margin-bottom: 1.5rem;"></div>
+                <p class="section-subtitle">Decades of combined experience. Real fight credentials. A shared passion for developing champions.</p>
+            </div>
+            <div class="instructors-grid">
+                <div class="instructor-card">
+                    <div class="instructor-photo-frame">
+                        <img src="assets/images/original/josh-pinney.jpg" alt="Josh Pinney">
+                    </div>
+                    <div class="instructor-info">
+                        <h3 class="gold-text">Josh Pinney</h3>
+                        <p class="instructor-title">Owner &amp; Head Kickboxing Instructor</p>
+                        <p>Training since 2002. Black Belt (I.K.C.A, 2007). BJJ Purple Belt. US Army veteran who trained with Dan Henderson, Gray Maynard, and Mark Munoz. Josh has coached multiple state and national champions, bringing elite-level knowledge to every class.</p>
+                    </div>
+                </div>
+                <div class="instructor-card">
+                    <div class="instructor-photo-frame">
+                        <img src="assets/images/original/robert-tahtinen.jpg" alt="Robert Tahtinen">
+                    </div>
+                    <div class="instructor-info">
+                        <h3 class="gold-text">Robert Tahtinen</h3>
+                        <p class="instructor-title">Head BJJ Instructor &mdash; Nibiru BJJ</p>
+                        <p>Black Belt (TAC Team, 2021). Training since 2011 after 15 years of wrestling. Retired MMA fighter with four title belts and a King of the Cage victory. Winner of IBJJF and Arizona State tournaments, Robert brings championship-level grappling expertise to the mat.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCHEDULE -->
+    <section class="schedule" id="schedule">
+        <div class="container">
+            <div class="schedule-header">
+                <p class="section-label">Weekly Schedule</p>
+                <h2 class="section-title"><span class="gold-text">Training</span> Schedule</h2>
+                <div class="gold-line" style="margin-bottom: 1.5rem;"></div>
+                <p class="section-subtitle">Find the right class for your schedule and level.</p>
+            </div>
+            <div class="schedule-table-wrap">
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>Class</th>
+                            <th>Days</th>
+                            <th>Time</th>
+                            <th>Level</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="class-name">Adult Kickboxing</td>
+                            <td>Monday, Wednesday, Friday</td>
+                            <td>6:00 PM &ndash; 7:00 PM</td>
+                            <td>All Levels</td>
+                        </tr>
+                        <tr>
+                            <td class="class-name">Adult Brazilian Jiu-Jitsu</td>
+                            <td>Tuesday, Thursday</td>
+                            <td>6:00 PM &ndash; 7:30 PM</td>
+                            <td>All Levels</td>
+                        </tr>
+                        <tr>
+                            <td class="class-name">Adult Brazilian Jiu-Jitsu</td>
+                            <td>Saturday</td>
+                            <td>9:00 AM &ndash; 11:00 AM</td>
+                            <td>All Levels</td>
+                        </tr>
+                        <tr>
+                            <td class="class-name">Kids Jiu-Jitsu</td>
+                            <td>Monday, Wednesday</td>
+                            <td>5:00 PM &ndash; 5:45 PM</td>
+                            <td>Ages 5-12</td>
+                        </tr>
+                        <tr>
+                            <td class="class-name">Ninja Kids</td>
+                            <td>Tuesday, Thursday</td>
+                            <td>5:00 PM &ndash; 5:45 PM</td>
+                            <td>Ages 4-8</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="schedule-hours">
+                <p><strong>Gym Hours:</strong> Mon&ndash;Fri: 5:00 PM &ndash; 7:30 PM &nbsp;|&nbsp; Sat: 9:00 AM &ndash; 11:00 AM &nbsp;|&nbsp; Sun: Closed</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section" id="trial">
+        <div class="container">
+            <div class="cta-inner">
+                <p class="section-label">Begin Your Journey</p>
+                <h2 class="section-title"><span class="gold-text">Start Your Free Trial</span> Today</h2>
+                <p>Step into Midguard and experience championship-level training firsthand. Your first class is on us.</p>
+                <a href="#" class="btn-gold">Claim Your Free Trial</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="assets/images/logos/logo-04.png" alt="Midguard Academy">
+                    <p>Midguard BJJ and Kickboxing. Championship-level martial arts training in Prescott Valley, Arizona.</p>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#programs">Programs</a></li>
+                        <li><a href="#why">Why Midguard</a></li>
+                        <li><a href="#instructors">Instructors</a></li>
+                        <li><a href="#schedule">Schedule</a></li>
+                        <li><a href="#trial">Free Trial</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact</h4>
+                    <p>Prescott Valley, Arizona</p>
+                    <p>Mon&ndash;Fri: 5:00 PM &ndash; 7:30 PM</p>
+                    <p>Sat: 9:00 AM &ndash; 11:00 AM</p>
+                    <p>Sun: Closed</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Midguard BJJ and Kickboxing. All rights reserved.</p>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+                    </a>
+                    <a href="#" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                    </a>
+                    <a href="#" aria-label="YouTube">
+                        <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.43z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile nav toggle
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile nav on link click
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Scroll-based nav background
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('nav');
+            if (window.scrollY > 60) {
+                nav.style.background = 'rgba(13, 13, 13, 0.98)';
+            } else {
+                nav.style.background = 'rgba(13, 13, 13, 0.92)';
+            }
+        });
+    </script>
+
+</body>
+</html>

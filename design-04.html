@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midguard Academy — BJJ &amp; Kickboxing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ============ RESET & BASE ============ */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Noto Sans', sans-serif;
+            font-weight: 300;
+            background: #F5F0EB;
+            color: #2C2C2C;
+            overflow-x: hidden;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+        img { max-width: 100%; display: block; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* ============ UTILITY ============ */
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+        .container-narrow { max-width: 800px; margin: 0 auto; padding: 0 32px; }
+
+        .section-label {
+            font-family: 'Noto Sans', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: #A0998B;
+            margin-bottom: 12px;
+        }
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            line-height: 1.2;
+            color: #2C2C2C;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+        }
+        .section-title em {
+            font-style: italic;
+            color: #C4704B;
+        }
+
+        /* Thin brush line */
+        .brush-line {
+            width: 60px;
+            height: 1px;
+            background: #C4704B;
+            margin: 24px 0;
+        }
+        .brush-line-center {
+            width: 60px;
+            height: 1px;
+            background: #C4704B;
+            margin: 24px auto;
+        }
+
+        /* Enso circle */
+        .enso {
+            width: 120px;
+            height: 120px;
+            border: 2px solid #A0998B;
+            border-radius: 50%;
+            border-top-color: transparent;
+            margin: 0 auto;
+            opacity: 0.25;
+            transform: rotate(-30deg);
+        }
+        .enso-small {
+            width: 60px;
+            height: 60px;
+            border: 1.5px solid #C4704B;
+            border-radius: 50%;
+            border-top-color: transparent;
+            opacity: 0.2;
+            transform: rotate(-45deg);
+        }
+
+        /* ============ NAVIGATION ============ */
+        .nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            background: rgba(245, 240, 235, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(160, 153, 139, 0.2);
+        }
+        .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+        }
+        .nav-logo { height: 44px; width: auto; }
+        .nav-links { display: flex; align-items: center; gap: 36px; }
+        .nav-links a {
+            font-size: 0.75rem;
+            font-weight: 400;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #666;
+            transition: color 0.3s;
+            padding: 4px 0;
+        }
+        .nav-links a:hover { color: #C4704B; }
+        .nav-cta {
+            border: 1px solid #C4704B !important;
+            color: #C4704B !important;
+            padding: 10px 24px !important;
+            transition: all 0.3s !important;
+        }
+        .nav-cta:hover {
+            background: #C4704B !important;
+            color: #F5F0EB !important;
+        }
+        .nav-divider {
+            width: 1px;
+            height: 20px;
+            background: rgba(160, 153, 139, 0.3);
+        }
+
+        .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+        .nav-toggle span {
+            display: block;
+            width: 24px;
+            height: 1.5px;
+            background: #2C2C2C;
+            margin: 6px 0;
+            transition: 0.3s;
+        }
+
+        /* ============ HERO ============ */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('assets/images/original/hero-bg.jpg') center/cover no-repeat;
+            z-index: 0;
+        }
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(245, 240, 235, 0.55) 0%,
+                rgba(237, 228, 218, 0.65) 50%,
+                rgba(245, 240, 235, 0.80) 100%
+            );
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 120px 32px 80px;
+            max-width: 700px;
+        }
+        .hero-rule {
+            width: 80px;
+            height: 1px;
+            background: #C4704B;
+            margin: 0 auto 28px;
+        }
+        .hero-label {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: #A0998B;
+            margin-bottom: 20px;
+        }
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            font-size: clamp(2.8rem, 7vw, 4.5rem);
+            line-height: 1.15;
+            color: #2C2C2C;
+            margin-bottom: 8px;
+            letter-spacing: 2px;
+        }
+        .hero-title em {
+            font-style: italic;
+            color: #C4704B;
+        }
+        .hero-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            font-size: 1.3rem;
+            color: #8B9D77;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 32px;
+        }
+        .hero-desc {
+            font-size: 1rem;
+            color: #666;
+            max-width: 480px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+        }
+        .hero-rule-bottom {
+            width: 80px;
+            height: 1px;
+            background: #C4704B;
+            margin: 0 auto;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            border: 1px solid #C4704B;
+            color: #C4704B;
+            padding: 16px 40px;
+            transition: all 0.4s;
+            background: transparent;
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            background: #C4704B;
+            color: #F5F0EB;
+        }
+        .btn-secondary {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #A0998B;
+            padding: 16px 0;
+            border-bottom: 1px solid #A0998B;
+            transition: all 0.4s;
+            cursor: pointer;
+            background: transparent;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+        }
+        .btn-secondary:hover {
+            color: #C4704B;
+            border-bottom-color: #C4704B;
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 40px; left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+        .hero-scroll span {
+            display: block;
+            width: 1px;
+            height: 48px;
+            background: #C4704B;
+            margin: 0 auto 8px;
+            animation: scrollLine 2s ease-in-out infinite;
+        }
+        .hero-scroll small {
+            font-size: 0.6rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #A0998B;
+        }
+        @keyframes scrollLine {
+            0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+            50% { opacity: 1; transform: scaleY(1); }
+        }
+
+        /* ============ PROGRAMS ============ */
+        .programs {
+            padding: 120px 0;
+            background: #F5F0EB;
+        }
+        .programs-header {
+            text-align: center;
+            margin-bottom: 72px;
+        }
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1px;
+            background: rgba(160, 153, 139, 0.15);
+        }
+        .program-card {
+            background: #F5F0EB;
+            padding: 48px 40px;
+            transition: background 0.4s;
+        }
+        .program-card:hover {
+            background: #EDE4DA;
+        }
+        .program-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            font-size: 1.5rem;
+            color: #2C2C2C;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+        }
+        .program-time {
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #C4704B;
+            margin-bottom: 16px;
+            display: block;
+        }
+        .program-card p {
+            color: #888;
+            font-size: 0.92rem;
+            line-height: 1.8;
+        }
+        .program-card .brush-line { margin: 20px 0 0; width: 32px; }
+
+        /* ============ PHILOSOPHY / WHY TRAIN ============ */
+        .philosophy {
+            padding: 120px 0;
+            background: #EDE4DA;
+            position: relative;
+        }
+        .philosophy-enso {
+            position: absolute;
+            top: 50%; right: 8%;
+            transform: translateY(-50%);
+            width: 200px; height: 200px;
+            border: 2px solid #A0998B;
+            border-radius: 50%;
+            border-top-color: transparent;
+            opacity: 0.08;
+            transform: translateY(-50%) rotate(-30deg);
+            pointer-events: none;
+        }
+        .philosophy-content {
+            max-width: 700px;
+        }
+        .philosophy-items {
+            margin-top: 56px;
+        }
+        .philosophy-item {
+            margin-bottom: 48px;
+            padding-left: 32px;
+            border-left: 1px solid rgba(196, 112, 75, 0.3);
+        }
+        .philosophy-item h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            font-size: 1.4rem;
+            color: #2C2C2C;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+        .philosophy-item p {
+            color: #888;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+        .philosophy-item .item-label {
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #C4704B;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        /* ============ INSTRUCTORS ============ */
+        .instructors {
+            padding: 120px 0;
+            background: #F5F0EB;
+        }
+        .instructors-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        .instructor-block {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+            margin-bottom: 80px;
+        }
+        .instructor-block:last-child { margin-bottom: 0; }
+        .instructor-block.reversed { direction: rtl; }
+        .instructor-block.reversed > * { direction: ltr; }
+        .instructor-photo {
+            position: relative;
+            aspect-ratio: 4/5;
+            overflow: hidden;
+        }
+        .instructor-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: saturate(0.7) contrast(0.95);
+            transition: filter 0.5s;
+        }
+        .instructor-photo:hover img {
+            filter: saturate(0.9) contrast(1);
+        }
+        .instructor-photo::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(196, 112, 75, 0.08) 0%, transparent 100%);
+            pointer-events: none;
+        }
+        .instructor-details {
+            padding-top: 32px;
+        }
+        .instructor-label {
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #C4704B;
+            margin-bottom: 10px;
+        }
+        .instructor-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            font-size: clamp(1.8rem, 3vw, 2.4rem);
+            color: #2C2C2C;
+            margin-bottom: 4px;
+            letter-spacing: 1px;
+        }
+        .instructor-role {
+            font-size: 0.8rem;
+            color: #8B9D77;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 500;
+            margin-bottom: 24px;
+        }
+        .instructor-bio {
+            color: #888;
+            font-size: 0.95rem;
+            line-height: 1.9;
+            margin-bottom: 20px;
+        }
+        .instructor-credentials {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .credential {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #A0998B;
+            padding-bottom: 4px;
+            border-bottom: 1px solid rgba(160, 153, 139, 0.3);
+        }
+
+        /* ============ SCHEDULE ============ */
+        .schedule-section {
+            padding: 120px 0;
+            background: #EDE4DA;
+        }
+        .schedule-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+        .schedule-table-wrap {
+            overflow-x: auto;
+        }
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+        .schedule-table thead th {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #A0998B;
+            padding: 16px 14px;
+            text-align: left;
+            border-bottom: 1px solid rgba(160, 153, 139, 0.3);
+        }
+        .schedule-table tbody td {
+            padding: 18px 14px;
+            border-bottom: 1px solid rgba(160, 153, 139, 0.15);
+            font-size: 0.92rem;
+            vertical-align: top;
+        }
+        .schedule-table tbody tr:hover { background: rgba(196, 112, 75, 0.04); }
+        .day-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            font-size: 1.1rem;
+            color: #2C2C2C;
+        }
+        .class-entry {
+            font-weight: 400;
+            color: #2C2C2C;
+        }
+        .class-entry-time {
+            font-size: 0.78rem;
+            color: #A0998B;
+            display: block;
+            margin-top: 2px;
+        }
+        .empty-cell { color: #d1ccc5; }
+
+        .schedule-hours-note {
+            text-align: center;
+            margin-top: 48px;
+            padding: 28px;
+            border-top: 1px solid rgba(160, 153, 139, 0.2);
+            border-bottom: 1px solid rgba(160, 153, 139, 0.2);
+        }
+        .schedule-hours-note p {
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #A0998B;
+        }
+        .schedule-hours-note span { color: #C4704B; }
+
+        /* ============ CTA SECTION ============ */
+        .cta-section {
+            padding: 140px 0;
+            background: #F5F0EB;
+            text-align: center;
+            position: relative;
+        }
+        .cta-enso {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px; height: 300px;
+            border: 2px solid #A0998B;
+            border-radius: 50%;
+            border-right-color: transparent;
+            opacity: 0.06;
+            pointer-events: none;
+        }
+        .cta-section .section-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+        }
+        .cta-desc {
+            font-size: 1rem;
+            color: #888;
+            max-width: 440px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+        }
+        .cta-buttons {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        /* ============ FOOTER ============ */
+        .footer {
+            background: #2C2C2C;
+            padding: 72px 0 32px;
+            color: #A0998B;
+        }
+        .footer-inner {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 56px;
+        }
+        .footer-brand p {
+            font-size: 0.85rem;
+            line-height: 1.8;
+            color: #777;
+            margin-top: 16px;
+        }
+        .footer-logo { height: 36px; margin-bottom: 4px; }
+        .footer-col h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            font-size: 1.05rem;
+            color: #ddd;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+        .footer-col a, .footer-col p {
+            display: block;
+            font-size: 0.82rem;
+            color: #777;
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+        .footer-col a:hover { color: #C4704B; }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .footer-bottom p {
+            font-size: 0.72rem;
+            color: #555;
+            letter-spacing: 1px;
+        }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 900px) {
+            .instructor-block,
+            .instructor-block.reversed {
+                grid-template-columns: 1fr;
+                gap: 32px;
+                direction: ltr;
+            }
+            .instructor-photo { max-width: 480px; }
+            .footer-inner { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 72px; left: 0; right: 0;
+                background: rgba(245, 240, 235, 0.98);
+                flex-direction: column;
+                padding: 32px;
+                gap: 20px;
+                border-bottom: 1px solid rgba(160, 153, 139, 0.2);
+            }
+            .nav-links.active { display: flex; }
+            .nav-toggle { display: block; }
+            .nav-divider { display: none; }
+            .programs-grid { grid-template-columns: 1fr; }
+            .instructor-block { gap: 24px; }
+            .footer-inner { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .philosophy-enso { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ====== NAVIGATION ====== -->
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a href="#hero">
+                <img src="assets/images/logos/logo-01.png" alt="Midguard Academy" class="nav-logo">
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="#programs">Programs</a>
+                <span class="nav-divider"></span>
+                <a href="#philosophy">Philosophy</a>
+                <span class="nav-divider"></span>
+                <a href="#instructors">Instructors</a>
+                <span class="nav-divider"></span>
+                <a href="#schedule">Schedule</a>
+                <span class="nav-divider"></span>
+                <a href="#cta" class="nav-cta">Begin Training</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ====== HERO ====== -->
+    <section class="hero" id="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-rule"></div>
+            <p class="hero-label">Midguard Academy</p>
+            <h1 class="hero-title">The Path to<br><em>Mastery</em> Begins Here</h1>
+            <p class="hero-subtitle">BJJ &amp; Kickboxing</p>
+            <p class="hero-desc">Step onto the mat with purpose. Discover discipline, strength, and community through world-class martial arts instruction.</p>
+            <a href="#cta" class="btn-primary">Start Your Free Trial</a>
+            <div class="hero-rule-bottom" style="margin-top:48px;"></div>
+        </div>
+        <div class="hero-scroll">
+            <span></span>
+            <small>Scroll</small>
+        </div>
+    </section>
+
+    <!-- ====== PROGRAMS ====== -->
+    <section class="programs" id="programs">
+        <div class="container">
+            <div class="programs-header">
+                <p class="section-label">Our Disciplines</p>
+                <h2 class="section-title">Programs We <em>Offer</em></h2>
+                <div class="brush-line-center"></div>
+            </div>
+            <div class="programs-grid">
+                <div class="program-card">
+                    <h3>Adult Kickboxing</h3>
+                    <span class="program-time">Mon / Wed / Fri &middot; 6:00 &ndash; 7:00 PM</span>
+                    <p>Master striking, footwork, combinations, and conditioning. Build power and precision through focused, intentional training.</p>
+                    <div class="brush-line"></div>
+                </div>
+                <div class="program-card">
+                    <h3>Adult Brazilian Jiu-Jitsu</h3>
+                    <span class="program-time">Tue / Thu 6:00 &ndash; 7:30 PM &middot; Sat 9:00 &ndash; 11:00 AM</span>
+                    <p>Ground fighting, submissions, and self-defense. Learn the gentle art that teaches leverage, technique, and calm under pressure.</p>
+                    <div class="brush-line"></div>
+                </div>
+                <div class="program-card">
+                    <h3>Kids Jiu-Jitsu</h3>
+                    <span class="program-time">Mon / Wed &middot; 5:00 &ndash; 5:45 PM</span>
+                    <p>Fundamentals of Brazilian Jiu-Jitsu in a safe, nurturing environment. Building confidence, discipline, and self-defense skills for life.</p>
+                    <div class="brush-line"></div>
+                </div>
+                <div class="program-card">
+                    <h3>Ninja Kids</h3>
+                    <span class="program-time">Tue / Thu &middot; 5:00 &ndash; 5:45 PM</span>
+                    <p>A spirited program building confidence, coordination, and strength. Young warriors discover focus and discipline through movement and play.</p>
+                    <div class="brush-line"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== PHILOSOPHY / WHY TRAIN ====== -->
+    <section class="philosophy" id="philosophy">
+        <div class="philosophy-enso"></div>
+        <div class="container">
+            <div class="philosophy-content">
+                <p class="section-label">Our Philosophy</p>
+                <h2 class="section-title">Why Train at <em>Midguard</em></h2>
+                <div class="brush-line"></div>
+                <div class="philosophy-items">
+                    <div class="philosophy-item">
+                        <span class="item-label">Principle One</span>
+                        <h3>Expert Instruction</h3>
+                        <p>Our instructors are highly trained and experienced in Sport Karate, Kickboxing, and Jiu-Jitsu and are dedicated to helping you achieve your goals. Every technique is taught with precision and patience.</p>
+                    </div>
+                    <div class="philosophy-item">
+                        <span class="item-label">Principle Two</span>
+                        <h3>Train With Champions</h3>
+                        <p>Train alongside state and national champions. Elevate your skills in an environment that fosters growth, determination, and greatness. Excellence is not a destination; it is a daily practice.</p>
+                    </div>
+                    <div class="philosophy-item">
+                        <span class="item-label">Principle Three</span>
+                        <h3>Be Part of a Team</h3>
+                        <p>Beyond a team, we are a family. Together, we forge bonds that strengthen on and off the mat. When you walk through our doors, you belong.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== INSTRUCTORS ====== -->
+    <section class="instructors" id="instructors">
+        <div class="container">
+            <div class="instructors-header">
+                <p class="section-label">Your Guides</p>
+                <h2 class="section-title"><em>Instructors</em></h2>
+                <div class="brush-line-center"></div>
+            </div>
+
+            <div class="instructor-block">
+                <div class="instructor-photo">
+                    <img src="assets/images/original/josh-pinney.jpg" alt="Josh Pinney" loading="lazy">
+                </div>
+                <div class="instructor-details">
+                    <p class="instructor-label">Head Kickboxing Instructor</p>
+                    <h3 class="instructor-name">Josh Pinney</h3>
+                    <p class="instructor-role">Owner &amp; Founder</p>
+                    <div class="brush-line" style="margin:16px 0 20px;"></div>
+                    <p class="instructor-bio">Training since 2002. Black Belt (I.K.C.A, 2007) and BJJ Purple Belt. A US Army veteran who honed his craft alongside Dan Henderson, Gray Maynard, and Mark Munoz. He has coached multiple state and national champions.</p>
+                    <div class="instructor-credentials">
+                        <span class="credential">Black Belt</span>
+                        <span class="credential">BJJ Purple Belt</span>
+                        <span class="credential">US Army Veteran</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin:0 auto;width:1px;height:60px;background:rgba(160,153,139,0.2);"></div>
+
+            <div class="instructor-block reversed">
+                <div class="instructor-photo">
+                    <img src="assets/images/original/robert-tahtinen.jpg" alt="Robert Tahtinen" loading="lazy">
+                </div>
+                <div class="instructor-details">
+                    <p class="instructor-label">Head BJJ Instructor</p>
+                    <h3 class="instructor-name">Robert Tahtinen</h3>
+                    <p class="instructor-role">Nibiru BJJ</p>
+                    <div class="brush-line" style="margin:16px 0 20px;"></div>
+                    <p class="instructor-bio">Black Belt (TAC Team, 2021). Training since 2011 after 15 years of wrestling. A retired MMA fighter with four title belts and a King of the Cage victory. Winner of IBJJF and Arizona State tournaments.</p>
+                    <div class="instructor-credentials">
+                        <span class="credential">Black Belt</span>
+                        <span class="credential">4x Title Holder</span>
+                        <span class="credential">IBJJF Champion</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== SCHEDULE ====== -->
+    <section class="schedule-section" id="schedule">
+        <div class="container">
+            <div class="schedule-header">
+                <p class="section-label">Training Times</p>
+                <h2 class="section-title">Weekly <em>Schedule</em></h2>
+                <div class="brush-line-center"></div>
+            </div>
+            <div class="schedule-table-wrap">
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>5:00 &ndash; 5:45 PM</th>
+                            <th>6:00 &ndash; 7:00 PM</th>
+                            <th>6:00 &ndash; 7:30 PM</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="day-name">Monday</span></td>
+                            <td><span class="class-entry">Kids Jiu-Jitsu</span></td>
+                            <td><span class="class-entry">Adult Kickboxing</span></td>
+                            <td><span class="empty-cell">&mdash;</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="day-name">Tuesday</span></td>
+                            <td><span class="class-entry">Ninja Kids</span></td>
+                            <td><span class="empty-cell">&mdash;</span></td>
+                            <td><span class="class-entry">Adult BJJ</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="day-name">Wednesday</span></td>
+                            <td><span class="class-entry">Kids Jiu-Jitsu</span></td>
+                            <td><span class="class-entry">Adult Kickboxing</span></td>
+                            <td><span class="empty-cell">&mdash;</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="day-name">Thursday</span></td>
+                            <td><span class="class-entry">Ninja Kids</span></td>
+                            <td><span class="empty-cell">&mdash;</span></td>
+                            <td><span class="class-entry">Adult BJJ</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="day-name">Friday</span></td>
+                            <td><span class="empty-cell">&mdash;</span></td>
+                            <td><span class="class-entry">Adult Kickboxing</span></td>
+                            <td><span class="empty-cell">&mdash;</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="day-name">Saturday</span></td>
+                            <td colspan="3" style="text-align:center;"><span class="class-entry">Adult BJJ</span><span class="class-entry-time"> &middot; 9:00 &ndash; 11:00 AM</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="day-name">Sunday</span></td>
+                            <td colspan="3" style="text-align:center;"><span class="empty-cell">Closed</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="schedule-hours-note">
+                <p>Open <span>Mon &ndash; Fri 5:00 PM &ndash; 7:30 PM</span> &nbsp;&middot;&nbsp; <span>Sat 9:00 AM &ndash; 11:00 AM</span> &nbsp;&middot;&nbsp; Sun Closed</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== CTA ====== -->
+    <section class="cta-section" id="cta">
+        <div class="cta-enso"></div>
+        <div class="container" style="position:relative;z-index:1;">
+            <div class="enso" style="margin-bottom:40px;"></div>
+            <p class="section-label">Begin Your Journey</p>
+            <h2 class="section-title">Start Your <em>Free Trial</em> Today</h2>
+            <div class="brush-line-center"></div>
+            <p class="cta-desc">No contracts. No pressure. Simply step onto the mat and experience the Midguard way for yourself.</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn-primary">Claim Your Free Trial</a>
+                <a href="#schedule" class="btn-secondary">View Schedule</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== FOOTER ====== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-brand">
+                    <img src="assets/images/logos/logo-04.png" alt="Midguard" class="footer-logo">
+                    <p>Midguard BJJ &amp; Kickboxing. Martial arts training rooted in discipline, respect, and the pursuit of mastery.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Programs</h4>
+                    <a href="#programs">Adult Kickboxing</a>
+                    <a href="#programs">Adult BJJ</a>
+                    <a href="#programs">Kids Jiu-Jitsu</a>
+                    <a href="#programs">Ninja Kids</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigate</h4>
+                    <a href="#philosophy">Philosophy</a>
+                    <a href="#instructors">Instructors</a>
+                    <a href="#schedule">Schedule</a>
+                    <a href="#cta">Free Trial</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Hours</h4>
+                    <p>Mon &ndash; Fri: 5:00 PM &ndash; 7:30 PM</p>
+                    <p>Saturday: 9:00 AM &ndash; 11:00 AM</p>
+                    <p>Sunday: Closed</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Midguard BJJ &amp; Kickboxing. All rights reserved.</p>
+                <p>Crafted with intention.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile nav toggle
+        const toggle = document.getElementById('navToggle');
+        const links = document.getElementById('navLinks');
+        toggle.addEventListener('click', () => links.classList.toggle('active'));
+        document.querySelectorAll('.nav-links a').forEach(a => {
+            a.addEventListener('click', () => links.classList.remove('active'));
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midguard Academy — Your Martial Arts Family</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-warm: #FFFBF5;
+            --bg-gray: #F0EDE8;
+            --orange: #E85D3A;
+            --orange-dark: #D14E2E;
+            --teal: #2D8B8B;
+            --teal-light: #3AA8A8;
+            --brown: #6B4C3B;
+            --brown-light: #8B6B56;
+            --yellow-soft: #FFF3CD;
+            --sage: #E8F0E8;
+            --sage-dark: #D0E0D0;
+            --white: #FFFFFF;
+            --text-dark: #3A3A3A;
+            --text-muted: #6B6B6B;
+            --shadow-sm: 0 2px 12px rgba(107, 76, 59, 0.08);
+            --shadow-md: 0 6px 24px rgba(107, 76, 59, 0.1);
+            --shadow-lg: 0 12px 40px rgba(107, 76, 59, 0.12);
+            --radius: 16px;
+            --radius-lg: 24px;
+            --radius-pill: 50px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--bg-warm);
+            color: var(--text-dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        /* ===== UTILITY ===== */
+        .container {
+            max-width: 1160px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section-label {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--teal);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-family: 'Quicksand', sans-serif;
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            font-weight: 700;
+            color: var(--brown);
+            line-height: 1.3;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            max-width: 560px;
+            font-weight: 400;
+        }
+
+        .accent-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--orange);
+            border-radius: 50%;
+            margin: 0 4px;
+            vertical-align: middle;
+        }
+
+        /* ===== NAV ===== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 251, 245, 0.95);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 1px 8px rgba(107, 76, 59, 0.06);
+            transition: box-shadow 0.3s;
+        }
+
+        .nav-inner {
+            max-width: 1160px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+
+        .nav-logo img {
+            height: 46px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--brown);
+            text-decoration: none;
+            position: relative;
+            padding-bottom: 4px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--orange);
+            border-radius: 2px;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--orange);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta-btn {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.85rem !important;
+            font-weight: 700 !important;
+            padding: 10px 26px !important;
+            background: var(--orange);
+            color: var(--white) !important;
+            border-radius: var(--radius-pill);
+            transition: all 0.3s !important;
+        }
+
+        .nav-cta-btn::after {
+            display: none !important;
+        }
+
+        .nav-cta-btn:hover {
+            background: var(--orange-dark) !important;
+            color: var(--white) !important;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(232, 93, 58, 0.35);
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 24px;
+            height: 2.5px;
+            background: var(--brown);
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('assets/images/original/hero-bg.jpg') center/cover no-repeat;
+        }
+
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 251, 245, 0.88) 0%,
+                rgba(255, 251, 245, 0.7) 40%,
+                rgba(255, 243, 205, 0.65) 100%
+            );
+        }
+
+        .hero-content {
+            position: relative;
+            max-width: 1160px;
+            margin: 0 auto;
+            padding: 140px 24px 100px;
+            width: 100%;
+        }
+
+        .hero-text {
+            max-width: 600px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--teal);
+            background: rgba(45, 139, 139, 0.1);
+            padding: 8px 18px;
+            border-radius: var(--radius-pill);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-badge svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--teal);
+        }
+
+        .hero-title {
+            font-family: 'Quicksand', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            color: var(--brown);
+            line-height: 1.15;
+            margin-bottom: 1rem;
+        }
+
+        .hero-title span {
+            color: var(--orange);
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 480px;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 36px;
+            background: var(--orange);
+            color: var(--white);
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: var(--radius-pill);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: var(--orange-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(232, 93, 58, 0.3);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 36px;
+            background: var(--white);
+            color: var(--brown);
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: var(--radius-pill);
+            border: 2px solid var(--bg-gray);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--teal);
+            color: var(--teal);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-teal {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 36px;
+            background: var(--teal);
+            color: var(--white);
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: var(--radius-pill);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-teal:hover {
+            background: var(--teal-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(45, 139, 139, 0.3);
+        }
+
+        /* Decorative blobs */
+        .blob-1 {
+            position: absolute;
+            top: 10%;
+            right: -5%;
+            width: 400px;
+            height: 400px;
+            background: rgba(232, 93, 58, 0.06);
+            border-radius: 60% 40% 50% 70% / 50% 60% 40% 50%;
+            z-index: 0;
+            animation: blobFloat 8s ease-in-out infinite;
+        }
+
+        .blob-2 {
+            position: absolute;
+            bottom: 5%;
+            left: -8%;
+            width: 300px;
+            height: 300px;
+            background: rgba(45, 139, 139, 0.06);
+            border-radius: 40% 60% 70% 30% / 50% 40% 60% 50%;
+            z-index: 0;
+            animation: blobFloat 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes blobFloat {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(10px, -15px) rotate(3deg); }
+            66% { transform: translate(-8px, 10px) rotate(-2deg); }
+        }
+
+        /* ===== PROGRAMS ===== */
+        .programs {
+            background: var(--white);
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .programs-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        .programs-header .section-subtitle {
+            margin: 0 auto;
+        }
+
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .program-card {
+            background: var(--bg-warm);
+            border-radius: var(--radius-lg);
+            padding: 36px 32px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .program-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .program-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+        }
+
+        .program-icon svg {
+            width: 28px;
+            height: 28px;
+            fill: none;
+            stroke: var(--white);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .program-icon-orange { background: var(--orange); }
+        .program-icon-teal { background: var(--teal); }
+        .program-icon-brown { background: var(--brown); }
+        .program-icon-sage { background: #7BAE7B; }
+
+        .program-card h3 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--brown);
+            margin-bottom: 0.4rem;
+        }
+
+        .program-schedule-tag {
+            display: inline-block;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--teal);
+            background: rgba(45, 139, 139, 0.1);
+            padding: 4px 12px;
+            border-radius: var(--radius-pill);
+            margin-bottom: 0.75rem;
+        }
+
+        .program-card p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* ===== WHY JOIN ===== */
+        .why-join {
+            background: var(--bg-warm);
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .why-join .blob-accent {
+            position: absolute;
+            top: -60px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            background: rgba(232, 93, 58, 0.04);
+            border-radius: 60% 40% 50% 70% / 50% 60% 40% 50%;
+        }
+
+        .why-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        .why-header .section-subtitle {
+            margin: 0 auto;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .why-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 40px 28px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s;
+        }
+
+        .why-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .why-card-icon {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 1.25rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .why-card-icon svg {
+            width: 32px;
+            height: 32px;
+            fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .icon-bg-orange { background: rgba(232, 93, 58, 0.1); }
+        .icon-bg-orange svg { stroke: var(--orange); }
+
+        .icon-bg-teal { background: rgba(45, 139, 139, 0.1); }
+        .icon-bg-teal svg { stroke: var(--teal); }
+
+        .icon-bg-brown { background: rgba(107, 76, 59, 0.1); }
+        .icon-bg-brown svg { stroke: var(--brown); }
+
+        .why-card h3 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--brown);
+            margin-bottom: 0.75rem;
+        }
+
+        .why-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.75;
+        }
+
+        /* ===== INSTRUCTORS ===== */
+        .instructors {
+            background: var(--white);
+            padding: 100px 0;
+        }
+
+        .instructors-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        .instructors-header .section-subtitle {
+            margin: 0 auto;
+        }
+
+        .instructors-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        .instructor-card {
+            text-align: center;
+            background: var(--bg-warm);
+            border-radius: var(--radius-lg);
+            padding: 48px 32px 40px;
+            transition: all 0.3s;
+        }
+
+        .instructor-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .instructor-photo-wrap {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 1.5rem;
+            border-radius: 50%;
+            padding: 5px;
+            position: relative;
+        }
+
+        .instructor-photo-wrap.ring-orange {
+            background: linear-gradient(135deg, var(--orange), rgba(232, 93, 58, 0.3));
+        }
+
+        .instructor-photo-wrap.ring-teal {
+            background: linear-gradient(135deg, var(--teal), rgba(45, 139, 139, 0.3));
+        }
+
+        .instructor-photo-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            display: block;
+            border: 4px solid var(--white);
+        }
+
+        .instructor-card h3 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--brown);
+            margin-bottom: 0.25rem;
+        }
+
+        .instructor-role {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--teal);
+            margin-bottom: 1.25rem;
+        }
+
+        .instructor-card p.bio {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.75;
+            text-align: left;
+        }
+
+        /* ===== KIDS HIGHLIGHT ===== */
+        .kids-section {
+            background: var(--sage);
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .kids-section .blob-accent {
+            position: absolute;
+            bottom: -80px;
+            left: -120px;
+            width: 350px;
+            height: 350px;
+            background: rgba(123, 174, 123, 0.15);
+            border-radius: 50% 60% 40% 70% / 60% 40% 60% 50%;
+        }
+
+        .kids-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 56px;
+            align-items: center;
+            position: relative;
+        }
+
+        .kids-content h2 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+            font-weight: 700;
+            color: var(--brown);
+            margin-bottom: 1rem;
+        }
+
+        .kids-content h2 span {
+            color: var(--orange);
+        }
+
+        .kids-content p {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .kids-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 2rem;
+        }
+
+        .kids-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--brown);
+        }
+
+        .kids-feature-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .kids-feature-icon svg {
+            width: 18px;
+            height: 18px;
+            fill: none;
+            stroke: var(--orange);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .kids-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .kids-program-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 28px 22px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s;
+        }
+
+        .kids-program-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .kids-program-card h4 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--brown);
+            margin-bottom: 0.25rem;
+        }
+
+        .kids-program-card .kp-time {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--teal);
+            margin-bottom: 0.6rem;
+        }
+
+        .kids-program-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ===== SCHEDULE ===== */
+        .schedule {
+            background: var(--bg-warm);
+            padding: 100px 0;
+        }
+
+        .schedule-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        .schedule-header .section-subtitle {
+            margin: 0 auto;
+        }
+
+        .schedule-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .schedule-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 24px 28px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s;
+            border-left: 4px solid transparent;
+        }
+
+        .schedule-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .schedule-card.type-kickboxing { border-left-color: var(--orange); }
+        .schedule-card.type-bjj { border-left-color: var(--teal); }
+        .schedule-card.type-kids { border-left-color: #7BAE7B; }
+        .schedule-card.type-ninja { border-left-color: var(--brown); }
+
+        .schedule-card-color {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--white);
+            text-transform: uppercase;
+        }
+
+        .sc-orange { background: var(--orange); }
+        .sc-teal { background: var(--teal); }
+        .sc-sage { background: #7BAE7B; }
+        .sc-brown { background: var(--brown); }
+
+        .schedule-card-info h4 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--brown);
+            margin-bottom: 2px;
+        }
+
+        .schedule-card-info p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .schedule-card-info .sc-time {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .schedule-hours {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px 28px;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .schedule-hours p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .schedule-hours strong {
+            color: var(--brown);
+            font-weight: 700;
+        }
+
+        /* ===== CTA ===== */
+        .cta-section {
+            background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+            padding: 90px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -60px;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 50%;
+        }
+
+        .cta-section::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -80px;
+            width: 350px;
+            height: 350px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 50%;
+        }
+
+        .cta-inner {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-inner h2 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: clamp(2rem, 4vw, 2.6rem);
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 0.75rem;
+        }
+
+        .cta-inner p {
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 2rem;
+        }
+
+        .btn-white {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 40px;
+            background: var(--white);
+            color: var(--orange);
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: var(--radius-pill);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--brown);
+            color: var(--white);
+            padding: 60px 0 36px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand img {
+            height: 40px;
+            margin-bottom: 1rem;
+            filter: brightness(10);
+        }
+
+        .footer-brand p {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.65);
+            line-height: 1.7;
+        }
+
+        .footer h4 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.6rem;
+        }
+
+        .footer-links a {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .footer-contact p {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-bottom {
+            padding-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .footer-bottom p {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-icons a {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: var(--orange);
+        }
+
+        .social-icons a svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--white);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .instructors-grid {
+                grid-template-columns: 1fr;
+                max-width: 520px;
+                margin: 0 auto;
+            }
+
+            .kids-inner {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: rgba(255, 251, 245, 0.98);
+                flex-direction: column;
+                padding: 24px;
+                gap: 1.25rem;
+                box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+                border-radius: 0 0 var(--radius) var(--radius);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .programs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .why-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .kids-features {
+                grid-template-columns: 1fr;
+            }
+
+            .kids-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .schedule-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .hero-buttons a {
+                text-align: center;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">
+                <img src="assets/images/logos/logo-01.png" alt="Midguard Academy">
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#programs">Programs</a></li>
+                <li><a href="#why">Why Us</a></li>
+                <li><a href="#instructors">Coaches</a></li>
+                <li><a href="#kids">Kids</a></li>
+                <li><a href="#schedule">Schedule</a></li>
+                <li><a href="#trial" class="nav-cta-btn">Join Our Family</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+        <div class="hero-bg"></div>
+        <div class="blob-1"></div>
+        <div class="blob-2"></div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-badge">
+                    <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    Welcome to Midguard Academy
+                </div>
+                <h1 class="hero-title">Your Martial Arts <span>Family</span> Starts Here</h1>
+                <p class="hero-subtitle">A welcoming community where every age and skill level belongs. Train together, grow together, succeed together.</p>
+                <div class="hero-buttons">
+                    <a href="#trial" class="btn-primary">
+                        Start Your Free Trial
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                    <a href="#programs" class="btn-secondary">Explore Programs</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROGRAMS -->
+    <section class="programs" id="programs">
+        <div class="container">
+            <div class="programs-header">
+                <p class="section-label">Our Programs</p>
+                <h2 class="section-title">Something for Everyone</h2>
+                <p class="section-subtitle">From striking to grappling, kids to adults, we have a class that fits your goals and schedule.</p>
+            </div>
+            <div class="programs-grid">
+                <div class="program-card">
+                    <div class="program-icon program-icon-orange">
+                        <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+                    </div>
+                    <h3>Adult Kickboxing</h3>
+                    <span class="program-schedule-tag">Mon / Wed / Fri 6:00 - 7:00 PM</span>
+                    <p>Striking, footwork, combinations, and conditioning. A high-energy class that builds strength, confidence, and skill in a supportive team environment.</p>
+                </div>
+                <div class="program-card">
+                    <div class="program-icon program-icon-teal">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+                    </div>
+                    <h3>Adult Brazilian Jiu-Jitsu</h3>
+                    <span class="program-schedule-tag">Tue / Thu 6:00 - 7:30 PM &bull; Sat 9 - 11 AM</span>
+                    <p>Ground fighting, submissions, and self-defense. Learn the art of leverage and technique in a welcoming, judgment-free setting.</p>
+                </div>
+                <div class="program-card">
+                    <div class="program-icon program-icon-sage">
+                        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+                    </div>
+                    <h3>Kids Jiu-Jitsu</h3>
+                    <span class="program-schedule-tag">Mon / Wed 5:00 - 5:45 PM</span>
+                    <p>Fundamentals of BJJ in a safe, fun environment. Your child builds confidence, respect, and discipline while making friends on the mat.</p>
+                </div>
+                <div class="program-card">
+                    <div class="program-icon program-icon-brown">
+                        <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    </div>
+                    <h3>Ninja Kids</h3>
+                    <span class="program-schedule-tag">Tue / Thu 5:00 - 5:45 PM</span>
+                    <p>A fun program building confidence, coordination, and strength. Perfect for younger children ready for their first martial arts adventure.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY JOIN -->
+    <section class="why-join" id="why">
+        <div class="blob-accent"></div>
+        <div class="container">
+            <div class="why-header">
+                <p class="section-label">The Midguard Difference</p>
+                <h2 class="section-title">Why Families Choose Us</h2>
+                <p class="section-subtitle">More than a gym. A community that lifts you up and helps you reach goals you never thought possible.</p>
+            </div>
+            <div class="why-grid">
+                <div class="why-card">
+                    <div class="why-card-icon icon-bg-orange">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <h3>Expert Instruction</h3>
+                    <p>Our instructors are highly trained and experienced in Sport Karate, Kickboxing, and Jiu-Jitsu and are dedicated to helping you achieve your goals.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-card-icon icon-bg-teal">
+                        <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/><path d="M6 3l6 6 6-6"/><line x1="6" y1="21" x2="18" y2="21"/><line x1="6" y1="15" x2="18" y2="15"/></svg>
+                    </div>
+                    <h3>Train with Champions</h3>
+                    <p>Train alongside state and national champions. Elevate your skills in an environment that fosters growth, determination, and greatness.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-card-icon icon-bg-brown">
+                        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+                    </div>
+                    <h3>Be Part of a Family</h3>
+                    <p>Beyond a team, we're a family. Together, we forge bonds that strengthen on and off the mat. Everyone belongs here.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INSTRUCTORS -->
+    <section class="instructors" id="instructors">
+        <div class="container">
+            <div class="instructors-header">
+                <p class="section-label">Meet Your Coaches</p>
+                <h2 class="section-title">Friendly Faces, World-Class Skills</h2>
+                <p class="section-subtitle">Our coaches combine decades of experience with a genuine love for teaching and mentoring.</p>
+            </div>
+            <div class="instructors-grid">
+                <div class="instructor-card">
+                    <div class="instructor-photo-wrap ring-orange">
+                        <img src="assets/images/original/josh-pinney.jpg" alt="Josh Pinney">
+                    </div>
+                    <h3>Josh Pinney</h3>
+                    <p class="instructor-role">Owner &amp; Head Kickboxing Instructor</p>
+                    <p class="bio">Training since 2002. Black Belt (I.K.C.A, 2007) and BJJ Purple Belt. A US Army veteran who trained with Dan Henderson, Gray Maynard, and Mark Munoz. Josh has coached multiple state and national champions and brings a welcoming, encouraging teaching style to every class.</p>
+                </div>
+                <div class="instructor-card">
+                    <div class="instructor-photo-wrap ring-teal">
+                        <img src="assets/images/original/robert-tahtinen.jpg" alt="Robert Tahtinen">
+                    </div>
+                    <h3>Robert Tahtinen</h3>
+                    <p class="instructor-role">Head BJJ Instructor &mdash; Nibiru BJJ</p>
+                    <p class="bio">Black Belt (TAC Team, 2021). Training since 2011 after 15 years of wrestling. A retired MMA fighter with four title belts and a King of the Cage victory. Robert is known for his patient, detailed instruction and his ability to make every student feel at home on the mat.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KIDS HIGHLIGHT -->
+    <section class="kids-section" id="kids">
+        <div class="blob-accent"></div>
+        <div class="container">
+            <div class="kids-inner">
+                <div class="kids-content">
+                    <p class="section-label" style="color: #5A9A5A;">For the Whole Family</p>
+                    <h2>A <span>Safe, Fun</span> Place for Your Kids to Grow</h2>
+                    <p>Our kids programs are designed to build character, confidence, and coordination in a positive, encouraging environment. Every child is celebrated for their effort and progress.</p>
+                    <div class="kids-features">
+                        <div class="kids-feature">
+                            <div class="kids-feature-icon">
+                                <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                            </div>
+                            Confidence Building
+                        </div>
+                        <div class="kids-feature">
+                            <div class="kids-feature-icon">
+                                <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                            </div>
+                            Coordination &amp; Strength
+                        </div>
+                        <div class="kids-feature">
+                            <div class="kids-feature-icon">
+                                <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                            </div>
+                            Discipline &amp; Respect
+                        </div>
+                        <div class="kids-feature">
+                            <div class="kids-feature-icon">
+                                <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                            </div>
+                            Fun &amp; Friendships
+                        </div>
+                    </div>
+                    <a href="#trial" class="btn-teal">Enroll Your Child</a>
+                </div>
+                <div class="kids-cards">
+                    <div class="kids-program-card">
+                        <h4>Kids Jiu-Jitsu</h4>
+                        <p class="kp-time">Mon &amp; Wed, 5:00 - 5:45 PM</p>
+                        <p>Fundamentals of Brazilian Jiu-Jitsu in a safe, structured, and fun environment. Ages 5-12.</p>
+                    </div>
+                    <div class="kids-program-card">
+                        <h4>Ninja Kids</h4>
+                        <p class="kp-time">Tue &amp; Thu, 5:00 - 5:45 PM</p>
+                        <p>A playful program building confidence, coordination, and strength. Ages 4-8.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SCHEDULE -->
+    <section class="schedule" id="schedule">
+        <div class="container">
+            <div class="schedule-header">
+                <p class="section-label">Weekly Schedule</p>
+                <h2 class="section-title">Find Your Perfect Class</h2>
+                <p class="section-subtitle">Convenient evening and weekend options for busy families and working adults.</p>
+            </div>
+            <div class="schedule-cards">
+                <div class="schedule-card type-kickboxing">
+                    <div class="schedule-card-color sc-orange">KB</div>
+                    <div class="schedule-card-info">
+                        <h4>Adult Kickboxing</h4>
+                        <p>Monday, Wednesday, Friday</p>
+                        <p class="sc-time">6:00 PM &ndash; 7:00 PM</p>
+                    </div>
+                </div>
+                <div class="schedule-card type-bjj">
+                    <div class="schedule-card-color sc-teal">BJJ</div>
+                    <div class="schedule-card-info">
+                        <h4>Adult Brazilian Jiu-Jitsu</h4>
+                        <p>Tuesday, Thursday</p>
+                        <p class="sc-time">6:00 PM &ndash; 7:30 PM</p>
+                    </div>
+                </div>
+                <div class="schedule-card type-bjj">
+                    <div class="schedule-card-color sc-teal">BJJ</div>
+                    <div class="schedule-card-info">
+                        <h4>Adult Brazilian Jiu-Jitsu</h4>
+                        <p>Saturday</p>
+                        <p class="sc-time">9:00 AM &ndash; 11:00 AM</p>
+                    </div>
+                </div>
+                <div class="schedule-card type-kids">
+                    <div class="schedule-card-color sc-sage">KJJ</div>
+                    <div class="schedule-card-info">
+                        <h4>Kids Jiu-Jitsu</h4>
+                        <p>Monday, Wednesday</p>
+                        <p class="sc-time">5:00 PM &ndash; 5:45 PM</p>
+                    </div>
+                </div>
+                <div class="schedule-card type-ninja">
+                    <div class="schedule-card-color sc-brown">NK</div>
+                    <div class="schedule-card-info">
+                        <h4>Ninja Kids</h4>
+                        <p>Tuesday, Thursday</p>
+                        <p class="sc-time">5:00 PM &ndash; 5:45 PM</p>
+                    </div>
+                </div>
+            </div>
+            <div class="schedule-hours">
+                <p><strong>Gym Hours:</strong> Mon&ndash;Fri: 5:00 PM &ndash; 7:30 PM &nbsp;|&nbsp; Sat: 9:00 AM &ndash; 11:00 AM &nbsp;|&nbsp; Sun: Closed</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section" id="trial">
+        <div class="container">
+            <div class="cta-inner">
+                <h2>Join Our Family Today</h2>
+                <p>Your first class is free. Come see why so many families call Midguard their home away from home.</p>
+                <a href="#" class="btn-white">
+                    Claim Your Free Trial
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="assets/images/logos/logo-04.png" alt="Midguard Academy">
+                    <p>Midguard BJJ and Kickboxing. A welcoming martial arts community for the whole family in Prescott Valley, Arizona.</p>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#programs">Programs</a></li>
+                        <li><a href="#why">Why Us</a></li>
+                        <li><a href="#instructors">Coaches</a></li>
+                        <li><a href="#kids">Kids Programs</a></li>
+                        <li><a href="#schedule">Schedule</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Visit Us</h4>
+                    <p>Prescott Valley, Arizona</p>
+                    <p>Mon&ndash;Fri: 5:00 PM &ndash; 7:30 PM</p>
+                    <p>Sat: 9:00 AM &ndash; 11:00 AM</p>
+                    <p>Sun: Closed</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Midguard BJJ and Kickboxing. All rights reserved.</p>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+                    </a>
+                    <a href="#" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                    </a>
+                    <a href="#" aria-label="YouTube">
+                        <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.43z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile nav toggle
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile nav on link click
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Scroll shadow on nav
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('nav');
+            if (window.scrollY > 40) {
+                nav.style.boxShadow = '0 2px 16px rgba(107, 76, 59, 0.1)';
+            } else {
+                nav.style.boxShadow = '0 1px 8px rgba(107, 76, 59, 0.06)';
+            }
+        });
+    </script>
+
+</body>
+</html>
