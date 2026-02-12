@@ -1,0 +1,1840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Midguard Academy | Combat Editorial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ========================================
+       CSS VARIABLES
+       ======================================== */
+    :root {
+      --red: #C41E2A;
+      --red-dark: #9B1722;
+      --black: #0A0A0A;
+      --black-soft: #1A1A1A;
+      --gray-dark: #2A2A2A;
+      --gray-mid: #444;
+      --gray-light: #888;
+      --white: #FFFFFF;
+      --off-white: #FAFAFA;
+      --cream: #F5F0EB;
+      --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+      --font-sans: 'Source Sans 3', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-label: 'Oswald', 'Arial Narrow', sans-serif;
+      --max-width: 1200px;
+      --nav-height: 72px;
+    }
+
+    /* ========================================
+       RESET & BASE
+       ======================================== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--gray-dark);
+      background: var(--white);
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: color 0.3s ease;
+    }
+
+    ul { list-style: none; }
+
+    /* ========================================
+       UTILITY CLASSES
+       ======================================== */
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section-rule {
+      width: 60px;
+      height: 2px;
+      background: var(--red);
+      border: none;
+      margin: 0;
+    }
+
+    .label {
+      font-family: var(--font-label);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--red);
+    }
+
+    .label--light {
+      color: var(--gray-light);
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ========================================
+       NAVIGATION
+       ======================================== */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      height: var(--nav-height);
+      background: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .nav--scrolled {
+      background: rgba(10, 10, 10, 0.98);
+      border-bottom-color: var(--red);
+      box-shadow: 0 1px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .nav__logo img {
+      height: 44px;
+      width: auto;
+    }
+
+    .nav__links {
+      display: none;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav__links a {
+      font-family: var(--font-label);
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
+      position: relative;
+      padding: 4px 0;
+      transition: color 0.3s ease;
+    }
+
+    .nav__links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--red);
+      transition: width 0.3s ease;
+    }
+
+    .nav__links a:hover {
+      color: var(--white);
+    }
+
+    .nav__links a:hover::after {
+      width: 100%;
+    }
+
+    .nav__cta {
+      font-family: var(--font-label) !important;
+      font-size: 0.65rem !important;
+      font-weight: 500 !important;
+      letter-spacing: 2.5px !important;
+      text-transform: uppercase;
+      color: var(--white) !important;
+      background: var(--red);
+      padding: 10px 24px !important;
+      border: none;
+      transition: background 0.3s ease, transform 0.2s ease !important;
+    }
+
+    .nav__cta:hover {
+      background: var(--red-dark);
+      transform: translateY(-1px);
+    }
+
+    .nav__cta::after { display: none !important; }
+
+    /* Hamburger */
+    .nav__hamburger {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 36px;
+      height: 36px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      gap: 6px;
+      padding: 0;
+    }
+
+    .nav__hamburger span {
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: var(--white);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .nav__hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .nav__hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav__hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      position: fixed;
+      top: var(--nav-height);
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--black);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+
+    .mobile-menu.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mobile-menu a {
+      font-family: var(--font-label);
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
+      transition: color 0.3s ease;
+    }
+
+    .mobile-menu a:hover {
+      color: var(--red);
+    }
+
+    @media (min-width: 768px) {
+      .nav__links { display: flex; }
+      .nav__hamburger { display: none; }
+    }
+
+    /* ========================================
+       HERO — MAGAZINE COVER
+       ======================================== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      overflow: hidden;
+      background: var(--black);
+    }
+
+    .hero__bg {
+      position: absolute;
+      inset: 0;
+      background: url('assets/images/original/hero-bg.jpg') center center / cover no-repeat;
+      filter: brightness(0.4) contrast(1.1);
+      transform: scale(1.05);
+      transition: transform 8s ease-out;
+    }
+
+    .hero.visible .hero__bg {
+      transform: scale(1);
+    }
+
+    .hero__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(10, 10, 10, 0.95) 0%,
+        rgba(10, 10, 10, 0.6) 35%,
+        rgba(10, 10, 10, 0.2) 60%,
+        rgba(10, 10, 10, 0.3) 100%
+      );
+    }
+
+    .hero__content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px 60px;
+    }
+
+    .hero__issue {
+      font-family: var(--font-label);
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gray-light);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .hero__issue::before {
+      content: '';
+      width: 40px;
+      height: 1px;
+      background: var(--red);
+    }
+
+    .hero__headline {
+      font-family: var(--font-serif);
+      font-size: clamp(3rem, 8vw, 7rem);
+      font-weight: 700;
+      line-height: 0.95;
+      color: var(--white);
+      letter-spacing: -1px;
+      margin-bottom: 24px;
+    }
+
+    .hero__headline em {
+      font-style: italic;
+      color: var(--red);
+    }
+
+    .hero__accent-line {
+      width: 80px;
+      height: 3px;
+      background: var(--red);
+      margin-bottom: 24px;
+    }
+
+    .hero__sub {
+      font-family: var(--font-sans);
+      font-size: 1.05rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.7);
+      max-width: 500px;
+      margin-bottom: 36px;
+    }
+
+    .hero__meta {
+      font-family: var(--font-label);
+      font-size: 0.6rem;
+      font-weight: 400;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.4);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .hero__meta span {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hero__meta span::before {
+      content: '';
+      width: 4px;
+      height: 4px;
+      background: var(--red);
+      border-radius: 50%;
+    }
+
+    .hero__meta span:first-child::before {
+      display: none;
+    }
+
+    .hero__scroll {
+      position: absolute;
+      bottom: 24px;
+      right: 24px;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero__scroll span {
+      font-family: var(--font-label);
+      font-size: 0.55rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.4);
+      writing-mode: vertical-rl;
+    }
+
+    .hero__scroll-line {
+      width: 1px;
+      height: 50px;
+      background: rgba(255, 255, 255, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero__scroll-line::after {
+      content: '';
+      position: absolute;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--red);
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollLine {
+      0% { top: -100%; }
+      100% { top: 100%; }
+    }
+
+    /* ========================================
+       PROGRAMS — EDITORIAL ARTICLE LAYOUT
+       ======================================== */
+    .programs {
+      padding: 100px 0;
+      background: var(--white);
+    }
+
+    .programs__header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .programs__header .label {
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .programs__title {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 16px;
+    }
+
+    .programs__subtitle {
+      font-family: var(--font-sans);
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--gray-light);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .programs__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    /* Feature card — large */
+    .program-card {
+      background: var(--off-white);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      overflow: hidden;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      position: relative;
+    }
+
+    .program-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+    }
+
+    .program-card__image {
+      width: 100%;
+      height: 220px;
+      background: var(--gray-dark);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .program-card__image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 50%, rgba(10, 10, 10, 0.7));
+    }
+
+    .program-card__icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 3rem;
+      z-index: 1;
+      opacity: 0.6;
+    }
+
+    .program-card__body {
+      padding: 28px 28px 32px;
+    }
+
+    .program-card__category {
+      font-family: var(--font-label);
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+
+    .program-card__title {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .program-card__desc {
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--gray-mid);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .program-card__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .program-card__tag {
+      font-family: var(--font-label);
+      font-size: 0.55rem;
+      font-weight: 400;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gray-light);
+      background: rgba(0, 0, 0, 0.04);
+      padding: 4px 10px;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    /* Feature variant — larger first two cards */
+    .program-card--feature .program-card__image {
+      height: 260px;
+    }
+
+    .program-card--feature .program-card__title {
+      font-size: 1.75rem;
+    }
+
+    @media (min-width: 768px) {
+      .programs__grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 28px;
+      }
+
+      .program-card--feature {
+        grid-column: span 1;
+      }
+
+      .program-card--feature .program-card__image {
+        height: 280px;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .programs__grid {
+        grid-template-columns: 1.2fr 0.8fr;
+        grid-template-rows: auto auto;
+        gap: 24px;
+      }
+
+      .program-card--feature:nth-child(1) {
+        grid-row: span 1;
+      }
+
+      .program-card--feature:nth-child(1) .program-card__image {
+        height: 300px;
+      }
+
+      .program-card:nth-child(2) .program-card__image {
+        height: 200px;
+      }
+
+      .program-card:nth-child(3) .program-card__image {
+        height: 200px;
+      }
+
+      .program-card:nth-child(4) .program-card__image {
+        height: 300px;
+      }
+    }
+
+    /* ========================================
+       INSTRUCTORS — EDITORIAL PROFILES
+       ======================================== */
+    .instructors {
+      padding: 100px 0;
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .instructors__header {
+      text-align: center;
+      margin-bottom: 70px;
+    }
+
+    .instructors__header .label {
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .instructors__title {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    .instructors__subtitle {
+      font-family: var(--font-sans);
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--gray-light);
+    }
+
+    .instructor {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: 80px;
+    }
+
+    .instructor:last-child {
+      margin-bottom: 0;
+    }
+
+    .instructor__photo-wrap {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .instructor__photo {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      object-position: top center;
+      filter: grayscale(30%) contrast(1.05);
+      transition: filter 0.6s ease, transform 0.6s ease;
+    }
+
+    .instructor:hover .instructor__photo {
+      filter: grayscale(0%) contrast(1.05);
+      transform: scale(1.02);
+    }
+
+    .instructor__photo-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 16px 24px;
+      background: linear-gradient(to top, rgba(10, 10, 10, 0.9), transparent);
+      font-family: var(--font-label);
+      font-size: 0.55rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .instructor__content {
+      padding: 32px 0;
+    }
+
+    .instructor__byline {
+      font-family: var(--font-label);
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .instructor__byline::before {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: var(--red);
+    }
+
+    .instructor__name {
+      font-family: var(--font-serif);
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+      line-height: 1.15;
+    }
+
+    .instructor__role {
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: var(--gray-light);
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    .instructor__bio {
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.65);
+      margin-bottom: 20px;
+    }
+
+    .instructor__bio::first-letter {
+      font-family: var(--font-serif);
+      font-size: 3.2em;
+      font-weight: 700;
+      float: left;
+      line-height: 0.8;
+      margin-right: 10px;
+      margin-top: 6px;
+      color: var(--red);
+    }
+
+    .instructor__credentials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .instructor__credential {
+      font-family: var(--font-label);
+      font-size: 0.55rem;
+      font-weight: 400;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gray-light);
+      padding: 6px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .instructor__rule {
+      width: 100%;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.08);
+      margin-top: 60px;
+    }
+
+    @media (min-width: 768px) {
+      .instructor {
+        flex-direction: row;
+        gap: 48px;
+        align-items: flex-start;
+      }
+
+      .instructor--reverse {
+        flex-direction: row-reverse;
+      }
+
+      .instructor__photo-wrap {
+        width: 45%;
+        flex-shrink: 0;
+      }
+
+      .instructor__photo {
+        height: 500px;
+      }
+
+      .instructor__content {
+        padding: 16px 0;
+        flex: 1;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .instructor__photo {
+        height: 560px;
+      }
+
+      .instructor__content {
+        padding: 24px 0;
+      }
+    }
+
+    /* ========================================
+       WHY TRAIN — EDITORIAL ARTICLE BLURBS
+       ======================================== */
+    .why-train {
+      padding: 100px 0;
+      background: var(--cream);
+    }
+
+    .why-train__header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .why-train__header .label {
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .why-train__title {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 12px;
+    }
+
+    .why-train__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .reason {
+      position: relative;
+    }
+
+    .reason__number {
+      font-family: var(--font-serif);
+      font-size: 4rem;
+      font-weight: 700;
+      color: var(--red);
+      line-height: 1;
+      margin-bottom: 8px;
+      opacity: 0.2;
+    }
+
+    .reason__title {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 12px;
+      line-height: 1.25;
+    }
+
+    .reason__text {
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--gray-mid);
+      line-height: 1.8;
+    }
+
+    .reason__text::first-letter {
+      font-family: var(--font-serif);
+      font-size: 2.8em;
+      font-weight: 700;
+      float: left;
+      line-height: 0.8;
+      margin-right: 8px;
+      margin-top: 6px;
+      color: var(--red);
+    }
+
+    .reason__rule {
+      width: 40px;
+      height: 2px;
+      background: var(--red);
+      margin-top: 24px;
+    }
+
+    @media (min-width: 768px) {
+      .why-train__grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+      }
+    }
+
+    /* ========================================
+       SCHEDULE — EDITORIAL TABLE
+       ======================================== */
+    .schedule {
+      padding: 100px 0;
+      background: var(--white);
+    }
+
+    .schedule__inner {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    .schedule__header {
+      text-align: center;
+    }
+
+    .schedule__header .label {
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .schedule__title {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 12px;
+    }
+
+    .schedule__subtitle {
+      font-family: var(--font-sans);
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--gray-light);
+    }
+
+    .schedule__table-wrap {
+      overflow-x: auto;
+    }
+
+    .schedule__table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 420px;
+    }
+
+    .schedule__table thead th {
+      font-family: var(--font-label);
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gray-light);
+      text-align: left;
+      padding: 16px 20px;
+      border-bottom: 2px solid var(--red);
+    }
+
+    .schedule__table tbody td {
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: var(--gray-dark);
+      padding: 18px 20px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .schedule__table tbody tr:hover {
+      background: rgba(196, 30, 42, 0.03);
+    }
+
+    .schedule__table .day {
+      font-family: var(--font-serif);
+      font-weight: 600;
+      color: var(--black);
+      font-size: 1rem;
+    }
+
+    .schedule__table .closed {
+      font-family: var(--font-label);
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gray-light);
+    }
+
+    .schedule__note {
+      text-align: center;
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--gray-light);
+      font-style: italic;
+      margin-top: 24px;
+    }
+
+    @media (min-width: 768px) {
+      .schedule__inner {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .schedule__table-wrap {
+        max-width: 700px;
+        width: 100%;
+      }
+    }
+
+    /* ========================================
+       TESTIMONIAL — MAGAZINE PULL QUOTE
+       ======================================== */
+    .testimonial {
+      padding: 100px 0;
+      background: var(--black-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .testimonial::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--red);
+    }
+
+    .testimonial::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--red);
+    }
+
+    .testimonial__inner {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .testimonial__open-quote {
+      font-family: var(--font-serif);
+      font-size: 10rem;
+      font-weight: 700;
+      color: var(--red);
+      line-height: 0.5;
+      opacity: 0.3;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .testimonial__text {
+      font-family: var(--font-serif);
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--white);
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+
+    .testimonial__rule {
+      width: 40px;
+      height: 2px;
+      background: var(--red);
+      margin: 0 auto 20px;
+    }
+
+    .testimonial__author {
+      font-family: var(--font-label);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gray-light);
+    }
+
+    .testimonial__author span {
+      color: var(--red);
+      margin: 0 8px;
+    }
+
+    /* ========================================
+       CTA — EDITORIAL STYLE
+       ======================================== */
+    .cta {
+      padding: 120px 0;
+      background: var(--cream);
+      position: relative;
+      text-align: center;
+    }
+
+    .cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 60px;
+      background: var(--red);
+    }
+
+    .cta__label {
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .cta__title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 700;
+      color: var(--black);
+      line-height: 1.05;
+      margin-bottom: 20px;
+    }
+
+    .cta__title em {
+      font-style: italic;
+      color: var(--red);
+    }
+
+    .cta__text {
+      font-family: var(--font-sans);
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--gray-mid);
+      max-width: 500px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+    }
+
+    .cta__btn {
+      display: inline-block;
+      font-family: var(--font-label);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--white);
+      background: var(--red);
+      padding: 18px 48px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+      position: relative;
+    }
+
+    .cta__btn:hover {
+      background: var(--red-dark);
+      transform: translateY(-2px);
+    }
+
+    .cta__fine {
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: var(--gray-light);
+      margin-top: 16px;
+      font-style: italic;
+    }
+
+    /* ========================================
+       FOOTER — MAGAZINE STYLE
+       ======================================== */
+    .footer {
+      padding: 60px 0 0;
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .footer__top {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .footer__brand {
+      max-width: 280px;
+    }
+
+    .footer__logo img {
+      height: 40px;
+      width: auto;
+      margin-bottom: 16px;
+    }
+
+    .footer__brand-text {
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.5);
+      line-height: 1.7;
+    }
+
+    .footer__col-title {
+      font-family: var(--font-label);
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+
+    .footer__links li {
+      margin-bottom: 10px;
+    }
+
+    .footer__links a {
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.5);
+      transition: color 0.3s ease;
+    }
+
+    .footer__links a:hover {
+      color: var(--red);
+    }
+
+    .footer__hours-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .footer__hours-item .days {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .footer__bottom {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      padding: 24px 0;
+    }
+
+    .footer__copy {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.3);
+      text-align: center;
+    }
+
+    .footer__magazine-tag {
+      font-family: var(--font-label);
+      font-size: 0.55rem;
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.15);
+    }
+
+    @media (min-width: 768px) {
+      .footer__top {
+        grid-template-columns: 1.5fr 1fr 1fr 1fr;
+        gap: 40px;
+      }
+
+      .footer__bottom {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+
+    /* ========================================
+       SECTION SEPARATOR
+       ======================================== */
+    .section-sep {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      background: var(--white);
+    }
+
+    .section-sep--dark {
+      background: var(--black);
+    }
+
+    .section-sep--cream {
+      background: var(--cream);
+    }
+
+    .section-sep__line {
+      width: 1px;
+      height: 60px;
+      background: var(--red);
+      opacity: 0.3;
+    }
+
+    /* ========================================
+       RESPONSIVE ADJUSTMENTS
+       ======================================== */
+    @media (max-width: 480px) {
+      .hero__content {
+        padding-bottom: 40px;
+      }
+
+      .hero__headline {
+        font-size: 2.6rem;
+      }
+
+      .programs,
+      .instructors,
+      .why-train,
+      .schedule,
+      .testimonial,
+      .cta {
+        padding: 70px 0;
+      }
+
+      .instructor__photo {
+        height: 320px;
+      }
+
+      .testimonial__open-quote {
+        font-size: 6rem;
+      }
+
+      .cta__title {
+        font-size: 2rem;
+      }
+    }
+
+    @media (min-width: 480px) and (max-width: 767px) {
+      .programs__grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================
+       NAVIGATION
+       ========================================== -->
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="#" class="nav__logo">
+        <img src="assets/images/logos/logo-04.png" alt="Midguard Academy">
+      </a>
+      <div class="nav__links">
+        <a href="#programs">Programs</a>
+        <a href="#instructors">Instructors</a>
+        <a href="#why-train">Why Train</a>
+        <a href="#schedule">Schedule</a>
+        <a href="#trial" class="nav__cta">Free Trial</a>
+      </div>
+      <button class="nav__hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#programs">Programs</a>
+    <a href="#instructors">Instructors</a>
+    <a href="#why-train">Why Train</a>
+    <a href="#schedule">Schedule</a>
+    <a href="#trial">Free Trial</a>
+  </div>
+
+  <!-- ==========================================
+       HERO — MAGAZINE COVER
+       ========================================== -->
+  <header class="hero reveal" id="hero">
+    <div class="hero__bg"></div>
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <div class="hero__issue">Est. 2020 &mdash; Waxahachie, TX</div>
+      <h1 class="hero__headline">The Art<br>of <em>Combat</em></h1>
+      <div class="hero__accent-line"></div>
+      <p class="hero__sub">Where discipline meets determination. Midguard Academy forges martial artists through world-class instruction in kickboxing and Brazilian Jiu-Jitsu.</p>
+      <div class="hero__meta">
+        <span>Combat Sports</span>
+        <span>Martial Arts</span>
+        <span>Self Defense</span>
+        <span>Fitness</span>
+      </div>
+    </div>
+    <div class="hero__scroll">
+      <span>Scroll</span>
+      <div class="hero__scroll-line"></div>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       PROGRAMS
+       ========================================== -->
+  <div class="section-sep"><div class="section-sep__line"></div></div>
+
+  <section class="programs" id="programs">
+    <div class="container">
+      <div class="programs__header reveal">
+        <span class="label">Training Programs</span>
+        <h2 class="programs__title">Disciplines We Teach</h2>
+        <p class="programs__subtitle">From striking to grappling, our programs build complete martial artists at every age and level.</p>
+      </div>
+
+      <div class="programs__grid">
+        <!-- Adult Kickboxing — Feature -->
+        <article class="program-card program-card--feature reveal reveal-delay-1">
+          <div class="program-card__image" style="background: linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 100%);">
+            <div class="program-card__icon" style="color: var(--red);">&#9758;</div>
+          </div>
+          <div class="program-card__body">
+            <span class="program-card__category">Adult Program</span>
+            <h3 class="program-card__title">Kickboxing</h3>
+            <p class="program-card__desc">An intense striking program combining Muay Thai technique with explosive conditioning. Build combat fitness, develop devastating striking combinations, and discover the fighter within.</p>
+            <div class="program-card__tags">
+              <span class="program-card__tag">Striking</span>
+              <span class="program-card__tag">Conditioning</span>
+              <span class="program-card__tag">Combat Fitness</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Adult BJJ -->
+        <article class="program-card reveal reveal-delay-2">
+          <div class="program-card__image" style="background: linear-gradient(135deg, #2A2A2A 0%, #1A1A1A 100%);">
+            <div class="program-card__icon" style="color: var(--red);">&#9775;</div>
+          </div>
+          <div class="program-card__body">
+            <span class="program-card__category">Adult Program</span>
+            <h3 class="program-card__title">Brazilian Jiu-Jitsu</h3>
+            <p class="program-card__desc">Master the art of grappling with our comprehensive BJJ curriculum. Learn submissions, sweeps, and positional dominance in a program designed for all skill levels.</p>
+            <div class="program-card__tags">
+              <span class="program-card__tag">Grappling</span>
+              <span class="program-card__tag">Submissions</span>
+              <span class="program-card__tag">Ground Game</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Kids Kickboxing -->
+        <article class="program-card reveal reveal-delay-3">
+          <div class="program-card__image" style="background: linear-gradient(135deg, #1A1A1A 0%, #333 100%);">
+            <div class="program-card__icon" style="color: var(--red);">&#9733;</div>
+          </div>
+          <div class="program-card__body">
+            <span class="program-card__category">Youth &mdash; Ages 6&ndash;14</span>
+            <h3 class="program-card__title">Kids Kickboxing</h3>
+            <p class="program-card__desc">Building young warriors through structured striking fundamentals. Our kids program instills discipline, develops confidence, and channels energy into purposeful training.</p>
+            <div class="program-card__tags">
+              <span class="program-card__tag">Discipline</span>
+              <span class="program-card__tag">Confidence</span>
+              <span class="program-card__tag">Ages 6&ndash;14</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Kids BJJ — Feature -->
+        <article class="program-card program-card--feature reveal reveal-delay-4">
+          <div class="program-card__image" style="background: linear-gradient(135deg, #333 0%, #1A1A1A 100%);">
+            <div class="program-card__icon" style="color: var(--red);">&#9812;</div>
+          </div>
+          <div class="program-card__body">
+            <span class="program-card__category">Youth &mdash; Ages 6&ndash;14</span>
+            <h3 class="program-card__title">Kids Brazilian Jiu-Jitsu</h3>
+            <p class="program-card__desc">Jiu-Jitsu teaches children problem-solving on the mat. Our youth program develops coordination, builds anti-bullying skills, and creates a foundation of respect and resilience.</p>
+            <div class="program-card__tags">
+              <span class="program-card__tag">Coordination</span>
+              <span class="program-card__tag">Anti-Bullying</span>
+              <span class="program-card__tag">Ages 6&ndash;14</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       INSTRUCTORS — EDITORIAL PROFILES
+       ========================================== -->
+  <section class="instructors" id="instructors">
+    <div class="container">
+      <div class="instructors__header reveal">
+        <span class="label">The Coaches</span>
+        <h2 class="instructors__title">Meet Your Instructors</h2>
+        <p class="instructors__subtitle">World-class coaching from athletes who have lived the fight.</p>
+      </div>
+
+      <!-- Josh Pinney -->
+      <article class="instructor reveal">
+        <div class="instructor__photo-wrap">
+          <img src="assets/images/original/josh-pinney.jpg" alt="Josh Pinney, Head Kickboxing Instructor" class="instructor__photo">
+          <div class="instructor__photo-caption">Photograph &mdash; Midguard Academy</div>
+        </div>
+        <div class="instructor__content">
+          <div class="instructor__byline">Owner &amp; Head Instructor</div>
+          <h3 class="instructor__name">Josh Pinney</h3>
+          <p class="instructor__role">Head Kickboxing Instructor &amp; Founder</p>
+          <p class="instructor__bio">Forged in the crucible of military service, Josh Pinney brings the discipline and tenacity of an Army veteran to every class he leads. With over fifteen years of martial arts experience spanning striking disciplines, he founded Midguard Academy with a singular vision: to create a training environment where ordinary people transform into extraordinary athletes. His teaching philosophy pairs technical precision with relentless conditioning, producing fighters who are as mentally tough as they are physically capable.</p>
+          <div class="instructor__credentials">
+            <span class="instructor__credential">Army Veteran</span>
+            <span class="instructor__credential">15+ Years Experience</span>
+            <span class="instructor__credential">Head Striking Coach</span>
+          </div>
+        </div>
+      </article>
+
+      <div class="instructor__rule"></div>
+
+      <!-- Robert Tahtinen -->
+      <article class="instructor instructor--reverse reveal" style="margin-top: 60px;">
+        <div class="instructor__photo-wrap">
+          <img src="assets/images/original/robert-tahtinen.jpg" alt="Robert Tahtinen, Head BJJ Instructor" class="instructor__photo">
+          <div class="instructor__photo-caption">Photograph &mdash; Midguard Academy</div>
+        </div>
+        <div class="instructor__content">
+          <div class="instructor__byline">Head BJJ Instructor</div>
+          <h3 class="instructor__name">Robert Tahtinen</h3>
+          <p class="instructor__role">Head Brazilian Jiu-Jitsu Instructor &amp; MMA Champion</p>
+          <p class="instructor__bio">Robert Tahtinen carries the quiet authority of someone who has proven himself under the brightest lights in combat sports. A Brazilian Jiu-Jitsu Black Belt and accomplished MMA champion, Robert brings a depth of grappling knowledge that is both encyclopedic and instinctive. His classes are masterclasses in leverage and timing, where students learn to control opponents twice their size through technique and intelligence rather than brute strength. Under his guidance, practitioners of every level discover the chess match that lives within every roll.</p>
+          <div class="instructor__credentials">
+            <span class="instructor__credential">BJJ Black Belt</span>
+            <span class="instructor__credential">MMA Champion</span>
+            <span class="instructor__credential">Grappling Specialist</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       WHY TRAIN — EDITORIAL BLURBS
+       ========================================== -->
+  <section class="why-train" id="why-train">
+    <div class="container">
+      <div class="why-train__header reveal">
+        <span class="label">The Case for Combat</span>
+        <h2 class="why-train__title">Why Train at Midguard</h2>
+      </div>
+
+      <div class="why-train__grid">
+        <!-- Reason 1 -->
+        <div class="reason reveal reveal-delay-1">
+          <div class="reason__number">01</div>
+          <h3 class="reason__title">Proven Coaching, Real Results</h3>
+          <p class="reason__text">Every session at Midguard is led by instructors who have competed, coached, and dedicated their lives to martial arts. This is not a franchise cardio class repackaged with gloves and pads. Our coaches have bled on competition mats and walked into cages under stadium lights. That experience translates into programming that produces measurable progress, class after class, month after month.</p>
+          <div class="reason__rule"></div>
+        </div>
+
+        <!-- Reason 2 -->
+        <div class="reason reveal reveal-delay-2">
+          <div class="reason__number">02</div>
+          <h3 class="reason__title">Community That Elevates</h3>
+          <p class="reason__text">Walk through our doors and you will find something rare: a community bound by shared struggle and mutual respect. Training partners who push you past your perceived limits, then help you off the mat with a handshake. At Midguard, the bonds forged in sparring sessions extend far beyond the gym walls, creating a support network that strengthens every aspect of your life.</p>
+          <div class="reason__rule"></div>
+        </div>
+
+        <!-- Reason 3 -->
+        <div class="reason reveal reveal-delay-3">
+          <div class="reason__number">03</div>
+          <h3 class="reason__title">Training for Every Chapter</h3>
+          <p class="reason__text">Whether you are a seasoned competitor or someone stepping onto the mat for the very first time, Midguard has a program built for your chapter. Our youth programs plant seeds of discipline in children as young as six, while our adult classes challenge athletes well into their forties and beyond. The path looks different for everyone, but the destination is the same: a stronger, sharper, more confident you.</p>
+          <div class="reason__rule"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SCHEDULE
+       ========================================== -->
+  <div class="section-sep section-sep--cream"><div class="section-sep__line"></div></div>
+
+  <section class="schedule" id="schedule">
+    <div class="container">
+      <div class="schedule__inner">
+        <div class="schedule__header reveal">
+          <span class="label">Class Times</span>
+          <h2 class="schedule__title">Weekly Schedule</h2>
+          <p class="schedule__subtitle">Consistent training builds consistent results.</p>
+        </div>
+
+        <div class="schedule__table-wrap reveal">
+          <table class="schedule__table">
+            <thead>
+              <tr>
+                <th>Day</th>
+                <th>Hours</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="day">Monday</td>
+                <td>5:00 PM &ndash; 7:30 PM</td>
+                <td><span class="label" style="color: var(--red);">Open</span></td>
+              </tr>
+              <tr>
+                <td class="day">Tuesday</td>
+                <td>5:00 PM &ndash; 7:30 PM</td>
+                <td><span class="label" style="color: var(--red);">Open</span></td>
+              </tr>
+              <tr>
+                <td class="day">Wednesday</td>
+                <td>5:00 PM &ndash; 7:30 PM</td>
+                <td><span class="label" style="color: var(--red);">Open</span></td>
+              </tr>
+              <tr>
+                <td class="day">Thursday</td>
+                <td>5:00 PM &ndash; 7:30 PM</td>
+                <td><span class="label" style="color: var(--red);">Open</span></td>
+              </tr>
+              <tr>
+                <td class="day">Friday</td>
+                <td>5:00 PM &ndash; 7:30 PM</td>
+                <td><span class="label" style="color: var(--red);">Open</span></td>
+              </tr>
+              <tr>
+                <td class="day">Saturday</td>
+                <td>9:00 AM &ndash; 11:00 AM</td>
+                <td><span class="label" style="color: var(--red);">Open</span></td>
+              </tr>
+              <tr>
+                <td class="day">Sunday</td>
+                <td class="closed">Closed</td>
+                <td><span class="label label--light">&mdash;</span></td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="schedule__note">Class schedules may vary during holidays. Contact us for details.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       TESTIMONIAL — PULL QUOTE
+       ========================================== -->
+  <section class="testimonial reveal">
+    <div class="container">
+      <div class="testimonial__inner">
+        <span class="testimonial__open-quote">&ldquo;</span>
+        <p class="testimonial__text">Midguard Academy changed my life. The coaches pushed me beyond what I thought was possible, and the community became a second family. I walked in looking for a workout and found a purpose.</p>
+        <div class="testimonial__rule"></div>
+        <p class="testimonial__author">Midguard Academy Member <span>|</span> Waxahachie, TX</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       CTA — FREE TRIAL
+       ========================================== -->
+  <section class="cta reveal" id="trial">
+    <div class="container">
+      <span class="label cta__label">Begin Your Journey</span>
+      <h2 class="cta__title">Your Story<br>Starts <em>Here</em></h2>
+      <p class="cta__text">Every champion was once a beginner. Step onto the mat, meet the coaches, and discover what you are capable of. Your first class is on us.</p>
+      <a href="#" class="cta__btn">Claim Your Free Trial</a>
+      <p class="cta__fine">No commitment. No experience required.</p>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       FOOTER
+       ========================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <!-- Brand -->
+        <div class="footer__brand">
+          <a href="#" class="footer__logo">
+            <img src="assets/images/logos/logo-04.png" alt="Midguard Academy">
+          </a>
+          <p class="footer__brand-text">Midguard Academy is a premier martial arts training facility in Waxahachie, Texas, offering world-class instruction in kickboxing and Brazilian Jiu-Jitsu for adults and youth.</p>
+        </div>
+
+        <!-- Programs -->
+        <div>
+          <h4 class="footer__col-title">Programs</h4>
+          <ul class="footer__links">
+            <li><a href="#programs">Adult Kickboxing</a></li>
+            <li><a href="#programs">Adult BJJ</a></li>
+            <li><a href="#programs">Kids Kickboxing</a></li>
+            <li><a href="#programs">Kids BJJ</a></li>
+          </ul>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 class="footer__col-title">Navigate</h4>
+          <ul class="footer__links">
+            <li><a href="#instructors">Instructors</a></li>
+            <li><a href="#why-train">Why Train</a></li>
+            <li><a href="#schedule">Schedule</a></li>
+            <li><a href="#trial">Free Trial</a></li>
+          </ul>
+        </div>
+
+        <!-- Hours -->
+        <div>
+          <h4 class="footer__col-title">Hours</h4>
+          <div class="footer__hours-item">
+            <span class="days">Mon &ndash; Fri</span>
+            <span>5:00 &ndash; 7:30 PM</span>
+          </div>
+          <div class="footer__hours-item">
+            <span class="days">Saturday</span>
+            <span>9:00 &ndash; 11:00 AM</span>
+          </div>
+          <div class="footer__hours-item">
+            <span class="days">Sunday</span>
+            <span>Closed</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <p class="footer__copy">&copy; 2025 Midguard Academy. All rights reserved. Waxahachie, Texas.</p>
+        <span class="footer__magazine-tag">Combat Editorial &mdash; Design v2.08</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================
+       JAVASCRIPT
+       ========================================== -->
+  <script>
+    /* ---- Mobile Menu ---- */
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileLinks = mobileMenu.querySelectorAll('a');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileMenu.classList.toggle('open');
+      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+
+    /* ---- Navbar Scroll Effect ---- */
+    const nav = document.getElementById('nav');
+    let lastScrollY = 0;
+
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      if (scrollY > 60) {
+        nav.classList.add('nav--scrolled');
+      } else {
+        nav.classList.remove('nav--scrolled');
+      }
+      lastScrollY = scrollY;
+    }, { passive: true });
+
+    /* ---- Scroll Reveal (IntersectionObserver) ---- */
+    const revealElements = document.querySelectorAll('.reveal');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    /* ---- Smooth Scroll for anchor links ---- */
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href === '#') return;
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          const navHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height'));
+          const top = target.getBoundingClientRect().top + window.scrollY - navHeight;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

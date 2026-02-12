@@ -1,0 +1,1949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midguard Academy — Enter The Red Planet</title>
+    <link rel="icon" type="image/png" href="assets/images/logos/logo-04.png">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ========== RESET & BASE ========== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0A0A0A;
+            color: #C0C0D0;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; display: block; }
+        ul { list-style: none; }
+
+        /* ========== CSS VARIABLES ========== */
+        :root {
+            --red: #C41E2A;
+            --red-dark: #8B1520;
+            --red-glow: rgba(196, 30, 42, 0.4);
+            --red-glow-soft: rgba(196, 30, 42, 0.15);
+            --red-glow-strong: rgba(196, 30, 42, 0.6);
+            --space-black: #0A0A0A;
+            --space-deep: #0D0D15;
+            --space-mid: #151520;
+            --white: #FFFFFF;
+            --silver: #C0C0D0;
+            --muted: #8888AA;
+            --glass-bg: rgba(15, 15, 25, 0.7);
+            --glass-border: rgba(196, 30, 42, 0.2);
+        }
+
+        /* ========== UTILITY ========== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ========== STARFIELD BACKGROUND ========== */
+        .starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .starfield .layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-repeat: repeat;
+        }
+        .stars-small {
+            background-image:
+                radial-gradient(1px 1px at 50px 80px, rgba(255,255,255,0.6), transparent),
+                radial-gradient(1px 1px at 180px 200px, rgba(255,255,255,0.5), transparent),
+                radial-gradient(1px 1px at 320px 50px, rgba(255,255,255,0.7), transparent),
+                radial-gradient(1px 1px at 470px 310px, rgba(255,255,255,0.4), transparent),
+                radial-gradient(1px 1px at 600px 180px, rgba(255,255,255,0.6), transparent),
+                radial-gradient(1px 1px at 750px 400px, rgba(255,255,255,0.5), transparent),
+                radial-gradient(1px 1px at 100px 350px, rgba(255,255,255,0.3), transparent),
+                radial-gradient(1px 1px at 250px 460px, rgba(255,255,255,0.6), transparent),
+                radial-gradient(1px 1px at 420px 120px, rgba(255,255,255,0.4), transparent),
+                radial-gradient(1px 1px at 550px 380px, rgba(255,255,255,0.7), transparent),
+                radial-gradient(1px 1px at 700px 90px, rgba(255,255,255,0.5), transparent),
+                radial-gradient(1px 1px at 830px 270px, rgba(255,255,255,0.3), transparent),
+                radial-gradient(1px 1px at 900px 450px, rgba(255,255,255,0.6), transparent),
+                radial-gradient(1px 1px at 150px 500px, rgba(255,255,255,0.5), transparent),
+                radial-gradient(1px 1px at 380px 250px, rgba(255,255,255,0.4), transparent);
+            background-size: 950px 550px;
+            animation: twinkle1 4s ease-in-out infinite alternate;
+        }
+        .stars-medium {
+            background-image:
+                radial-gradient(1.5px 1.5px at 120px 150px, rgba(255,255,255,0.8), transparent),
+                radial-gradient(1.5px 1.5px at 350px 300px, rgba(255,255,255,0.6), transparent),
+                radial-gradient(1.5px 1.5px at 580px 80px, rgba(255,255,255,0.7), transparent),
+                radial-gradient(1.5px 1.5px at 770px 350px, rgba(255,255,255,0.5), transparent),
+                radial-gradient(1.5px 1.5px at 200px 420px, rgba(255,255,255,0.8), transparent),
+                radial-gradient(1.5px 1.5px at 450px 200px, rgba(255,255,255,0.6), transparent),
+                radial-gradient(1.5px 1.5px at 680px 480px, rgba(255,255,255,0.7), transparent),
+                radial-gradient(1.5px 1.5px at 850px 120px, rgba(255,255,255,0.5), transparent),
+                radial-gradient(1.5px 1.5px at 50px 280px, rgba(255,255,255,0.4), transparent),
+                radial-gradient(1.5px 1.5px at 500px 450px, rgba(255,255,255,0.6), transparent);
+            background-size: 900px 530px;
+            animation: twinkle2 6s ease-in-out infinite alternate;
+        }
+        .stars-large {
+            background-image:
+                radial-gradient(2px 2px at 200px 100px, rgba(255,255,255,0.9), transparent),
+                radial-gradient(2px 2px at 500px 350px, rgba(196,30,42,0.6), transparent),
+                radial-gradient(2px 2px at 800px 200px, rgba(255,255,255,0.7), transparent),
+                radial-gradient(2px 2px at 100px 400px, rgba(196,30,42,0.4), transparent),
+                radial-gradient(2px 2px at 650px 100px, rgba(255,255,255,0.8), transparent),
+                radial-gradient(2px 2px at 350px 480px, rgba(255,255,255,0.6), transparent);
+            background-size: 950px 550px;
+            animation: twinkle3 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes twinkle1 {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        @keyframes twinkle2 {
+            0% { opacity: 0.7; }
+            50% { opacity: 0.3; }
+            100% { opacity: 0.8; }
+        }
+        @keyframes twinkle3 {
+            0% { opacity: 0.4; }
+            50% { opacity: 0.9; }
+            100% { opacity: 0.5; }
+        }
+
+        /* ========== NAVIGATION ========== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: 0 2px 30px rgba(196, 30, 42, 0.08);
+            transition: all 0.4s ease;
+        }
+        .nav.scrolled {
+            background: rgba(10, 10, 10, 0.95);
+            border-bottom-color: var(--red-glow);
+            box-shadow: 0 2px 40px rgba(196, 30, 42, 0.15);
+        }
+        .nav-inner {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+        }
+        .nav-logo img {
+            height: 48px;
+            width: auto;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .nav-links a {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            color: var(--silver);
+            padding: 8px 16px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .nav-links a:not(.nav-cta)::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--red);
+            box-shadow: 0 0 8px var(--red-glow);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .nav-links a:not(.nav-cta):hover {
+            color: var(--white);
+        }
+        .nav-links a:not(.nav-cta):hover::after {
+            width: 70%;
+        }
+        .nav-cta {
+            background: var(--red);
+            color: var(--white) !important;
+            padding: 10px 28px !important;
+            border-radius: 4px;
+            font-weight: 700 !important;
+            letter-spacing: 2px !important;
+            box-shadow: 0 0 20px var(--red-glow), 0 0 40px rgba(196, 30, 42, 0.15);
+            transition: all 0.3s ease !important;
+        }
+        .nav-cta:hover {
+            background: #d62533 !important;
+            box-shadow: 0 0 30px var(--red-glow-strong), 0 0 60px var(--red-glow) !important;
+            transform: translateY(-1px);
+        }
+        .nav-cta::after { display: none !important; }
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1001;
+        }
+        .nav-hamburger span {
+            width: 28px;
+            height: 2px;
+            background: var(--white);
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+        .nav-hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .nav-hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .nav-hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* ========== SECTION STYLING ========== */
+        .section-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: var(--red);
+            text-shadow: 0 0 20px var(--red-glow);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .section-label::before {
+            content: '';
+            width: 30px;
+            height: 1px;
+            background: var(--red);
+            box-shadow: 0 0 10px var(--red-glow);
+        }
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--white);
+            line-height: 1.2;
+            margin-bottom: 20px;
+            text-shadow: 0 0 40px rgba(196, 30, 42, 0.2);
+        }
+        .section-title .accent {
+            background: linear-gradient(135deg, var(--red), #FF4444);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .section-desc {
+            font-size: 1.05rem;
+            color: var(--muted);
+            max-width: 600px;
+            line-height: 1.8;
+        }
+
+        /* ========== HERO ========== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding-top: 72px;
+        }
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.25) saturate(0.6);
+        }
+        .hero-nebula {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(196, 30, 42, 0.25) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 30%, rgba(139, 21, 32, 0.2) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(196, 30, 42, 0.15) 0%, transparent 60%),
+                radial-gradient(circle at 70% 60%, rgba(139, 21, 32, 0.12) 0%, transparent 40%),
+                linear-gradient(180deg, rgba(10,10,10,0.3) 0%, rgba(13,13,21,0.6) 50%, rgba(10,10,10,0.9) 100%);
+            animation: nebulaShift 15s ease-in-out infinite alternate;
+        }
+        @keyframes nebulaShift {
+            0% {
+                background-position: 0% 0%, 100% 0%, 50% 100%, 70% 60%, 0% 0%;
+            }
+            100% {
+                background-position: 5% 5%, 95% 5%, 55% 95%, 65% 65%, 0% 0%;
+            }
+        }
+        .hero-content {
+            position: relative;
+            z-index: 5;
+            text-align: center;
+            padding: 40px 24px;
+            max-width: 900px;
+        }
+        .hero-orbit-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            border: 1px solid rgba(196, 30, 42, 0.12);
+            border-radius: 50%;
+            z-index: 3;
+            animation: orbitSpin 60s linear infinite;
+        }
+        .hero-orbit-ring::after {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: 50%;
+            width: 6px;
+            height: 6px;
+            background: var(--red);
+            border-radius: 50%;
+            box-shadow: 0 0 12px var(--red-glow-strong);
+        }
+        .hero-orbit-ring-2 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            border: 1px solid rgba(196, 30, 42, 0.06);
+            border-radius: 50%;
+            z-index: 3;
+            animation: orbitSpin 90s linear infinite reverse;
+        }
+        @keyframes orbitSpin {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 24px;
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            background: rgba(196, 30, 42, 0.08);
+            backdrop-filter: blur(10px);
+            margin-bottom: 32px;
+        }
+        .hero-badge-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--red);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--red-glow-strong);
+            animation: pulseDot 2s ease-in-out infinite;
+        }
+        @keyframes pulseDot {
+            0%, 100% { opacity: 1; box-shadow: 0 0 10px var(--red-glow-strong); }
+            50% { opacity: 0.5; box-shadow: 0 0 20px var(--red-glow-strong); }
+        }
+        .hero-badge-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--red);
+        }
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.5rem, 7vw, 5.5rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 1.1;
+            color: var(--white);
+            margin-bottom: 8px;
+            text-shadow:
+                0 0 40px rgba(196, 30, 42, 0.3),
+                0 0 80px rgba(196, 30, 42, 0.1);
+        }
+        .hero h1 .red-text {
+            background: linear-gradient(135deg, #FF3344, var(--red), var(--red-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 30px var(--red-glow));
+        }
+        .hero-sub {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            font-weight: 400;
+            color: var(--silver);
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-bottom: 32px;
+        }
+        .hero-desc {
+            font-size: 1.1rem;
+            color: var(--muted);
+            max-width: 550px;
+            margin: 0 auto 48px;
+            line-height: 1.8;
+        }
+        .hero-cta-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .btn-cosmic {
+            display: inline-block;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            padding: 18px 44px;
+            background: linear-gradient(135deg, var(--red), #d62533);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow:
+                0 0 30px var(--red-glow),
+                0 0 60px rgba(196, 30, 42, 0.15);
+            transition: all 0.4s ease;
+        }
+        .btn-cosmic::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            transition: left 0.5s ease;
+        }
+        .btn-cosmic:hover::before {
+            left: 100%;
+        }
+        .btn-cosmic:hover {
+            transform: translateY(-3px);
+            box-shadow:
+                0 0 40px var(--red-glow-strong),
+                0 0 80px var(--red-glow),
+                0 8px 32px rgba(0,0,0,0.4);
+        }
+        .btn-outline-cosmic {
+            display: inline-block;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            padding: 17px 40px;
+            background: transparent;
+            color: var(--silver);
+            border: 1px solid rgba(196, 30, 42, 0.4);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+        .btn-outline-cosmic:hover {
+            border-color: var(--red);
+            color: var(--white);
+            box-shadow: 0 0 30px var(--red-glow-soft);
+            transform: translateY(-2px);
+        }
+        .hero-scroll {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            animation: floatDown 2s ease-in-out infinite;
+        }
+        .hero-scroll span {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.55rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+        .hero-scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--red), transparent);
+        }
+        @keyframes floatDown {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* ========== PROGRAMS ========== */
+        .programs {
+            position: relative;
+            z-index: 5;
+            padding: 120px 0;
+            background:
+                radial-gradient(ellipse at 30% 0%, rgba(196, 30, 42, 0.06) 0%, transparent 50%),
+                linear-gradient(180deg, var(--space-black) 0%, var(--space-deep) 100%);
+        }
+        .programs-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+        .programs-header .section-label {
+            justify-content: center;
+        }
+        .programs-header .section-label::before { display: none; }
+        .programs-header .section-desc {
+            margin: 0 auto;
+        }
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+        .program-card {
+            position: relative;
+            padding: 40px 28px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.4s ease;
+            overflow: hidden;
+        }
+        .program-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--red), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .program-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(196, 30, 42, 0.04) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .program-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(196, 30, 42, 0.4);
+            box-shadow:
+                0 0 40px var(--red-glow-soft),
+                0 20px 40px rgba(0,0,0,0.3);
+        }
+        .program-card:hover::before {
+            opacity: 1;
+        }
+        .program-card:hover::after {
+            opacity: 1;
+        }
+        .program-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 24px;
+            border-radius: 50%;
+            background: rgba(196, 30, 42, 0.1);
+            border: 1px solid rgba(196, 30, 42, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+        .program-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--red);
+            fill: none;
+            stroke-width: 1.5;
+        }
+        .program-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--white);
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .program-age {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--red);
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
+        }
+        .program-card p {
+            font-size: 0.9rem;
+            color: var(--muted);
+            line-height: 1.7;
+            position: relative;
+            z-index: 1;
+        }
+        .program-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        .program-tag {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 4px 12px;
+            border: 1px solid rgba(196, 30, 42, 0.2);
+            border-radius: 50px;
+            color: var(--silver);
+            background: rgba(196, 30, 42, 0.05);
+        }
+
+        /* ========== INSTRUCTORS ========== */
+        .instructors {
+            position: relative;
+            z-index: 5;
+            padding: 120px 0;
+            background:
+                radial-gradient(ellipse at 70% 50%, rgba(196, 30, 42, 0.05) 0%, transparent 50%),
+                linear-gradient(180deg, var(--space-deep) 0%, var(--space-mid) 50%, var(--space-deep) 100%);
+        }
+        .instructors-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        .instructors-header .section-label {
+            justify-content: center;
+        }
+        .instructors-header .section-label::before { display: none; }
+        .instructors-header .section-desc {
+            margin: 0 auto;
+        }
+        .instructors-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 60px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .instructor-card {
+            text-align: center;
+        }
+        .instructor-photo-wrap {
+            position: relative;
+            width: 220px;
+            height: 220px;
+            margin: 0 auto 32px;
+        }
+        .instructor-orbit {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            width: 250px;
+            height: 250px;
+            border: 1px solid rgba(196, 30, 42, 0.2);
+            border-radius: 50%;
+            animation: orbitSpin 12s linear infinite;
+        }
+        .instructor-orbit::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: 50%;
+            width: 8px;
+            height: 8px;
+            background: var(--red);
+            border-radius: 50%;
+            box-shadow: 0 0 15px var(--red-glow-strong);
+        }
+        .instructor-orbit-2 {
+            position: absolute;
+            top: -25px;
+            left: -25px;
+            width: 270px;
+            height: 270px;
+            border: 1px dashed rgba(196, 30, 42, 0.1);
+            border-radius: 50%;
+            animation: orbitSpin 20s linear infinite reverse;
+        }
+        .instructor-orbit-2::before {
+            content: '';
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 5px;
+            height: 5px;
+            background: var(--red);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--red-glow);
+            opacity: 0.6;
+        }
+        .instructor-photo {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid rgba(196, 30, 42, 0.3);
+            box-shadow:
+                0 0 30px var(--red-glow-soft),
+                inset 0 0 30px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 2;
+        }
+        .instructor-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: saturate(0.8);
+            transition: all 0.4s ease;
+        }
+        .instructor-card:hover .instructor-photo img {
+            filter: saturate(1);
+        }
+        .instructor-card:hover .instructor-photo {
+            box-shadow:
+                0 0 50px var(--red-glow),
+                inset 0 0 20px rgba(0,0,0,0.2);
+            border-color: var(--red);
+        }
+        .instructor-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+        .instructor-role {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--red);
+            margin-bottom: 16px;
+            text-shadow: 0 0 20px var(--red-glow-soft);
+        }
+        .instructor-bio {
+            font-size: 0.9rem;
+            color: var(--muted);
+            line-height: 1.8;
+            max-width: 350px;
+            margin: 0 auto;
+        }
+        .instructor-credentials {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .instructor-credential {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 5px 14px;
+            border: 1px solid rgba(196, 30, 42, 0.25);
+            border-radius: 50px;
+            color: var(--silver);
+            background: rgba(196, 30, 42, 0.06);
+        }
+
+        /* ========== WHY TRAIN ========== */
+        .why-train {
+            position: relative;
+            z-index: 5;
+            padding: 120px 0;
+            background:
+                radial-gradient(ellipse at 50% 50%, rgba(196, 30, 42, 0.04) 0%, transparent 60%),
+                linear-gradient(180deg, var(--space-deep) 0%, var(--space-black) 100%);
+        }
+        .why-train-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        .why-train-header .section-label {
+            justify-content: center;
+        }
+        .why-train-header .section-label::before { display: none; }
+        .why-train-header .section-desc {
+            margin: 0 auto;
+        }
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+        .why-card {
+            text-align: center;
+            padding: 48px 32px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+        .why-card::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 20%;
+            right: 20%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--red), transparent);
+            border-radius: 2px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .why-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(196, 30, 42, 0.35);
+            box-shadow: 0 0 40px var(--red-glow-soft), 0 16px 40px rgba(0,0,0,0.3);
+        }
+        .why-card:hover::before {
+            opacity: 1;
+        }
+        .why-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 28px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(196, 30, 42, 0.12) 0%, rgba(196, 30, 42, 0.03) 100%);
+            border: 1px solid rgba(196, 30, 42, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .why-icon::after {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            border: 1px dashed rgba(196, 30, 42, 0.1);
+            border-radius: 50%;
+            animation: orbitSpin 20s linear infinite;
+        }
+        .why-icon svg {
+            width: 36px;
+            height: 36px;
+            stroke: var(--red);
+            fill: none;
+            stroke-width: 1.5;
+        }
+        .why-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--white);
+            margin-bottom: 16px;
+        }
+        .why-card p {
+            font-size: 0.95rem;
+            color: var(--muted);
+            line-height: 1.8;
+        }
+
+        /* ========== SCHEDULE ========== */
+        .schedule {
+            position: relative;
+            z-index: 5;
+            padding: 120px 0;
+            background:
+                radial-gradient(ellipse at 20% 80%, rgba(196, 30, 42, 0.05) 0%, transparent 50%),
+                linear-gradient(180deg, var(--space-black) 0%, var(--space-deep) 100%);
+        }
+        .schedule-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+        .schedule-header .section-label {
+            justify-content: center;
+        }
+        .schedule-header .section-label::before { display: none; }
+        .schedule-header .section-desc {
+            margin: 0 auto;
+        }
+        .schedule-table-wrap {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(0,0,0,0.2);
+        }
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .schedule-table thead th {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--red);
+            text-shadow: 0 0 15px var(--red-glow-soft);
+            padding: 24px 32px;
+            text-align: left;
+            border-bottom: 1px solid rgba(196, 30, 42, 0.15);
+            background: rgba(196, 30, 42, 0.05);
+        }
+        .schedule-table tbody td {
+            padding: 20px 32px;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            font-size: 0.95rem;
+            transition: background 0.3s ease;
+        }
+        .schedule-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        .schedule-table tbody tr:hover td {
+            background: rgba(196, 30, 42, 0.04);
+        }
+        .schedule-day {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            color: var(--white);
+            letter-spacing: 1px;
+            font-size: 1rem;
+        }
+        .schedule-time {
+            color: var(--silver);
+        }
+        .schedule-closed {
+            color: var(--muted);
+            font-style: italic;
+        }
+        .schedule-note {
+            text-align: center;
+            margin-top: 32px;
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+        .schedule-note strong {
+            color: var(--red);
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        /* ========== TESTIMONIAL ========== */
+        .testimonial {
+            position: relative;
+            z-index: 5;
+            padding: 100px 0;
+            background:
+                radial-gradient(ellipse at 50% 50%, rgba(196, 30, 42, 0.06) 0%, transparent 50%),
+                var(--space-deep);
+        }
+        .testimonial-inner {
+            max-width: 750px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+        }
+        .testimonial-quote-mark {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 5rem;
+            color: var(--red);
+            opacity: 0.2;
+            line-height: 1;
+            margin-bottom: -20px;
+            text-shadow: 0 0 40px var(--red-glow);
+        }
+        .testimonial-text {
+            font-size: 1.3rem;
+            font-weight: 300;
+            color: var(--silver);
+            line-height: 1.9;
+            font-style: italic;
+            margin-bottom: 32px;
+            position: relative;
+        }
+        .testimonial-text::before,
+        .testimonial-text::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--red), transparent);
+        }
+        .testimonial-text::before {
+            top: -20px;
+        }
+        .testimonial-text::after {
+            bottom: -16px;
+        }
+        .testimonial-author {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--white);
+            margin-top: 32px;
+        }
+        .testimonial-role {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--red);
+            margin-top: 6px;
+            text-shadow: 0 0 15px var(--red-glow-soft);
+        }
+
+        /* ========== FREE TRIAL CTA ========== */
+        .trial-cta {
+            position: relative;
+            z-index: 5;
+            padding: 120px 0;
+            background:
+                radial-gradient(ellipse at 30% 50%, rgba(196, 30, 42, 0.2) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 50%, rgba(139, 21, 32, 0.15) 0%, transparent 50%),
+                linear-gradient(135deg, var(--space-black) 0%, #12050A 50%, var(--space-deep) 100%);
+            overflow: hidden;
+        }
+        .trial-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .trial-particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--red);
+            border-radius: 50%;
+            box-shadow: 0 0 6px var(--red-glow);
+            opacity: 0;
+            animation: particleFloat 8s ease-in-out infinite;
+        }
+        .trial-particle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+        .trial-particle:nth-child(2) { left: 25%; top: 60%; animation-delay: 1s; }
+        .trial-particle:nth-child(3) { left: 40%; top: 30%; animation-delay: 2s; }
+        .trial-particle:nth-child(4) { left: 55%; top: 70%; animation-delay: 3s; }
+        .trial-particle:nth-child(5) { left: 70%; top: 40%; animation-delay: 4s; }
+        .trial-particle:nth-child(6) { left: 85%; top: 55%; animation-delay: 5s; }
+        .trial-particle:nth-child(7) { left: 15%; top: 80%; animation-delay: 1.5s; }
+        .trial-particle:nth-child(8) { left: 60%; top: 15%; animation-delay: 2.5s; }
+        .trial-particle:nth-child(9) { left: 80%; top: 75%; animation-delay: 3.5s; }
+        .trial-particle:nth-child(10) { left: 35%; top: 50%; animation-delay: 4.5s; }
+        .trial-particle:nth-child(11) { left: 90%; top: 25%; animation-delay: 0.5s; }
+        .trial-particle:nth-child(12) { left: 5%; top: 45%; animation-delay: 5.5s; }
+        @keyframes particleFloat {
+            0% { opacity: 0; transform: translateY(0) scale(1); }
+            20% { opacity: 0.8; }
+            50% { opacity: 0.4; transform: translateY(-40px) scale(1.5); }
+            80% { opacity: 0.6; }
+            100% { opacity: 0; transform: translateY(-80px) scale(0.5); }
+        }
+        .trial-cta-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+        .trial-cta .section-label {
+            justify-content: center;
+        }
+        .trial-cta .section-label::before { display: none; }
+        .trial-cta h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            color: var(--white);
+            margin-bottom: 24px;
+            text-shadow:
+                0 0 40px rgba(196, 30, 42, 0.3),
+                0 0 80px rgba(196, 30, 42, 0.15);
+        }
+        .trial-cta h2 .accent {
+            background: linear-gradient(135deg, #FF3344, var(--red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .trial-cta p {
+            font-size: 1.1rem;
+            color: var(--muted);
+            max-width: 500px;
+            margin: 0 auto 48px;
+            line-height: 1.8;
+        }
+        .trial-orbit {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 500px;
+            border: 1px solid rgba(196, 30, 42, 0.08);
+            border-radius: 50%;
+            animation: orbitSpin 40s linear infinite;
+        }
+        .trial-orbit-2 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 350px;
+            height: 350px;
+            border: 1px dashed rgba(196, 30, 42, 0.06);
+            border-radius: 50%;
+            animation: orbitSpin 25s linear infinite reverse;
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            position: relative;
+            z-index: 5;
+            padding: 80px 0 0;
+            background: var(--space-black);
+            border-top: 1px solid rgba(196, 30, 42, 0.15);
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            padding-bottom: 60px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .footer-brand img {
+            height: 45px;
+            margin-bottom: 20px;
+        }
+        .footer-brand p {
+            font-size: 0.9rem;
+            color: var(--muted);
+            line-height: 1.7;
+            max-width: 280px;
+        }
+        .footer-col h4 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+        .footer-col ul li a {
+            font-size: 0.9rem;
+            color: var(--muted);
+            transition: all 0.3s ease;
+        }
+        .footer-col ul li a:hover {
+            color: var(--red);
+            padding-left: 4px;
+        }
+        .footer-hours li {
+            font-size: 0.9rem;
+            color: var(--muted);
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .footer-hours li span:first-child {
+            color: var(--silver);
+            font-weight: 500;
+        }
+        .footer-bottom {
+            padding: 24px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .footer-copy {
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+        .footer-social {
+            display: flex;
+            gap: 16px;
+        }
+        .footer-social a {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid rgba(196, 30, 42, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .footer-social a:hover {
+            border-color: var(--red);
+            box-shadow: 0 0 15px var(--red-glow-soft);
+        }
+        .footer-social a svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--muted);
+            transition: fill 0.3s ease;
+        }
+        .footer-social a:hover svg {
+            fill: var(--red);
+        }
+
+        /* ========== SCROLL REVEAL ========== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* ========== MOBILE RESPONSIVE ========== */
+
+        /* Small phones */
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero-sub {
+                font-size: 0.85rem;
+                letter-spacing: 3px;
+            }
+            .hero-desc {
+                font-size: 0.95rem;
+            }
+            .hero-orbit-ring, .hero-orbit-ring-2 {
+                display: none;
+            }
+            .hero-cta-group {
+                flex-direction: column;
+            }
+            .btn-cosmic, .btn-outline-cosmic {
+                width: 100%;
+                text-align: center;
+            }
+            .programs-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .why-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .instructors-grid {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+            .schedule-table thead th,
+            .schedule-table tbody td {
+                padding: 16px 20px;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+            .section-title {
+                font-size: 1.5rem;
+            }
+            .testimonial-text {
+                font-size: 1.05rem;
+            }
+        }
+
+        /* Tablets portrait */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 300px;
+                height: 100vh;
+                background: rgba(10, 10, 10, 0.98);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                flex-direction: column;
+                justify-content: center;
+                gap: 8px;
+                padding: 40px;
+                transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                border-left: 1px solid var(--glass-border);
+            }
+            .nav-links.active {
+                right: 0;
+            }
+            .nav-links a {
+                font-size: 0.9rem;
+                letter-spacing: 3px;
+                padding: 12px 0;
+            }
+            .nav-hamburger {
+                display: flex;
+            }
+            .programs-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            .instructors-grid {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+            .why-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 32px;
+            }
+            .hero-orbit-ring {
+                width: 400px;
+                height: 400px;
+            }
+            .hero-orbit-ring-2 {
+                width: 550px;
+                height: 550px;
+            }
+        }
+
+        /* Tablets landscape */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .programs-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
+            }
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 32px;
+            }
+        }
+
+        /* Mobile overlay */
+        .mobile-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 998;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+        .mobile-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* ========== PAGE LOADING ========== */
+        .page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--space-black);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        .page-loader.loaded {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .loader-ring {
+            width: 60px;
+            height: 60px;
+            border: 2px solid rgba(196, 30, 42, 0.15);
+            border-top-color: var(--red);
+            border-radius: 50%;
+            animation: loaderSpin 1s linear infinite;
+            box-shadow: 0 0 30px var(--red-glow-soft);
+        }
+        @keyframes loaderSpin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PAGE LOADER -->
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-ring"></div>
+    </div>
+
+    <!-- STARFIELD BACKGROUND -->
+    <div class="starfield">
+        <div class="layer stars-small"></div>
+        <div class="layer stars-medium"></div>
+        <div class="layer stars-large"></div>
+    </div>
+
+    <!-- MOBILE OVERLAY -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <!-- ========== NAVIGATION ========== -->
+    <nav class="nav" id="mainNav">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">
+                <img src="assets/images/logos/logo-04.png" alt="Midguard Academy">
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="#programs">Programs</a>
+                <a href="#instructors">Instructors</a>
+                <a href="#why">Why Train</a>
+                <a href="#schedule">Schedule</a>
+                <a href="#trial" class="nav-cta">Free Trial</a>
+            </div>
+            <div class="nav-hamburger" id="navHamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ========== HERO ========== -->
+    <section class="hero" id="hero">
+        <div class="hero-bg">
+            <img src="assets/images/original/hero-bg.jpg" alt="Midguard Academy Training">
+        </div>
+        <div class="hero-nebula"></div>
+        <div class="hero-orbit-ring"></div>
+        <div class="hero-orbit-ring-2"></div>
+        <div class="hero-content">
+            <div class="hero-badge reveal">
+                <div class="hero-badge-dot"></div>
+                <span class="hero-badge-text">Midguard Academy</span>
+            </div>
+            <h1 class="reveal reveal-delay-1">
+                Enter The<br><span class="red-text">Red Planet</span>
+            </h1>
+            <p class="hero-sub reveal reveal-delay-2">Martial Arts &bull; Discipline &bull; Evolution</p>
+            <p class="hero-desc reveal reveal-delay-2">
+                Step beyond the ordinary. Train in an environment forged for warriors who refuse to accept limits. Kickboxing and Brazilian Jiu-Jitsu for all levels.
+            </p>
+            <div class="hero-cta-group reveal reveal-delay-3">
+                <a href="#trial" class="btn-cosmic">Launch Your Journey</a>
+                <a href="#programs" class="btn-outline-cosmic">Explore Programs</a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <span>Scroll</span>
+            <div class="hero-scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- ========== PROGRAMS ========== -->
+    <section class="programs" id="programs">
+        <div class="container">
+            <div class="programs-header">
+                <div class="section-label reveal">Training Programs</div>
+                <h2 class="section-title reveal reveal-delay-1">Choose Your <span class="accent">Orbit</span></h2>
+                <p class="section-desc reveal reveal-delay-2">
+                    From striking to grappling, adults to kids &mdash; find the discipline that ignites your potential and propels you forward.
+                </p>
+            </div>
+            <div class="programs-grid">
+                <!-- Adult Kickboxing -->
+                <div class="program-card reveal">
+                    <div class="program-icon">
+                        <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8zm4-4l1 4m4-4l1 4"/></svg>
+                    </div>
+                    <h3>Adult Kickboxing</h3>
+                    <div class="program-age">Ages 15+</div>
+                    <p>High-intensity striking, conditioning, and combat fitness. Build power, speed, and unwavering confidence through proven techniques.</p>
+                    <div class="program-tags">
+                        <span class="program-tag">Striking</span>
+                        <span class="program-tag">Conditioning</span>
+                        <span class="program-tag">Combat Fitness</span>
+                    </div>
+                </div>
+                <!-- Adult BJJ -->
+                <div class="program-card reveal reveal-delay-1">
+                    <div class="program-icon">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12l2 2 4-4"/></svg>
+                    </div>
+                    <h3>Adult BJJ</h3>
+                    <div class="program-age">Ages 15+</div>
+                    <p>Master the art of grappling, submissions, and ground game strategy. Develop technical precision and mental resilience on the mat.</p>
+                    <div class="program-tags">
+                        <span class="program-tag">Grappling</span>
+                        <span class="program-tag">Submissions</span>
+                        <span class="program-tag">Ground Game</span>
+                    </div>
+                </div>
+                <!-- Kids Kickboxing -->
+                <div class="program-card reveal reveal-delay-2">
+                    <div class="program-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <h3>Kids Kickboxing</h3>
+                    <div class="program-age">Ages 6 &ndash; 14</div>
+                    <p>Fun, structured training that builds discipline, confidence, and coordination. A safe environment for young warriors to grow.</p>
+                    <div class="program-tags">
+                        <span class="program-tag">Discipline</span>
+                        <span class="program-tag">Confidence</span>
+                        <span class="program-tag">Coordination</span>
+                    </div>
+                </div>
+                <!-- Kids BJJ -->
+                <div class="program-card reveal reveal-delay-3">
+                    <div class="program-icon">
+                        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87m-4-12a4 4 0 010 7.75"/></svg>
+                    </div>
+                    <h3>Kids BJJ</h3>
+                    <div class="program-age">Ages 6 &ndash; 14</div>
+                    <p>Ground-based training focused on coordination, problem-solving, and anti-bullying skills. Build lifelong confidence through gentle art.</p>
+                    <div class="program-tags">
+                        <span class="program-tag">Coordination</span>
+                        <span class="program-tag">Anti-Bullying</span>
+                        <span class="program-tag">Problem Solving</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== INSTRUCTORS ========== -->
+    <section class="instructors" id="instructors">
+        <div class="container">
+            <div class="instructors-header">
+                <div class="section-label reveal">Meet The Guides</div>
+                <h2 class="section-title reveal reveal-delay-1">Your <span class="accent">Mission Control</span></h2>
+                <p class="section-desc reveal reveal-delay-2">
+                    Seasoned warriors and dedicated mentors guiding your transformation through years of real-world combat experience.
+                </p>
+            </div>
+            <div class="instructors-grid">
+                <!-- Josh Pinney -->
+                <div class="instructor-card reveal">
+                    <div class="instructor-photo-wrap">
+                        <div class="instructor-orbit"></div>
+                        <div class="instructor-orbit-2"></div>
+                        <div class="instructor-photo">
+                            <img src="assets/images/original/josh-pinney.jpg" alt="Josh Pinney">
+                        </div>
+                    </div>
+                    <h3 class="instructor-name">Josh Pinney</h3>
+                    <div class="instructor-role">Owner / Head Kickboxing Instructor</div>
+                    <p class="instructor-bio">
+                        Army veteran with 15+ years of martial arts experience. Josh brings military discipline and combat-tested techniques to every class, forging stronger fighters and stronger people.
+                    </p>
+                    <div class="instructor-credentials">
+                        <span class="instructor-credential">Army Veteran</span>
+                        <span class="instructor-credential">15+ Years</span>
+                        <span class="instructor-credential">Head Instructor</span>
+                    </div>
+                </div>
+                <!-- Robert Tahtinen -->
+                <div class="instructor-card reveal reveal-delay-2">
+                    <div class="instructor-photo-wrap">
+                        <div class="instructor-orbit"></div>
+                        <div class="instructor-orbit-2"></div>
+                        <div class="instructor-photo">
+                            <img src="assets/images/original/robert-tahtinen.jpg" alt="Robert Tahtinen">
+                        </div>
+                    </div>
+                    <h3 class="instructor-name">Robert Tahtinen</h3>
+                    <div class="instructor-role">Head BJJ Instructor</div>
+                    <p class="instructor-bio">
+                        Black Belt in Brazilian Jiu-Jitsu and MMA champion. Robert brings elite-level grappling knowledge with a passion for developing students of all skill levels.
+                    </p>
+                    <div class="instructor-credentials">
+                        <span class="instructor-credential">Black Belt</span>
+                        <span class="instructor-credential">MMA Champion</span>
+                        <span class="instructor-credential">Head BJJ</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== WHY TRAIN ========== -->
+    <section class="why-train" id="why">
+        <div class="container">
+            <div class="why-train-header">
+                <div class="section-label reveal">The Mission</div>
+                <h2 class="section-title reveal reveal-delay-1">Why <span class="accent">Train Here</span></h2>
+                <p class="section-desc reveal reveal-delay-2">
+                    More than a gym &mdash; a launchpad for personal transformation across body, mind, and community.
+                </p>
+            </div>
+            <div class="why-grid">
+                <!-- Physical Power -->
+                <div class="why-card reveal">
+                    <div class="why-icon">
+                        <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                    </div>
+                    <h3>Physical Power</h3>
+                    <p>Forge an unstoppable body through intense conditioning, striking drills, and grappling sessions that push beyond your known limits.</p>
+                </div>
+                <!-- Mental Gravity -->
+                <div class="why-card reveal reveal-delay-1">
+                    <div class="why-icon">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    </div>
+                    <h3>Mental Gravity</h3>
+                    <p>Develop an unshakable mindset. The discipline forged through martial arts training creates focus and calm that anchors every area of life.</p>
+                </div>
+                <!-- Cosmic Brotherhood -->
+                <div class="why-card reveal reveal-delay-2">
+                    <div class="why-icon">
+                        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87m-4-12a4 4 0 010 7.75"/></svg>
+                    </div>
+                    <h3>Cosmic Brotherhood</h3>
+                    <p>Join a tribe of dedicated individuals bound by shared purpose. Train together, grow together, and forge bonds that transcend the mat.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SCHEDULE ========== -->
+    <section class="schedule" id="schedule">
+        <div class="container">
+            <div class="schedule-header">
+                <div class="section-label reveal">Training Schedule</div>
+                <h2 class="section-title reveal reveal-delay-1">Mission <span class="accent">Timeline</span></h2>
+                <p class="section-desc reveal reveal-delay-2">
+                    Plan your training week. Consistent attendance is the fuel that propels your martial arts journey.
+                </p>
+            </div>
+            <div class="schedule-table-wrap reveal reveal-delay-3">
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>Hours</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="schedule-day">Monday</td>
+                            <td class="schedule-time">5:00 PM &ndash; 7:30 PM</td>
+                        </tr>
+                        <tr>
+                            <td class="schedule-day">Tuesday</td>
+                            <td class="schedule-time">5:00 PM &ndash; 7:30 PM</td>
+                        </tr>
+                        <tr>
+                            <td class="schedule-day">Wednesday</td>
+                            <td class="schedule-time">5:00 PM &ndash; 7:30 PM</td>
+                        </tr>
+                        <tr>
+                            <td class="schedule-day">Thursday</td>
+                            <td class="schedule-time">5:00 PM &ndash; 7:30 PM</td>
+                        </tr>
+                        <tr>
+                            <td class="schedule-day">Friday</td>
+                            <td class="schedule-time">5:00 PM &ndash; 7:30 PM</td>
+                        </tr>
+                        <tr>
+                            <td class="schedule-day">Saturday</td>
+                            <td class="schedule-time">9:00 AM &ndash; 11:00 AM</td>
+                        </tr>
+                        <tr>
+                            <td class="schedule-day">Sunday</td>
+                            <td class="schedule-closed">Closed</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="schedule-note reveal reveal-delay-4">
+                <strong>First class is free.</strong> Walk-ins welcome during any scheduled session.
+            </p>
+        </div>
+    </section>
+
+    <!-- ========== TESTIMONIAL ========== -->
+    <section class="testimonial">
+        <div class="container">
+            <div class="testimonial-inner reveal">
+                <div class="testimonial-quote-mark">&ldquo;</div>
+                <p class="testimonial-text">
+                    Midguard Academy changed everything for me. The instructors don't just teach technique &mdash; they build warriors from the inside out. I walked in unsure of myself and walked out with a fire that hasn't gone out since.
+                </p>
+                <div class="testimonial-author">Marcus T.</div>
+                <div class="testimonial-role">Member Since 2023</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FREE TRIAL CTA ========== -->
+    <section class="trial-cta" id="trial">
+        <div class="trial-particles">
+            <div class="trial-particle"></div>
+            <div class="trial-particle"></div>
+            <div class="trial-particle"></div>
+            <div class="trial-particle"></div>
+            <div class="trial-particle"></div>
+            <div class="trial-particle"></div>
+            <div class="trial-particle"></div>
+            <div class="trial-particle"></div>
+            <div class="trial-particle"></div>
+            <div class="trial-particle"></div>
+            <div class="trial-particle"></div>
+            <div class="trial-particle"></div>
+        </div>
+        <div class="trial-orbit"></div>
+        <div class="trial-orbit-2"></div>
+        <div class="container">
+            <div class="trial-cta-content">
+                <div class="section-label reveal">Begin Now</div>
+                <h2 class="reveal reveal-delay-1">Launch Your <span class="accent">Journey</span></h2>
+                <p class="reveal reveal-delay-2">
+                    Your first class is completely free. No obligations, no pressure &mdash; just step onto the mat and discover what you're capable of.
+                </p>
+                <div class="reveal reveal-delay-3">
+                    <a href="#" class="btn-cosmic">Claim Free Trial</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="assets/images/logos/logo-04.png" alt="Midguard Academy">
+                    <p>Martial arts training for the committed. Kickboxing and Brazilian Jiu-Jitsu for adults and kids in a welcoming, disciplined environment.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigate</h4>
+                    <ul>
+                        <li><a href="#programs">Programs</a></li>
+                        <li><a href="#instructors">Instructors</a></li>
+                        <li><a href="#why">Why Train</a></li>
+                        <li><a href="#schedule">Schedule</a></li>
+                        <li><a href="#trial">Free Trial</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Programs</h4>
+                    <ul>
+                        <li><a href="#programs">Adult Kickboxing</a></li>
+                        <li><a href="#programs">Adult BJJ</a></li>
+                        <li><a href="#programs">Kids Kickboxing</a></li>
+                        <li><a href="#programs">Kids BJJ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Hours</h4>
+                    <ul class="footer-hours">
+                        <li><span>Mon&ndash;Fri</span> <span>5:00 PM &ndash; 7:30 PM</span></li>
+                        <li><span>Saturday</span> <span>9:00 AM &ndash; 11:00 AM</span></li>
+                        <li><span>Sunday</span> <span>Closed</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span class="footer-copy">&copy; 2025 Midguard Academy. All rights reserved.</span>
+                <div class="footer-social">
+                    <a href="#" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+                    </a>
+                    <a href="#" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                    </a>
+                    <a href="#" aria-label="YouTube">
+                        <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.43z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========== JAVASCRIPT ========== -->
+    <script>
+        // Page Loader
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('pageLoader');
+            setTimeout(() => {
+                loader.classList.add('loaded');
+            }, 600);
+        });
+
+        // Navigation — Scroll Effect
+        const nav = document.getElementById('mainNav');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+            lastScroll = currentScroll;
+        });
+
+        // Mobile Menu
+        const hamburger = document.getElementById('navHamburger');
+        const navLinks = document.getElementById('navLinks');
+        const overlay = document.getElementById('mobileOverlay');
+
+        function toggleMenu() {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        }
+
+        hamburger.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+
+        // Close menu on link click
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navLinks.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+        });
+
+        // Scroll Reveal (IntersectionObserver)
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        revealElements.forEach(el => {
+            revealObserver.observe(el);
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const navHeight = nav.offsetHeight;
+                    const targetPos = target.offsetTop - navHeight;
+                    window.scrollTo({
+                        top: targetPos,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
