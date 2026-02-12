@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midguard Academy — Where Warriors Are Made</title>
+    <link rel="icon" type="image/png" href="assets/images/logos/logo-04.png">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ========== RESET & BASE ========== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body {
+            font-family: 'Barlow', sans-serif;
+            background: #0A0A0A;
+            color: #d0d0d0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; display: block; }
+        ul { list-style: none; }
+
+        /* ========== CSS VARIABLES ========== */
+        :root {
+            --red: #C41E2A;
+            --red-dark: #9B1720;
+            --black: #0A0A0A;
+            --charcoal: #111111;
+            --dark-gray: #1A1A1A;
+            --white: #FFFFFF;
+            --off-white: #F5F5F5;
+            --text-muted: #999;
+        }
+
+        /* ========== UTILITY ========== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ========== NAVIGATION ========== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: var(--black);
+            border-bottom: 3px solid var(--red);
+            transition: all 0.3s ease;
+        }
+        .nav-inner {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+        .nav-logo img {
+            height: 50px;
+            width: auto;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .nav-links a {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--off-white);
+            padding: 8px 16px;
+            transition: color 0.3s;
+            position: relative;
+        }
+        .nav-links a:not(.nav-cta):hover {
+            color: var(--red);
+        }
+        .nav-cta {
+            background: var(--red);
+            color: var(--white) !important;
+            padding: 10px 24px !important;
+            font-weight: 600 !important;
+            clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+            transition: background 0.3s !important;
+        }
+        .nav-cta:hover {
+            background: var(--red-dark) !important;
+        }
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+        }
+        .nav-hamburger span {
+            width: 28px;
+            height: 3px;
+            background: var(--white);
+            transition: all 0.3s;
+        }
+
+        /* ========== RED TICKER BANNER ========== */
+        .ticker-banner {
+            background: var(--red);
+            padding: 8px 0;
+            overflow: hidden;
+            margin-top: 70px;
+        }
+        .ticker-content {
+            display: flex;
+            animation: tickerScroll 20s linear infinite;
+            white-space: nowrap;
+        }
+        .ticker-content span {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--white);
+            padding: 0 40px;
+        }
+        @keyframes tickerScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ========== HERO — SPLIT SCREEN ========== */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: calc(100vh - 105px);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px 60px;
+            background: var(--black);
+            position: relative;
+            z-index: 2;
+        }
+        .hero-content::after {
+            content: '';
+            position: absolute;
+            right: -60px;
+            top: 0;
+            bottom: 0;
+            width: 120px;
+            background: var(--black);
+            clip-path: polygon(0 0, 100% 0, 0 100%);
+            z-index: 3;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .hero-badge-line {
+            width: 40px;
+            height: 3px;
+            background: var(--red);
+        }
+        .hero-badge-text {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--red);
+        }
+        .hero h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            line-height: 1.05;
+            color: var(--white);
+            margin-bottom: 24px;
+        }
+        .hero h1 em {
+            font-style: normal;
+            color: var(--red);
+            display: block;
+        }
+        .hero-tagline {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            margin-bottom: 40px;
+            max-width: 400px;
+        }
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .hero-stat {
+            text-align: left;
+        }
+        .hero-stat-number {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--red);
+            line-height: 1;
+        }
+        .hero-stat-label {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+        .hero-cta-group {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+        .btn-primary {
+            display: inline-block;
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 16px 40px;
+            background: var(--red);
+            color: var(--white);
+            clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+            transition: background 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-primary:hover {
+            background: var(--red-dark);
+        }
+        .btn-outline {
+            display: inline-block;
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 14px 36px;
+            border: 2px solid var(--red);
+            color: var(--white);
+            background: transparent;
+            clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .btn-outline:hover {
+            background: var(--red);
+        }
+        .hero-image {
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .hero-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, rgba(10,10,10,0.4), transparent 40%);
+        }
+
+        /* ========== SECTION COMMON ========== */
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .section-header-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .section-header-tag .line {
+            width: 30px;
+            height: 2px;
+            background: var(--red);
+        }
+        .section-header-tag span {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--red);
+        }
+        .section-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--white);
+            letter-spacing: 2px;
+        }
+        .section-subtitle {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            margin-top: 8px;
+        }
+
+        /* ========== ANGLED SECTION DIVIDERS ========== */
+        .angle-top {
+            position: relative;
+        }
+        .angle-top::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: inherit;
+            clip-path: polygon(0 50%, 100% 0, 100% 100%, 0 100%);
+            z-index: 1;
+        }
+
+        /* ========== PROGRAMS — MATCH CARDS ========== */
+        .programs {
+            padding: 100px 0;
+            background: var(--charcoal);
+            position: relative;
+        }
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+        .match-card {
+            background: var(--dark-gray);
+            border: 1px solid #222;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .match-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--red);
+        }
+        .match-card-header {
+            background: var(--red);
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            clip-path: polygon(0 0, 100% 0, calc(100% - 20px) 100%, 0 100%);
+        }
+        .match-card-header h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--white);
+        }
+        .match-card-header .live-badge {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--white);
+            background: rgba(0,0,0,0.3);
+            padding: 4px 12px;
+        }
+        .match-card-body {
+            padding: 24px;
+        }
+        .match-card-schedule {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--red);
+        }
+        .match-card-schedule svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--red);
+        }
+        .match-card-desc {
+            font-size: 0.95rem;
+            color: #aaa;
+            line-height: 1.6;
+        }
+        .match-card-number {
+            position: absolute;
+            bottom: 16px;
+            right: 20px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            color: rgba(196, 30, 42, 0.08);
+            line-height: 1;
+        }
+
+        /* ========== INSTRUCTORS — ATHLETE PROFILES ========== */
+        .instructors {
+            padding: 120px 0;
+            background: var(--black);
+            position: relative;
+        }
+        .instructors::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: var(--charcoal);
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+        }
+        .instructor-profiles {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-top: 20px;
+        }
+        .athlete-card {
+            background: var(--dark-gray);
+            border: 1px solid #222;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            min-height: 380px;
+            transition: border-color 0.3s;
+        }
+        .athlete-card:hover {
+            border-color: var(--red);
+        }
+        .athlete-photo {
+            position: relative;
+            overflow: hidden;
+        }
+        .athlete-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .athlete-photo::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40%;
+            background: linear-gradient(transparent, rgba(26,26,26,0.8));
+        }
+        .athlete-info {
+            padding: 30px 28px;
+            display: flex;
+            flex-direction: column;
+        }
+        .athlete-name {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--white);
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+        .athlete-title {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--red);
+            margin-bottom: 20px;
+        }
+        .athlete-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #333;
+        }
+        .athlete-stat {
+            text-align: center;
+            padding: 10px 0;
+            background: rgba(196, 30, 42, 0.06);
+            border: 1px solid rgba(196, 30, 42, 0.15);
+        }
+        .athlete-stat-val {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--red);
+            line-height: 1;
+        }
+        .athlete-stat-lbl {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+        .athlete-bio {
+            font-size: 0.85rem;
+            color: #aaa;
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        /* ========== WHY TRAIN ========== */
+        .why-train {
+            padding: 100px 0;
+            background: var(--charcoal);
+            position: relative;
+        }
+        .why-train::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: var(--black);
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 0%);
+        }
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+        .why-card {
+            background: var(--dark-gray);
+            border-top: 4px solid var(--red);
+            padding: 40px 28px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        .why-card:hover {
+            transform: translateY(-6px);
+        }
+        .why-card-number {
+            font-family: 'Oswald', sans-serif;
+            font-size: 5rem;
+            font-weight: 700;
+            color: rgba(196, 30, 42, 0.08);
+            position: absolute;
+            top: -10px;
+            right: 16px;
+            line-height: 1;
+        }
+        .why-card h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--white);
+            margin-bottom: 16px;
+            position: relative;
+        }
+        .why-card p {
+            font-size: 0.9rem;
+            color: #aaa;
+            line-height: 1.7;
+            position: relative;
+        }
+
+        /* ========== SCHEDULE — BROADCAST STYLE ========== */
+        .schedule {
+            padding: 100px 0;
+            background: var(--black);
+            position: relative;
+        }
+        .schedule::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: var(--charcoal);
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+        }
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--dark-gray);
+            overflow: hidden;
+        }
+        .schedule-table thead {
+            background: var(--red);
+        }
+        .schedule-table th {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--white);
+            padding: 16px 20px;
+            text-align: left;
+        }
+        .schedule-table td {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: #ccc;
+            padding: 16px 20px;
+            border-bottom: 1px solid #222;
+            vertical-align: top;
+        }
+        .schedule-table tbody tr {
+            transition: background 0.2s;
+        }
+        .schedule-table tbody tr:hover {
+            background: rgba(196, 30, 42, 0.05);
+        }
+        .schedule-table .day-cell {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--white);
+            min-width: 100px;
+        }
+        .schedule-table .time-badge {
+            display: inline-block;
+            background: rgba(196, 30, 42, 0.15);
+            color: var(--red);
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 3px 10px;
+            letter-spacing: 1px;
+            margin-right: 8px;
+        }
+        .schedule-table .closed-cell {
+            color: #555;
+            font-style: italic;
+        }
+
+        /* ========== TESTIMONIAL ========== */
+        .testimonial {
+            padding: 80px 0;
+            background: var(--red);
+            position: relative;
+            clip-path: polygon(0 30px, 100% 0, 100% calc(100% - 30px), 0 100%);
+        }
+        .testimonial-inner {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 20px 24px;
+        }
+        .testimonial-quote {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+            font-weight: 300;
+            color: var(--white);
+            line-height: 1.6;
+            margin-bottom: 24px;
+            font-style: italic;
+        }
+        .testimonial-author {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* ========== FINAL CTA ========== */
+        .final-cta {
+            padding: 120px 0;
+            background: var(--dark-gray);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .final-cta::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--red);
+        }
+        .final-cta h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--white);
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+        .final-cta p {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            margin-bottom: 40px;
+        }
+        .final-cta-bg-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(6rem, 15vw, 14rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            color: rgba(196, 30, 42, 0.04);
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            background: var(--black);
+            border-top: 3px solid var(--red);
+            padding: 50px 0 30px;
+        }
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: start;
+            gap: 40px;
+        }
+        .footer-logo img {
+            height: 45px;
+            width: auto;
+        }
+        .footer-links {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .footer-links a {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            transition: color 0.3s;
+        }
+        .footer-links a:hover {
+            color: var(--red);
+        }
+        .footer-hours {
+            text-align: right;
+        }
+        .footer-hours p {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 30px auto 0;
+            padding: 20px 24px 0;
+            border-top: 1px solid #222;
+            text-align: center;
+        }
+        .footer-bottom p {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.8rem;
+            color: #555;
+            letter-spacing: 1px;
+        }
+
+        /* ========== SCROLL ANIMATIONS ========== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* ========== MOBILE RESPONSIVE ========== */
+        @media (max-width: 1024px) {
+            .athlete-card {
+                grid-template-columns: 180px 1fr;
+            }
+        }
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+                min-height: auto;
+            }
+            .hero-content {
+                padding: 100px 40px 60px;
+                order: 2;
+            }
+            .hero-content::after {
+                display: none;
+            }
+            .hero-image {
+                height: 50vh;
+                order: 1;
+            }
+            .instructor-profiles {
+                grid-template-columns: 1fr;
+            }
+            .athlete-card {
+                grid-template-columns: 200px 1fr;
+            }
+            .programs-grid {
+                grid-template-columns: 1fr;
+            }
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: var(--black);
+                flex-direction: column;
+                padding: 20px;
+                border-bottom: 3px solid var(--red);
+                gap: 0;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .nav-links a {
+                padding: 14px 20px;
+                width: 100%;
+                text-align: center;
+            }
+            .nav-cta {
+                clip-path: none;
+                margin-top: 8px;
+            }
+            .nav-hamburger {
+                display: flex;
+            }
+            .hero-content {
+                padding: 60px 24px 50px;
+            }
+            .hero-stats {
+                gap: 24px;
+            }
+            .hero-cta-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .athlete-card {
+                grid-template-columns: 1fr;
+            }
+            .athlete-photo {
+                height: 250px;
+            }
+            .schedule-table {
+                font-size: 0.85rem;
+            }
+            .schedule-table th, .schedule-table td {
+                padding: 12px 14px;
+            }
+            .footer-inner {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 24px;
+            }
+            .footer-logo {
+                display: flex;
+                justify-content: center;
+            }
+            .footer-hours {
+                text-align: center;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero-stat-number {
+                font-size: 2rem;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== NAVIGATION ========== -->
+    <nav class="nav" id="navbar">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">
+                <img src="assets/images/logos/logo-04.png" alt="Midguard Academy">
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="#programs">Programs</a>
+                <a href="#instructors">Instructors</a>
+                <a href="#schedule">Schedule</a>
+                <a href="#why-train">Why Train</a>
+                <a href="#free-trial" class="nav-cta">Free Trial</a>
+            </div>
+            <div class="nav-hamburger" id="hamburger" onclick="document.getElementById('navLinks').classList.toggle('active')">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ========== TICKER BANNER ========== -->
+    <div class="ticker-banner">
+        <div class="ticker-content">
+            <span>Kickboxing &bull; Brazilian Jiu-Jitsu &bull; Kids Programs &bull; Free Trial Available</span>
+            <span>State &amp; National Champions &bull; Expert Instruction &bull; All Skill Levels Welcome</span>
+            <span>Kickboxing &bull; Brazilian Jiu-Jitsu &bull; Kids Programs &bull; Free Trial Available</span>
+            <span>State &amp; National Champions &bull; Expert Instruction &bull; All Skill Levels Welcome</span>
+        </div>
+    </div>
+
+    <!-- ========== HERO — SPLIT SCREEN ========== -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="hero-badge-line"></span>
+                <span class="hero-badge-text">Midguard Academy</span>
+            </div>
+            <h1>Where<br>Warriors<br><em>Are Made</em></h1>
+            <p class="hero-tagline">Premier kickboxing &amp; Brazilian Jiu-Jitsu training in a championship-level environment.</p>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-stat-number">20+</div>
+                    <div class="hero-stat-label">Years Experience</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-number">6</div>
+                    <div class="hero-stat-label">Programs</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-number">50+</div>
+                    <div class="hero-stat-label">Champions Trained</div>
+                </div>
+            </div>
+            <div class="hero-cta-group">
+                <a href="#free-trial" class="btn-primary">Start Free Trial</a>
+                <a href="#programs" class="btn-outline">View Programs</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="assets/images/original/hero-bg.jpg" alt="Training at Midguard Academy">
+        </div>
+    </section>
+
+    <!-- ========== PROGRAMS ========== -->
+    <section class="programs" id="programs">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-header-tag">
+                    <span class="line"></span>
+                    <span>Fight Card</span>
+                    <span class="line"></span>
+                </div>
+                <h2 class="section-title">Our Programs</h2>
+                <p class="section-subtitle">Choose your discipline. Begin your journey.</p>
+            </div>
+            <div class="programs-grid">
+                <!-- Card 1 -->
+                <div class="match-card reveal-left">
+                    <div class="match-card-header">
+                        <h3>Adult Kickboxing</h3>
+                        <span class="live-badge">Adults</span>
+                    </div>
+                    <div class="match-card-body">
+                        <div class="match-card-schedule">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z"/></svg>
+                            Mon / Wed / Fri &mdash; 6:00 - 7:00 PM
+                        </div>
+                        <p class="match-card-desc">Striking, footwork, combinations, and conditioning. Build power and precision on your feet.</p>
+                    </div>
+                    <span class="match-card-number">01</span>
+                </div>
+                <!-- Card 2 -->
+                <div class="match-card reveal-right">
+                    <div class="match-card-header">
+                        <h3>Adult Brazilian Jiu-Jitsu</h3>
+                        <span class="live-badge">Adults</span>
+                    </div>
+                    <div class="match-card-body">
+                        <div class="match-card-schedule">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z"/></svg>
+                            Tue / Thu 6:00 - 7:30 PM &bull; Sat 9:00 - 11:00 AM
+                        </div>
+                        <p class="match-card-desc">Ground fighting, submissions, and self-defense. Master the art of leverage and control.</p>
+                    </div>
+                    <span class="match-card-number">02</span>
+                </div>
+                <!-- Card 3 -->
+                <div class="match-card reveal-left">
+                    <div class="match-card-header">
+                        <h3>Kids Jiu-Jitsu</h3>
+                        <span class="live-badge">Kids</span>
+                    </div>
+                    <div class="match-card-body">
+                        <div class="match-card-schedule">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z"/></svg>
+                            Mon / Wed &mdash; 5:00 - 5:45 PM
+                        </div>
+                        <p class="match-card-desc">Fundamentals of BJJ in a safe, fun, structured environment. Develops balance, coordination, confidence.</p>
+                    </div>
+                    <span class="match-card-number">03</span>
+                </div>
+                <!-- Card 4 -->
+                <div class="match-card reveal-right">
+                    <div class="match-card-header">
+                        <h3>Ninja Kids</h3>
+                        <span class="live-badge">Kids</span>
+                    </div>
+                    <div class="match-card-body">
+                        <div class="match-card-schedule">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z"/></svg>
+                            Tue / Thu &mdash; 5:00 - 5:45 PM
+                        </div>
+                        <p class="match-card-desc">Fun, high-energy program building confidence, coordination, strength through playful movements and gymnastics-inspired skills.</p>
+                    </div>
+                    <span class="match-card-number">04</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== INSTRUCTORS ========== -->
+    <section class="instructors" id="instructors">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-header-tag">
+                    <span class="line"></span>
+                    <span>Athlete Profiles</span>
+                    <span class="line"></span>
+                </div>
+                <h2 class="section-title">Meet Your Coaches</h2>
+                <p class="section-subtitle">Championship-caliber instruction</p>
+            </div>
+            <div class="instructor-profiles">
+                <!-- Josh -->
+                <div class="athlete-card reveal-left">
+                    <div class="athlete-photo">
+                        <img src="assets/images/original/josh-pinney.jpg" alt="Josh Pinney">
+                    </div>
+                    <div class="athlete-info">
+                        <h3 class="athlete-name">Josh Pinney</h3>
+                        <p class="athlete-title">Owner &amp; Head Kickboxing Instructor</p>
+                        <div class="athlete-stats">
+                            <div class="athlete-stat">
+                                <div class="athlete-stat-val">20+</div>
+                                <div class="athlete-stat-lbl">Yrs Training</div>
+                            </div>
+                            <div class="athlete-stat">
+                                <div class="athlete-stat-val">Black</div>
+                                <div class="athlete-stat-lbl">Belt Rank</div>
+                            </div>
+                            <div class="athlete-stat">
+                                <div class="athlete-stat-val">Purple</div>
+                                <div class="athlete-stat-lbl">BJJ Belt</div>
+                            </div>
+                            <div class="athlete-stat">
+                                <div class="athlete-stat-val">Army</div>
+                                <div class="athlete-stat-lbl">Veteran</div>
+                            </div>
+                        </div>
+                        <p class="athlete-bio">Training since 2002. Black Belt (I.K.C.A, 2007). BJJ Purple Belt. US Army veteran &mdash; trained with Dan Henderson, Gray Maynard, and Mark Munoz. Has coached multiple state and national champions.</p>
+                    </div>
+                </div>
+                <!-- Robert -->
+                <div class="athlete-card reveal-right">
+                    <div class="athlete-photo">
+                        <img src="assets/images/original/robert-tahtinen.jpg" alt="Robert Tahtinen">
+                    </div>
+                    <div class="athlete-info">
+                        <h3 class="athlete-name">Robert Tahtinen</h3>
+                        <p class="athlete-title">Head BJJ Instructor &bull; Nibiru BJJ</p>
+                        <div class="athlete-stats">
+                            <div class="athlete-stat">
+                                <div class="athlete-stat-val">15+</div>
+                                <div class="athlete-stat-lbl">Yrs Training</div>
+                            </div>
+                            <div class="athlete-stat">
+                                <div class="athlete-stat-val">Black</div>
+                                <div class="athlete-stat-lbl">BJJ Belt</div>
+                            </div>
+                            <div class="athlete-stat">
+                                <div class="athlete-stat-val">4</div>
+                                <div class="athlete-stat-lbl">Title Belts</div>
+                            </div>
+                            <div class="athlete-stat">
+                                <div class="athlete-stat-val">KOTC</div>
+                                <div class="athlete-stat-lbl">Champion</div>
+                            </div>
+                        </div>
+                        <p class="athlete-bio">Black Belt (TAC Team, 2021). Training since 2011 after 15 years of wrestling. Retired MMA fighter with four title belts and a King of the Cage victory. Won IBJJF and Arizona State tournaments.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== WHY TRAIN ========== -->
+    <section class="why-train" id="why-train">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-header-tag">
+                    <span class="line"></span>
+                    <span>The Advantage</span>
+                    <span class="line"></span>
+                </div>
+                <h2 class="section-title">Why Train With Us</h2>
+                <p class="section-subtitle">The championship difference</p>
+            </div>
+            <div class="why-grid">
+                <div class="why-card reveal">
+                    <span class="why-card-number">01</span>
+                    <h3>Expert Instruction</h3>
+                    <p>Our instructors are highly trained and experienced in Sport Karate, Kickboxing, and Jiu Jitsu and are dedicated to helping you achieve your goals.</p>
+                </div>
+                <div class="why-card reveal" style="transition-delay: 0.15s;">
+                    <span class="why-card-number">02</span>
+                    <h3>Train with Champions</h3>
+                    <p>Train alongside state and national champions. Elevate your skills in an environment that fosters growth, determination, and greatness.</p>
+                </div>
+                <div class="why-card reveal" style="transition-delay: 0.3s;">
+                    <span class="why-card-number">03</span>
+                    <h3>Be Part of a Team</h3>
+                    <p>Beyond a team, we're a family. Together, we forge bonds that strengthen on and off the mat.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SCHEDULE ========== -->
+    <section class="schedule" id="schedule">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-header-tag">
+                    <span class="line"></span>
+                    <span>Broadcast Schedule</span>
+                    <span class="line"></span>
+                </div>
+                <h2 class="section-title">Weekly Schedule</h2>
+                <p class="section-subtitle">Find your time slot</p>
+            </div>
+            <div class="reveal" style="overflow-x:auto;">
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>Early Session</th>
+                            <th>Main Event</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="day-cell">Monday</td>
+                            <td><span class="time-badge">5:00-5:45</span> Kids Jiu-Jitsu</td>
+                            <td><span class="time-badge">6:00-7:00</span> Adult Kickboxing</td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">Tuesday</td>
+                            <td><span class="time-badge">5:00-5:45</span> Ninja Kids</td>
+                            <td><span class="time-badge">6:00-7:30</span> Adult BJJ</td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">Wednesday</td>
+                            <td><span class="time-badge">5:00-5:45</span> Kids Jiu-Jitsu</td>
+                            <td><span class="time-badge">6:00-7:00</span> Adult Kickboxing</td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">Thursday</td>
+                            <td><span class="time-badge">5:00-5:45</span> Ninja Kids</td>
+                            <td><span class="time-badge">6:00-7:30</span> Adult BJJ</td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">Friday</td>
+                            <td>&mdash;</td>
+                            <td><span class="time-badge">6:00-7:00</span> Adult Kickboxing</td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">Saturday</td>
+                            <td>&mdash;</td>
+                            <td><span class="time-badge">9:00-11:00</span> Adult BJJ</td>
+                        </tr>
+                        <tr>
+                            <td class="day-cell">Sunday</td>
+                            <td class="closed-cell" colspan="2">Closed</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== TESTIMONIAL ========== -->
+    <section class="testimonial">
+        <div class="testimonial-inner">
+            <p class="testimonial-quote">"Midguard Academy changed my life. The instructors genuinely care about every student's growth, and the community here is like a second family."</p>
+            <p class="testimonial-author">&mdash; Sarah M., Training for 2 Years</p>
+        </div>
+    </section>
+
+    <!-- ========== FINAL CTA ========== -->
+    <section class="final-cta" id="free-trial">
+        <div class="final-cta-bg-text">Fight Night</div>
+        <div class="container" style="position:relative;z-index:2;">
+            <div class="section-header-tag" style="justify-content:center;display:flex;margin-bottom:16px;">
+                <span class="line"></span>
+                <span style="font-family:'Barlow Condensed',sans-serif;font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:4px;color:var(--red);padding:0 12px;">Step Into The Ring</span>
+                <span class="line"></span>
+            </div>
+            <h2>Start Your Free Trial Today</h2>
+            <p>No commitment, no pressure &mdash; just step onto the mat.</p>
+            <a href="#" class="btn-primary" style="font-size:1.1rem;padding:18px 50px;">Claim Your Free Trial</a>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-logo">
+                <img src="assets/images/logos/logo-04.png" alt="Midguard Academy">
+            </div>
+            <div class="footer-links">
+                <a href="#programs">Programs</a>
+                <a href="#instructors">Instructors</a>
+                <a href="#schedule">Schedule</a>
+                <a href="#why-train">Why Train</a>
+                <a href="#free-trial">Free Trial</a>
+            </div>
+            <div class="footer-hours">
+                <p>Mon-Fri 5 - 7:30 PM</p>
+                <p>Sat 9 - 11 AM</p>
+                <p>Sun Closed</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Midguard Academy. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ========== SCROLL REVEAL JS ========== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+            reveals.forEach(function(el) { observer.observe(el); });
+
+            // Navbar scroll effect
+            let lastScroll = 0;
+            window.addEventListener('scroll', function() {
+                const nav = document.getElementById('navbar');
+                if (window.scrollY > 100) {
+                    nav.style.background = 'rgba(10,10,10,0.98)';
+                    nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.5)';
+                } else {
+                    nav.style.background = 'var(--black)';
+                    nav.style.boxShadow = 'none';
+                }
+                lastScroll = window.scrollY;
+            });
+        });
+    </script>
+</body>
+</html>
