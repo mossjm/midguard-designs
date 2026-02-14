@@ -12,6 +12,11 @@ p.sub { text-align: center; color: #999; margin-bottom: 2rem; }
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; max-width: 1200px; margin: 0 auto; }
 a.card { display: block; background: #1a1a1a; border: 1px solid #333; border-radius: 12px; padding: 1.5rem; text-decoration: none; color: #fff; transition: all 0.2s; }
 a.card:hover { border-color: #c62828; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(198,40,40,0.2); }
+a.card.strategy { border-color: #1565c0; background: linear-gradient(135deg, #0d1b2a 0%, #1a1a2e 100%); }
+a.card.strategy:hover { border-color: #42a5f5; box-shadow: 0 8px 24px rgba(21,101,192,0.3); }
+a.card.strategy .num { color: #42a5f5; font-size: 1.5rem; }
+a.card.strategy .badge { display: inline-block; background: #1565c0; color: #fff; font-size: 0.65rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem; }
+a.card.strategy .dl { display: inline-block; color: #42a5f5; font-size: 0.8rem; margin-top: 0.5rem; font-weight: 600; }
 .num { font-size: 3rem; font-weight: 900; color: #c62828; line-height: 1; }
 .name { font-size: 1.25rem; font-weight: 700; margin: 0.5rem 0 0.25rem; }
 .desc { color: #999; font-size: 0.9rem; line-height: 1.4; }
@@ -19,8 +24,10 @@ a.card:hover { border-color: #c62828; transform: translateY(-2px); box-shadow: 0
 </head>
 <body>
 <h1>⚔️ Midguard Academy</h1>
-<p class="sub">10 Design Concepts — Tap to preview (mobile-optimized)</p>
+<p class="sub">Strategy Docs & 10 Design Concepts — Tap to preview</p>
 <div class="grid">
+<a class="card strategy" href="marketing-strategy.html"><span class="badge">Strategy Doc</span><span class="num">📋</span><div class="name">Marketing Strategy</div><div class="desc">Messaging pillars, homepage copy, SEO keywords, competitor analysis & action items for repositioning MidGuard to attract professionals</div><div class="dl" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='marketing-strategy.pdf';">📄 <span style="text-decoration:underline;">Download PDF</span></div></a>
+<a class="card strategy" href="growth-plan.html"><span class="badge">Strategy Doc</span><span class="num">📈</span><div class="name">Growth Plan</div><div class="desc">90-day growth roadmap with enrollment targets, marketing channels, and milestone tracking</div></a>
 <a class="card" href="design-01.html"><span class="num">01</span><div class="name">Viking Forge</div><div class="desc">Ultra dark, fire/ember colors, Norse rune typography, aggressive</div></a>
 <a class="card" href="design-02.html"><span class="num">02</span><div class="name">Clean Combat</div><div class="desc">Minimalist white, elegant typography, premium feel</div></a>
 <a class="card" href="design-03.html"><span class="num">03</span><div class="name">Street Fighter</div><div class="desc">Bold graffiti/urban aesthetic, electric colors, raw energy</div></a>

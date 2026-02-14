@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Midguard Academy — Marketing & Messaging Strategy</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, system-ui, sans-serif;
+  background: #0a0a0a;
+  color: #e0e0e0;
+  line-height: 1.7;
+}
+
+/* PDF-specific overrides */
+@media print {
+  body { background: #0a0a0a; color: #e0e0e0; }
+  .container { max-width: 100%; padding: 1.5rem; }
+  section { page-break-inside: avoid; }
+  h2 { page-break-after: avoid; }
+  .hero { padding: 2rem 1.5rem; }
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Hero */
+.hero {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #0d1117 100%);
+  border-bottom: 3px solid #c62828;
+  margin-bottom: 2rem;
+}
+
+.hero h1 {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -0.5px;
+  margin-bottom: 0.25rem;
+}
+
+.hero .subtitle {
+  font-size: 1.1rem;
+  color: #c62828;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.hero .meta {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+/* Back link */
+.back-link {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  color: #c62828;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.back-link:hover { text-decoration: underline; }
+
+/* Sections */
+section {
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #c62828;
+}
+
+h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 1.25rem 0 0.5rem;
+}
+
+p { margin-bottom: 0.75rem; }
+
+ul, ol {
+  margin: 0.5rem 0 1rem 1.5rem;
+}
+
+li {
+  margin-bottom: 0.4rem;
+}
+
+strong { color: #fff; }
+
+/* Pillar cards */
+.pillar {
+  background: #111;
+  border: 1px solid #333;
+  border-left: 4px solid #c62828;
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  margin: 1rem 0;
+}
+
+.pillar h3 {
+  margin-top: 0;
+  font-size: 1.05rem;
+  color: #c62828;
+}
+
+.pillar .sample-copy {
+  background: #0d0d0d;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-top: 0.75rem;
+  font-style: italic;
+  color: #bbb;
+  border-left: 3px solid #444;
+}
+
+/* Homepage mock */
+.homepage-mock {
+  background: #0d0d0d;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 2rem;
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.homepage-mock h3 {
+  font-size: 1.5rem;
+  color: #c62828;
+  margin-top: 0;
+}
+
+.homepage-mock .tagline {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0.75rem 0;
+}
+
+.homepage-mock .body-copy {
+  color: #bbb;
+  max-width: 600px;
+  margin: 0 auto 1rem;
+  text-align: left;
+  line-height: 1.7;
+}
+
+.homepage-mock .cta {
+  display: inline-block;
+  background: #c62828;
+  color: #fff;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+  margin: 1rem 0;
+}
+
+.homepage-mock .benefits {
+  text-align: left;
+  max-width: 500px;
+  margin: 1rem auto 0;
+  list-style: none;
+  padding: 0;
+}
+
+.homepage-mock .benefits li {
+  padding: 0.3rem 0;
+  color: #ccc;
+}
+
+.homepage-mock .benefits li::before {
+  content: "✓ ";
+  color: #c62828;
+  font-weight: 700;
+}
+
+/* Keyword tags */
+.keyword-group {
+  margin: 0.75rem 0;
+}
+
+.keyword-group .label {
+  font-weight: 700;
+  color: #fff;
+  font-size: 0.9rem;
+  margin-bottom: 0.4rem;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.tag {
+  background: #222;
+  border: 1px solid #444;
+  padding: 0.25rem 0.65rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  color: #ccc;
+}
+
+/* Competitor table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+th, td {
+  text-align: left;
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid #2a2a2a;
+  font-size: 0.9rem;
+}
+
+th {
+  color: #c62828;
+  font-weight: 700;
+  border-bottom: 2px solid #333;
+}
+
+td { color: #bbb; }
+
+/* Action items */
+.action-item {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #222;
+}
+
+.action-item:last-child { border-bottom: none; }
+
+.action-priority {
+  display: inline-block;
+  padding: 0.15rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.priority-high {
+  background: #c62828;
+  color: #fff;
+}
+
+.priority-med {
+  background: #e65100;
+  color: #fff;
+}
+
+.priority-low {
+  background: #2e7d32;
+  color: #fff;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 2rem;
+  color: #555;
+  font-size: 0.8rem;
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>⚔️ Midguard Academy</h1>
+  <div class="subtitle">Marketing & Messaging Strategy</div>
+  <div class="meta">Prepared February 2026 · For Josh & Team · Confidential</div>
+</div>
+
+<div class="container">
+
+<a href="index.html" class="back-link">← Back to All Designs</a>
+
+<!-- EXECUTIVE SUMMARY -->
+<section>
+  <h2>Executive Summary</h2>
+  <p><strong>The core insight:</strong> Brazilian Jiu-Jitsu naturally attracts professionals, intellectuals, and problem-solvers — software engineers, lawyers, doctors, business owners — but most gyms (including MidGuard currently) market exclusively to the "fighter/MMA" crowd.</p>
+  <p>By repositioning MidGuard around <strong>"strategic exercise"</strong> — emphasizing the mental/intellectual challenge, stress relief, and confidence-building — the academy can dramatically broaden its appeal without alienating its existing base.</p>
+  <p>This document provides specific messaging, copy, SEO keywords, and action items to make this shift.</p>
+  <p><strong>Origin:</strong> Mark Mahoney identified the opportunity — BJJ should be marketed as "physical chess" to attract the professional/academic audience that's already naturally drawn to the art. This research validates that insight with competitor analysis and concrete recommendations.</p>
+</section>
+
+<!-- CURRENT STATE -->
+<section>
+  <h2>Current State Assessment</h2>
+  <h3>What's on midguardkb.com Today</h3>
+  <ul>
+    <li><strong>~957 characters</strong> of homepage copy — very thin content</li>
+    <li>Focus on "Expert Instruction," "Train with Champions," "Be Part of a Team"</li>
+    <li>Language like <em>"whether you are a beginner or an experienced fighter"</em> — fighting-forward</li>
+    <li>No mention of mental/intellectual benefits</li>
+    <li>No "physical chess" or strategic positioning</li>
+    <li>No fitness/wellness framing</li>
+    <li>No class schedule, pricing, or clear CTA visible on main page</li>
+    <li>Domain emphasizes kickboxing (midguardkb.com)</li>
+  </ul>
+
+  <h3>Social Media</h3>
+  <ul>
+    <li><strong>Instagram:</strong> @midguard_bjj — 53 followers, 14 posts</li>
+    <li><strong>Facebook:</strong> MidGuard Kickboxing Academy</li>
+    <li>Minimal content; competition/fighter-focused</li>
+  </ul>
+
+  <h3>Key Problems</h3>
+  <ol>
+    <li><strong>Fighting-forward language</strong> alienates the broader audience (professionals, parents, fitness seekers)</li>
+    <li><strong>Zero mental/intellectual positioning</strong> — the biggest differentiator for attracting professionals</li>
+    <li><strong>No wellness/stress-relief framing</strong> — misses people searching for exercise alternatives</li>
+    <li><strong>No self-defense for everyday people</strong> — only competitive/sport framing</li>
+    <li><strong>Very thin content</strong> — hurts SEO, gives no reason to stay on the site</li>
+  </ol>
+</section>
+
+<!-- 5 MESSAGING PILLARS -->
+<section>
+  <h2>5 Messaging Pillars</h2>
+  <p>These are the core themes all MidGuard marketing should draw from. Every piece of content — website copy, social posts, ads, flyers — should connect to one or more of these pillars.</p>
+
+  <div class="pillar">
+    <h3>1. Physical Chess — Train Your Mind and Body</h3>
+    <p>Appeals to intellectuals, professionals, and problem-solvers. Differentiates from "tough guy" martial arts marketing.</p>
+    <div class="sample-copy">
+      "Brazilian Jiu-Jitsu isn't about size or strength — it's about strategy. Every roll is a puzzle to solve, every technique a move on the chessboard. If you've ever enjoyed solving complex problems, you'll love jiu jitsu."
+    </div>
+  </div>
+
+  <div class="pillar">
+    <h3>2. Stress Relief That Actually Works</h3>
+    <p>Speaks to busy professionals seeking stress relief. Positions BJJ as superior to traditional gym workouts.</p>
+    <div class="sample-copy">
+      "When you're on the mat, your phone, your inbox, and your to-do list don't exist. Jiu jitsu demands your complete focus — creating the kind of active mindfulness that melts away stress in ways a treadmill never will."
+    </div>
+  </div>
+
+  <div class="pillar">
+    <h3>3. For Every Body, Every Background</h3>
+    <p>Removes intimidation. Shows real diversity of practitioners. "Start where you are" is a powerful low-barrier CTA.</p>
+    <div class="sample-copy">
+      "Our students are teachers, engineers, business owners, parents, and retirees. Jiu jitsu uses leverage and technique — not brute force — which means it works for every body type and fitness level. Start where you are."
+    </div>
+  </div>
+
+  <div class="pillar">
+    <h3>4. Confidence That Extends Beyond the Mat</h3>
+    <p>Connects physical training to real-world professional/personal benefits. Inspired by Renzo Gracie's philosophy.</p>
+    <div class="sample-copy">
+      "We don't just teach self-defense. We build the kind of quiet confidence that changes how you carry yourself at work, at home, and in life. When you know you can handle yourself physically, everything else gets easier."
+    </div>
+  </div>
+
+  <div class="pillar">
+    <h3>5. Community, Not Competition</h3>
+    <p>Reduces intimidation of competitive martial arts. "Smarter way to stay fit" is a perfect bridge phrase.</p>
+    <div class="sample-copy">
+      "MidGuard is a family-owned, veteran-operated school where beginners are welcomed and growth is celebrated. Whether you want to compete or just want a smarter way to stay fit, you belong here."
+    </div>
+  </div>
+</section>
+
+<!-- RECOMMENDED HOMEPAGE COPY -->
+<section>
+  <h2>Recommended Homepage Copy</h2>
+  <p>This is a ready-to-use homepage rewrite that Josh can drop directly into the new site design.</p>
+
+  <div class="homepage-mock">
+    <h3>MIDGUARD BJJ & KICKBOXING</h3>
+    <div style="font-size: 0.85rem; color: #888; margin-bottom: 1rem;">Veteran-Owned · Wisconsin Rapids, WI</div>
+    <div class="tagline">PHYSICAL CHESS. REAL FITNESS. TOTAL CONFIDENCE.</div>
+    <div class="body-copy">
+      <p>Jiu jitsu is the thinking person's workout. Every session is a full-body exercise that challenges your mind as much as your muscles. Our students are teachers, engineers, business owners, and parents who discovered that the smartest exercise they've ever done happens to be a martial art.</p>
+      <p>No experience needed. No tough-guy attitude required.<br>Just show up — we'll take it from there.</p>
+    </div>
+    <div class="cta">TRY A FREE CLASS →</div>
+    <ul class="benefits">
+      <li>Strategic exercise — like physical chess for your body</li>
+      <li>Stress relief that actually works — total focus, total release</li>
+      <li>For all ages and fitness levels — technique over strength</li>
+      <li>Build real confidence — on and off the mat</li>
+      <li>Veteran-owned, family-operated — welcoming community first</li>
+    </ul>
+  </div>
+</section>
+
+<!-- SEO KEYWORDS -->
+<section>
+  <h2>SEO Keywords for Non-Fighter Audiences</h2>
+  <p>These keywords target people who would <em>never</em> search for "BJJ" or "martial arts" — but would absolutely love it once they tried it.</p>
+
+  <div class="keyword-group">
+    <div class="label">Primary Local</div>
+    <div class="tags">
+      <span class="tag">jiu jitsu Wisconsin Rapids</span>
+      <span class="tag">martial arts Wisconsin Rapids</span>
+      <span class="tag">BJJ near me Wisconsin</span>
+      <span class="tag">self defense classes Wisconsin Rapids</span>
+    </div>
+  </div>
+
+  <div class="keyword-group">
+    <div class="label">Strategic / Intellectual Appeal</div>
+    <div class="tags">
+      <span class="tag">physical chess exercise</span>
+      <span class="tag">strategic exercise near me</span>
+      <span class="tag">mental workout fitness</span>
+      <span class="tag">problem solving exercise</span>
+      <span class="tag">mindful martial arts</span>
+      <span class="tag">active meditation</span>
+      <span class="tag">functional fitness for professionals</span>
+    </div>
+  </div>
+
+  <div class="keyword-group">
+    <div class="label">Wellness / Lifestyle</div>
+    <div class="tags">
+      <span class="tag">stress relief exercise near me</span>
+      <span class="tag">best exercise for anxiety</span>
+      <span class="tag">fitness for beginners over 30/40/50</span>
+      <span class="tag">full body workout that's not boring</span>
+      <span class="tag">exercise that builds confidence</span>
+      <span class="tag">workout for mental health</span>
+      <span class="tag">adult fitness classes near me</span>
+    </div>
+  </div>
+
+  <div class="keyword-group">
+    <div class="label">Self-Defense</div>
+    <div class="tags">
+      <span class="tag">self defense for women Wisconsin Rapids</span>
+      <span class="tag">women's self defense classes</span>
+      <span class="tag">practical self defense training</span>
+      <span class="tag">self defense for professionals</span>
+    </div>
+  </div>
+</section>
+
+<!-- COMPETITOR ANALYSIS -->
+<section>
+  <h2>Competitor Analysis Highlights</h2>
+  <p>What the best BJJ schools are doing to attract non-fighter audiences:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>School</th>
+        <th>Key Approach</th>
+        <th>Takeaway for MidGuard</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Gracie Barra</strong><br><span style="color:#666; font-size:0.8rem;">1,000+ schools globally</span></td>
+        <td>"Jiu-Jitsu for Everyone®" — inclusive branding at scale</td>
+        <td>Inclusive language, no fighting imagery in tagline, personal growth framing</td>
+      </tr>
+      <tr>
+        <td><strong>Renzo Gracie Academy</strong><br><span style="color:#666; font-size:0.8rem;">NYC flagship</span></td>
+        <td>"We are in the business of building confidence"</td>
+        <td>Reframes value prop entirely — not selling fighting, selling life confidence</td>
+      </tr>
+      <tr>
+        <td><strong>Stockman Jiu-Jitsu</strong><br><span style="color:#666; font-size:0.8rem;">Indianapolis area</span></td>
+        <td>Explicitly positions BJJ as "a physical chess game"</td>
+        <td>Mental health/stress relief messaging directly speaks to professional audience</td>
+      </tr>
+      <tr>
+        <td><strong>Bowerhouse MMA</strong><br><span style="color:#666; font-size:0.8rem;">600-member gym</span></td>
+        <td>Leveraged storytelling and PR for massive growth</td>
+        <td>Content marketing and student stories drive enrollment</td>
+      </tr>
+      <tr>
+        <td><strong>Midgard Jiu Jitsu</strong><br><span style="color:#666; font-size:0.8rem;">Trevor, WI — similar name!</span></td>
+        <td>"Family owned," "welcoming atmosphere," "safe and fun"</td>
+        <td>Even simple inclusive language works — MidGuard can do this AND the intellectual angle</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Common Patterns on Successful Sites</h3>
+  <ol>
+    <li>Hero section with <strong>clear value proposition</strong> (not just "learn martial arts")</li>
+    <li><strong>Free trial/class CTA</strong> above the fold</li>
+    <li>Testimonials from <strong>diverse students</strong> (not just fighters)</li>
+    <li><strong>Benefits-focused copy</strong> (confidence, fitness, stress relief, community)</li>
+    <li>Clean <strong>schedule and pricing</strong> easily accessible</li>
+    <li>Photos of <strong>real students</strong> (diverse ages, genders, body types)</li>
+    <li><strong>Mobile-optimized</strong> with easy contact options</li>
+  </ol>
+
+  <h3>Key Gymdesk Industry Insight</h3>
+  <p style="background: #0d0d0d; padding: 1rem; border-radius: 6px; border-left: 3px solid #c62828; font-style: italic;">
+    "Your target audience for BJJ differs from the striking arts. BJJ attracts problem-solvers, chess-players, and technical thinkers — people who appreciate the 'human chess' aspect. Your marketing should emphasize technique, strategy, and the intellectual challenge, not just physical intensity."
+  </p>
+
+  <h3>Reddit Validation (r/bjj)</h3>
+  <p>A thread asking BJJ practitioners "What do you do for work?" revealed: <strong>40%+ of one gym were software engineers.</strong> Common professions: lawyers, doctors, professors, CEOs, data scientists, firefighters.</p>
+  <p style="font-style: italic; color: #999;">"BJJ attracts the engineering/science crowd because it's high-stakes troubleshooting for people who like to solve puzzles."</p>
+</section>
+
+<!-- CONTENT / BLOG IDEAS -->
+<section>
+  <h2>Content & Blog Ideas</h2>
+  <p>These blog posts are designed to rank for the non-fighter keywords above and attract the professional/intellectual audience through search.</p>
+
+  <ol>
+    <li><strong>"Why Software Engineers, Lawyers, and Doctors Love Jiu Jitsu"</strong><br><span style="color:#888;">Targets: professionals searching for exercise. Validates that BJJ is for "their type."</span></li>
+    <li><strong>"Jiu Jitsu: The Physical Chess That's Taking Over Professional Culture"</strong><br><span style="color:#888;">Targets: "physical chess" keyword. Builds the intellectual brand.</span></li>
+    <li><strong>"Too Old for Martial Arts? Why Adults Are Starting BJJ in Their 40s, 50s, and Beyond"</strong><br><span style="color:#888;">Targets: age-related fitness concerns. Huge untapped audience.</span></li>
+    <li><strong>"5 Reasons Jiu Jitsu Is the Best Stress Relief for Busy Professionals"</strong><br><span style="color:#888;">Targets: stress relief/wellness keywords. Listicle format for shareability.</span></li>
+    <li><strong>"I'm Not a Fighter — Why I Started Jiu Jitsu Anyway (And What Happened)"</strong><br><span style="color:#888;">First-person student story. Reduces intimidation barrier. Highly shareable.</span></li>
+    <li><strong>"The Mental Health Benefits of Brazilian Jiu-Jitsu: What Science Says"</strong><br><span style="color:#888;">Targets: mental health + exercise keywords. Builds credibility with research.</span></li>
+  </ol>
+
+  <h3>Social Media Content Strategy</h3>
+  <ul>
+    <li><strong>Instagram:</strong> Share "day in the life" content showing diverse students — not just competition highlights</li>
+    <li><strong>Facebook:</strong> Target local professionals with ads emphasizing stress relief and mental fitness</li>
+    <li><strong>Google Ads:</strong> Bid on "fitness classes Wisconsin Rapids" and "stress relief exercise" — not just "BJJ"</li>
+  </ul>
+</section>
+
+<!-- ACTION ITEMS -->
+<section>
+  <h2>Action Items</h2>
+
+  <h3>Quick Wins (Do First)</h3>
+  <div class="action-item">
+    <span class="action-priority priority-high">HIGH</span>
+    <div><strong>Rewrite homepage hero section</strong> using one of the 5 messaging pillars (see recommended copy above)</div>
+  </div>
+  <div class="action-item">
+    <span class="action-priority priority-high">HIGH</span>
+    <div><strong>Add "Veteran Owned" prominently</strong> — huge trust signal, especially in Wisconsin</div>
+  </div>
+  <div class="action-item">
+    <span class="action-priority priority-high">HIGH</span>
+    <div><strong>Add a free trial class CTA</strong> above the fold with online booking</div>
+  </div>
+  <div class="action-item">
+    <span class="action-priority priority-high">HIGH</span>
+    <div><strong>Create an "About" page</strong> with Josh's story — veteran background, why he opened MidGuard</div>
+  </div>
+  <div class="action-item">
+    <span class="action-priority priority-high">HIGH</span>
+    <div><strong>Add testimonials</strong> from non-fighter students (professionals, parents, fitness seekers)</div>
+  </div>
+
+  <h3>Medium-Term (Next 30–60 Days)</h3>
+  <div class="action-item">
+    <span class="action-priority priority-med">MED</span>
+    <div><strong>Start a blog</strong> targeting the SEO keywords listed above (begin with the 6 article ideas)</div>
+  </div>
+  <div class="action-item">
+    <span class="action-priority priority-med">MED</span>
+    <div><strong>Create separate landing pages</strong> for: Adults, Kids, Women's Self-Defense, Fitness</div>
+  </div>
+  <div class="action-item">
+    <span class="action-priority priority-med">MED</span>
+    <div><strong>Optimize Google Business Profile</strong> — hours, photos, reviews all current</div>
+  </div>
+  <div class="action-item">
+    <span class="action-priority priority-med">MED</span>
+    <div><strong>Consider domain strategy</strong> — midguardbjj.com or midguardma.com to broaden positioning beyond kickboxing</div>
+  </div>
+
+  <h3>Ongoing</h3>
+  <div class="action-item">
+    <span class="action-priority priority-low">ONGOING</span>
+    <div><strong>Instagram content shift</strong> — diverse students, daily life, not just competition highlights</div>
+  </div>
+  <div class="action-item">
+    <span class="action-priority priority-low">ONGOING</span>
+    <div><strong>Facebook ads</strong> — target local professionals with stress relief / mental fitness messaging</div>
+  </div>
+  <div class="action-item">
+    <span class="action-priority priority-low">ONGOING</span>
+    <div><strong>Collect and publish student testimonials</strong> — especially from non-fighter demographics</div>
+  </div>
+</section>
+
+<div class="footer">
+  <p>Midguard Academy — Marketing & Messaging Strategy · February 2026</p>
+  <p style="margin-top: 0.5rem;">Prepared for Josh · <a href="marketing-strategy.pdf" style="color: #c62828;">Download PDF</a></p>
+</div>
+
+</div>
+</body>
+</html>
