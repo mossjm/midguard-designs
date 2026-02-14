@@ -3,31 +3,54 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Midguard Academy — 10 Design Concepts</title>
+<title>Midguard Academy — Design Hub</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: -apple-system, system-ui, sans-serif; background: #0a0a0a; color: #fff; padding: 2rem; }
 h1 { text-align: center; font-size: 2rem; margin-bottom: 0.5rem; }
 p.sub { text-align: center; color: #999; margin-bottom: 2rem; }
+h2 { font-size: 1.3rem; color: #fff; margin: 2.5rem 0 1rem; max-width: 1200px; margin-left: auto; margin-right: auto; border-bottom: 1px solid #333; padding-bottom: 0.5rem; }
+h2 span { color: #999; font-weight: 400; font-size: 0.9rem; margin-left: 0.5rem; }
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; max-width: 1200px; margin: 0 auto; }
-a.card { display: block; background: #1a1a1a; border: 1px solid #333; border-radius: 12px; padding: 1.5rem; text-decoration: none; color: #fff; transition: all 0.2s; }
+a.card { display: block; background: #1a1a1a; border: 1px solid #333; border-radius: 12px; padding: 1.5rem; text-decoration: none; color: #fff; transition: all 0.2s; position: relative; }
 a.card:hover { border-color: #c62828; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(198,40,40,0.2); }
-a.card.strategy { border-color: #1565c0; background: linear-gradient(135deg, #0d1b2a 0%, #1a1a2e 100%); }
-a.card.strategy:hover { border-color: #42a5f5; box-shadow: 0 8px 24px rgba(21,101,192,0.3); }
-a.card.strategy .num { color: #42a5f5; font-size: 1.5rem; }
-a.card.strategy .badge { display: inline-block; background: #1565c0; color: #fff; font-size: 0.65rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.5rem; }
-a.card.strategy .dl { display: inline-block; color: #42a5f5; font-size: 0.8rem; margin-top: 0.5rem; font-weight: 600; }
+a.card.strategy { border-color: #1e40af; }
+a.card.strategy:hover { border-color: #3b82f6; box-shadow: 0 8px 24px rgba(59,130,246,0.2); }
+.badge { position: absolute; top: 0.75rem; right: 0.75rem; background: #1e40af; color: #fff; font-size: 0.65rem; padding: 0.2rem 0.5rem; border-radius: 4px; text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em; }
 .num { font-size: 3rem; font-weight: 900; color: #c62828; line-height: 1; }
+a.card.strategy .num { color: #3b82f6; }
 .name { font-size: 1.25rem; font-weight: 700; margin: 0.5rem 0 0.25rem; }
 .desc { color: #999; font-size: 0.9rem; line-height: 1.4; }
+.pdf-link { display: inline-block; margin-top: 0.5rem; color: #3b82f6; font-size: 0.8rem; }
 </style>
 </head>
 <body>
 <h1>⚔️ Midguard Academy</h1>
-<p class="sub">Strategy Docs & 10 Design Concepts — Tap to preview</p>
+<p class="sub">Design Concepts, Strategy Docs & Growth Plan</p>
+
+<h2>📋 Strategy Documents</h2>
 <div class="grid">
-<a class="card strategy" href="marketing-strategy.html"><span class="badge">Strategy Doc</span><span class="num">📋</span><div class="name">Marketing Strategy</div><div class="desc">Messaging pillars, homepage copy, SEO keywords, competitor analysis & action items for repositioning MidGuard to attract professionals</div><div class="dl" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='marketing-strategy.pdf';">📄 <span style="text-decoration:underline;">Download PDF</span></div></a>
+<a class="card strategy" href="marketing-strategy.html"><span class="badge">Strategy Doc</span><span class="num">📊</span><div class="name">Marketing & Messaging Strategy</div><div class="desc">Repositioning BJJ as "physical chess" — 5 messaging pillars, SEO keywords, competitor analysis, homepage copy</div><span class="pdf-link">📄 PDF version available</span></a>
 <a class="card strategy" href="growth-plan.html"><span class="badge">Strategy Doc</span><span class="num">📈</span><div class="name">Growth Plan</div><div class="desc">90-day growth roadmap with enrollment targets, marketing channels, and milestone tracking</div></a>
+</div>
+
+<h2>🎨 Round 2 — Latest Designs <span>(on-brand: red/black/white from the logo)</span></h2>
+<div class="grid">
+<a class="card" href="design-v2-01b.html"><span class="num">01</span><div class="name">Crimson Discipline</div><div class="desc">Bold structured grid with professional martial arts feel. Family-friendly.</div></a>
+<a class="card" href="design-v2-02.html"><span class="num">02</span><div class="name">Forge Athletics</div><div class="desc">Nike-inspired. Massive hero, bold sans-serif, editorial layout.</div></a>
+<a class="card" href="design-v2-03.html"><span class="num">03</span><div class="name">Red Planet</div><div class="desc">Cosmic/space undertones (Nibiru connection), red gradients on dark.</div></a>
+<a class="card" href="design-v2-04.html"><span class="num">04</span><div class="name">Iron Discipline</div><div class="desc">Brutalist typography, heavy red borders, raw industrial grit.</div></a>
+<a class="card" href="design-v2-05.html"><span class="num">05</span><div class="name">Academy Red</div><div class="desc">Sports broadcast aesthetic, bold red banners, dynamic angles. Family-friendly.</div></a>
+<a class="card" href="design-v2-05b.html"><span class="num">05b</span><div class="name">Academy Red — Full-Bleed Hero</div><div class="desc">Same as 05 but with full-width hero image and text overlay instead of split-grid layout.</div></a>
+<a class="card" href="design-v2-06.html"><span class="num">06</span><div class="name">Modern Warrior</div><div class="desc">Sleek minimal dark, red accent lines, smooth and professional.</div></a>
+<a class="card" href="design-v2-07.html"><span class="num">07</span><div class="name">Community Forge</div><div class="desc">Warm but strong, family-focused, welcoming yet disciplined.</div></a>
+<a class="card" href="design-v2-08.html"><span class="num">08</span><div class="name">Combat Editorial</div><div class="desc">Magazine-style layout, large photo features, editorial typography.</div></a>
+<a class="card" href="design-v2-09.html"><span class="num">09</span><div class="name">Apex Performance</div><div class="desc">Premium fitness brand, gradient red-to-dark, clean cards.</div></a>
+<a class="card" href="design-v2-10.html"><span class="num">10</span><div class="name">Tactical Red</div><div class="desc">Military + modern hybrid, red HUD elements, structured discipline.</div></a>
+</div>
+
+<h2>🎨 Round 1 — Original Concepts</h2>
+<div class="grid">
 <a class="card" href="design-01.html"><span class="num">01</span><div class="name">Viking Forge</div><div class="desc">Ultra dark, fire/ember colors, Norse rune typography, aggressive</div></a>
 <a class="card" href="design-02.html"><span class="num">02</span><div class="name">Clean Combat</div><div class="desc">Minimalist white, elegant typography, premium feel</div></a>
 <a class="card" href="design-03.html"><span class="num">03</span><div class="name">Street Fighter</div><div class="desc">Bold graffiti/urban aesthetic, electric colors, raw energy</div></a>
@@ -39,5 +62,6 @@ a.card.strategy .dl { display: inline-block; color: #42a5f5; font-size: 0.8rem; 
 <a class="card" href="design-09.html"><span class="num">09</span><div class="name">Neon Arena</div><div class="desc">Dark with neon accents, cyberpunk-adjacent, high energy</div></a>
 <a class="card" href="design-10.html"><span class="num">10</span><div class="name">Heritage & Honor</div><div class="desc">Rich editorial, storytelling-focused, magazine feel</div></a>
 </div>
+
 </body>
 </html>
